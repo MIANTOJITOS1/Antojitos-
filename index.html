@@ -42,7 +42,6 @@
             border: 1px solid rgba(155, 81, 224, 0.1);
         }
 
-        /* BANNER SABOR DEL MES */
         .sabor-mes {
             background: linear-gradient(45deg, #ff9a9e, #fad0c4);
             color: #d6249f; padding: 15px; border-radius: 20px;
@@ -53,7 +52,6 @@
         }
         @keyframes pulse { 0% {transform: scale(1);} 50% {transform: scale(1.02);} 100% {transform: scale(1);} }
 
-        /* PAQUETE FIESTA */
         .promo-card {
             border: 2px dashed var(--morado); background: #fdfaff;
             padding: 15px; border-radius: 20px; margin-bottom: 20px;
@@ -109,7 +107,7 @@
     <section>
         <h2>¿Quiénes somos? 👫</h2>
         <p>Somos <strong>Iker y Michelle</strong> (15 años). Cada boli es artesanal y hecho con amor en Coapa. ¡Gracias por apoyarnos!</p>
-        <button class="btn-insta" onclick="window.open('https://instagram.com/tu_usuario', '_blank')">📸 SÍGUENOS EN INSTAGRAM</button>
+        <button class="btn-insta" onclick="window.open('https://instagram.com/antojitos_mi', '_blank')">📸 SÍGUENOS EN INSTAGRAM</button>
     </section>
 
     <section id="tienda">
@@ -119,7 +117,7 @@
             <div>
                 <strong>🎉 Paquete Fiesta</strong><br>
                 <small>10 Bolis Surtidos</small><br>
-                <span style="color: var(--rosa); font-weight: bold;">$220 (Ahorra $30)</span>
+                <span style="color: var(--rosa); font-weight: bold;">$230 (Ahorra $20)</span>
             </div>
             <div class="controles">
                 <button class="btn-qty" onclick="cambiar('Paquete Fiesta', -1)">-</button>
@@ -187,7 +185,7 @@
     }
 
     function actualizarTotal() {
-        let total = carrito["Paquete Fiesta"] * 220;
+        let total = carrito["Paquete Fiesta"] * 230;
         productos.forEach(p => { total += (carrito[p.nombre] || 0) * p.precio; });
         document.getElementById('total-display').innerText = `$${total}`;
     }
@@ -197,8 +195,8 @@
         let total = 0;
 
         if(carrito["Paquete Fiesta"] > 0) {
-            pedidoArray.push(`• ${carrito["Paquete Fiesta"]} Paquete Fiesta ($${carrito["Paquete Fiesta"]*220})`);
-            total += carrito["Paquete Fiesta"] * 220;
+            pedidoArray.push(`• ${carrito["Paquete Fiesta"]} Paquete Fiesta ($${carrito["Paquete Fiesta"]*230})`);
+            total += carrito["Paquete Fiesta"] * 230;
         }
 
         for (let p in carrito) {

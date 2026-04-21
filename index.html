@@ -16,7 +16,6 @@
             --shadow: rgba(0,0,0,0.05);
         }
 
-        /* MODO OSCURO AUTOMÁTICO */
         @media (prefers-color-scheme: dark) {
             :root {
                 --fondo: #1a1a2e;
@@ -41,7 +40,6 @@
             background-color: var(--fondo); 
             color: var(--texto);
             padding-bottom: 120px;
-            transition: 0.3s;
         }
 
         header { 
@@ -51,7 +49,6 @@
             padding: 4.5rem 1.5rem;
             border-bottom-left-radius: 50px;
             border-bottom-right-radius: 50px;
-            box-shadow: 0 15px 30px rgba(155, 81, 224, 0.2);
         }
 
         header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; }
@@ -68,9 +65,8 @@
         }
 
         h2 { color: var(--morado); font-size: 1.5rem; margin-top: 0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-        p { font-size: 1rem; color: #57606f; line-height: 1.7; }
+        p { font-size: 1rem; color: #57606f; line-height: 1.7; margin-bottom: 15px; }
 
-        /* NUEVA SECCIÓN INFO */
         .info-tag {
             display: inline-flex;
             align-items: center;
@@ -114,7 +110,6 @@
         }
         .cant { width: 35px; text-align: center; font-weight: 700; }
 
-        /* BOTÓN COMPARTIR */
         .btn-share {
             background: var(--blanco);
             color: var(--morado);
@@ -124,7 +119,6 @@
             border-radius: 18px;
             font-weight: 700;
             margin-top: 10px;
-            cursor: pointer;
             font-family: 'Outfit';
         }
 
@@ -152,7 +146,6 @@
             padding: 14px 24px; 
             border-radius: 20px; 
             font-weight: 700; 
-            box-shadow: 0 8px 15px rgba(37, 211, 102, 0.2);
         }
     </style>
 </head>
@@ -165,16 +158,23 @@
 
 <div class="container">
     <section>
-        <h2>Información de Pedido</h2>
+        <h2>Entregas y Pedidos</h2>
         <div class="info-tag">📍 Coapa y Cuemanco</div>
         <div class="info-tag">⏰ Lun - Sáb: 2pm - 6pm</div>
-        <p>Hacemos entregas personales en la zona. Si tienes duda sobre tu ubicación, ¡escríbenos al confirmar tu carrito!</p>
+        <p>Somos un emprendimiento local. Entregamos personalmente para asegurar que tus bolis lleguen en el punto perfecto de congelación.</p>
         <button class="btn-share" onclick="compartir()">🚀 Compartir con un amigo</button>
     </section>
 
     <section>
-        <h2>Nuestra Historia</h2>
-        <p>Somos <strong>Iker y Michelle</strong>, tenemos 15 años y este es nuestro sueño. Creamos bolis 100% artesanales con la meta de tener nuestros propios locales. ¡Gracias por apoyarnos!</p>
+        <h2>¿Quiénes somos? 👫</h2>
+        <p>Detrás de cada sabor de <strong>M&I Antojitos</strong> estamos nosotros: <strong>Iker y Michelle</strong>. Somos una pareja de adolescentes de 15 años que comparte mucho más que una hielera; compartimos el sueño de construir algo propio desde cero.</p>
+        <p>Nuestro nombre, M&I, representa la unión de nuestras iniciales y el esfuerzo que ponemos cada día para equilibrar la escuela con nuestra pasión por los negocios. No somos solo una marca; somos dos jóvenes de Coapa que creen que con dedicación, los sueños se congelan... ¡pero para hacerse realidad!</p>
+        <p>Cada boli que preparas en este carrito es hecho a mano por nosotros, cuidando la calidad y la limpieza, porque sabemos que mereces lo mejor. Al elegirnos, no solo compras un postre, apoyas el futuro de dos emprendedores que buscan pasar de las calles a tener sus propios locales establecidos.</p>
+    </section>
+
+    <section>
+        <h2>¿Qué nos hace diferentes? ✨</h2>
+        <p>Nuestros bolis son <strong>Gourmet</strong>. ¿Qué significa esto? Que no usamos colorantes artificiales ni exceso de azúcar. Buscamos la cremosidad perfecta en los de leche (como el de Mazapán u Oreo) y la frescura más vibrante en los de agua con toppings reales como Skwinkles o Chamoy.</p>
     </section>
 
     <section id="tienda">
@@ -262,11 +262,11 @@
         if (navigator.share) {
             navigator.share({
                 title: 'M&I Antojitos',
-                text: '¡Mira estos bolis gourmet artesanales en Coapa! 🍦',
+                text: '¡Mira los bolis gourmet de Iker y Michelle en Coapa! 🍦',
                 url: window.location.href
             });
         } else {
-            alert("Copia el link de la barra de arriba y pásalo por WhatsApp 🚀");
+            alert("Copia el link y pásalo por WhatsApp 🚀");
         }
     }
 

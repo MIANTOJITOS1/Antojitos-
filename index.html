@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M&I Antojitos | Gourmet</title>
+    <title>M&I Antojitos | Gourmet & Artesanal</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff66b2;
-            --secondary: #89cff0;
-            --bg: #fdfdfd;
-            --text: #2d3436;
-            --white: #ffffff;
+            --rosa: #ff85c1;
+            --morado: #9b51e0;
+            --blanco: #ffffff;
+            --fondo: #fcfaff;
+            --texto: #2d3436;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -19,112 +19,109 @@
         body { 
             font-family: 'Outfit', sans-serif; 
             margin: 0; 
-            background-color: var(--bg); 
-            color: var(--text);
-            padding-bottom: 100px;
+            background-color: var(--fondo); 
+            color: var(--texto);
+            padding-bottom: 110px;
         }
 
-        /* Hero Moderno */
+        /* Encabezado con degradado Rosa-Morado */
         header { 
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+            background: linear-gradient(135deg, var(--rosa) 0%, var(--morado) 100%); 
             color: white; 
             text-align: center; 
-            padding: 4rem 1.5rem;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 20px rgba(255, 102, 178, 0.2);
+            padding: 4.5rem 1.5rem;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 15px 30px rgba(155, 81, 224, 0.2);
         }
 
-        header h1 { margin: 0; font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
-        header p { margin-top: 10px; font-weight: 300; opacity: 0.9; }
+        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; }
+        header p { margin-top: 8px; font-weight: 300; font-size: 1.1rem; opacity: 0.9; }
 
-        /* Contenedores Estéticos */
-        .container { padding: 0 1.5rem; max-width: 500px; margin: -30px auto 0; }
+        .container { padding: 0 1.2rem; max-width: 550px; margin: -40px auto 0; }
         
         section { 
-            background: var(--white); 
-            padding: 1.8rem; 
-            border-radius: 24px; 
+            background: var(--blanco); 
+            padding: 2rem; 
+            border-radius: 30px; 
             margin-bottom: 1.5rem; 
-            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
-            border: 1px solid rgba(0,0,0,0.02);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            border: 1px solid rgba(155, 81, 224, 0.1);
         }
 
-        h2 { color: var(--primary); font-size: 1.4rem; margin-top: 0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-        h2::before { content: ''; width: 4px; height: 20px; background: var(--secondary); border-radius: 10px; display: inline-block; }
+        h2 { color: var(--morado); font-size: 1.5rem; margin-top: 0; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+        h2::after { content: '✨'; font-size: 1.2rem; }
 
-        p { font-size: 0.95rem; color: #636e72; line-height: 1.6; }
+        p { font-size: 1rem; color: #57606f; line-height: 1.7; }
 
-        /* Estilo de Productos tipo App */
-        h3 { font-size: 1.1rem; margin: 1.5rem 0 1rem; color: #b2bec3; text-transform: uppercase; letter-spacing: 1px; }
+        h3 { font-size: 1rem; margin: 1.8rem 0 1rem; color: var(--morado); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; opacity: 0.7; }
         
+        /* Tarjetas de Productos */
         .producto { 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            padding: 12px 15px; 
-            background: #f8f9fa;
-            border-radius: 18px;
-            margin-bottom: 10px;
-            transition: transform 0.2s;
+            padding: 15px 20px; 
+            background: #fff;
+            border: 2px solid #f1f2f6;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
         }
 
-        .producto:active { transform: scale(0.98); }
+        .producto:active { transform: translateY(-3px); border-color: var(--rosa); }
 
         .info-prod { display: flex; flex-direction: column; }
-        .nombre-prod { font-weight: 600; font-size: 1rem; color: var(--text); }
-        .precio-prod { font-size: 0.85rem; color: var(--primary); font-weight: 600; }
+        .nombre-prod { font-weight: 600; font-size: 1.1rem; color: var(--texto); }
+        .precio-prod { font-size: 0.9rem; color: var(--rosa); font-weight: 700; }
 
-        .controles { display: flex; align-items: center; background: white; border-radius: 12px; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .controles { display: flex; align-items: center; background: #f8f9fa; border-radius: 15px; padding: 5px; }
         .btn-qty { 
-            background: var(--secondary); 
+            background: var(--morado); 
             border: none; 
             color: white; 
-            width: 28px; 
-            height: 28px; 
-            border-radius: 10px; 
-            font-size: 1.2rem; 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 12px; 
+            font-size: 1.3rem; 
             display: flex; 
             align-items: center; 
             justify-content: center;
             cursor: pointer;
         }
-        .cant { width: 30px; text-align: center; font-weight: 700; color: var(--text); }
+        .cant { width: 35px; text-align: center; font-weight: 700; font-size: 1.1rem; }
 
-        /* Footer Flotante de Compra */
+        /* Checkout Moderno */
         .checkout-bar {
             position: fixed;
-            bottom: 20px;
-            left: 5%;
-            right: 5%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 20px;
-            border-radius: 25px;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 18px 25px;
+            border-radius: 28px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            border: 1px solid rgba(255, 102, 178, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border: 1px solid var(--rosa);
             z-index: 1000;
         }
 
         .total-info { display: flex; flex-direction: column; }
-        .total-label { font-size: 0.7rem; color: #b2bec3; text-transform: uppercase; }
-        .total-num { font-size: 1.4rem; font-weight: 800; color: var(--text); }
+        .total-label { font-size: 0.75rem; color: #a4b0be; text-transform: uppercase; font-weight: 600; }
+        .total-num { font-size: 1.6rem; font-weight: 800; color: var(--texto); }
 
         .btn-ws { 
-            background: #25d366; 
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); 
             color: white; 
             border: none; 
-            padding: 12px 20px; 
-            border-radius: 15px; 
+            padding: 14px 24px; 
+            border-radius: 20px; 
             font-weight: 700; 
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            font-size: 1rem;
+            box-shadow: 0 8px 15px rgba(37, 211, 102, 0.2);
         }
     </style>
 </head>
@@ -132,39 +129,41 @@
 
 <header>
     <h1>M&I Antojitos</h1>
-    <p>Bolis Gourmet Artesanales ✨</p>
+    <p>El sabor artesanal que mereces</p>
 </header>
 
 <div class="container">
     <section>
-        <h2>Nuestra Esencia</h2>
-        <p>Creamos experiencias heladas 100% artesanales. Cada boli es una mezcla perfecta de cremosidad y frescura, hecha con pasión para transformar un antojo en un momento inolvidable.</p>
+        <h2>¿Qué es un Boli Gourmet?</h2>
+        <p>En <strong>M&I Antojitos</strong>, no hacemos simples congeladas; creamos experiencias de sabor. Nuestros bolis son piezas de repostería helada <strong>100% artesanales</strong>. A diferencia de los industriales, utilizamos ingredientes naturales de primera calidad y procesos manuales que garantizan una cremosidad extrema en los de leche y una explosión frutal en los de agua.</p>
+        <p>Cada sabor está diseñado para ser un viaje directo a tu antojo favorito, cuidando la textura desde el primer mordisco hasta el final.</p>
     </section>
 
     <section>
-        <h2>El Sueño M&I</h2>
-        <p>Somos una pareja de adolescentes con una visión clara: pasar de la hielera a nuestros propios locales. ¡Gracias por elegirnos y ser parte de esta historia!</p>
+        <h2>Detrás del Sueño</h2>
+        <p>¡Hola! Somos <strong>Iker y Michelle</strong>. Tenemos 15 años y somos una pareja de adolescentes con un sueño gigante. M&I nació de nuestra pasión por emprender juntos y demostrar que la edad no es un límite cuando hay ganas y dedicación.</p>
+        <p>Lo que empezó con una pequeña hielera compartida entre nosotros, hoy es un proyecto que busca crecer. Nuestra meta es transformar este emprendimiento local en una cadena de locales establecidos. Cada boli que compras nos ayuda a estar un paso más cerca de ese sueño.</p>
     </section>
 
     <section id="tienda">
-        <h2>Menú Gourmet</h2>
-        <p style="margin-bottom: 20px;"><em>"Gracias por elegirnos!!"</em></p>
+        <h2>Elige tu favorito</h2>
+        <p style="text-align: center; color: var(--rosa); font-weight: bold;">"Gracias por elegirnos!!"</p>
         
-        <h3>🥛 Cremosos ($25)</h3>
+        <h3>✨ De Leche ($25)</h3>
         <div id="lista-leche"></div>
 
-        <h3>💧 Frutales ($20)</h3>
+        <h3>🌊 De Agua ($20)</h3>
         <div id="lista-agua"></div>
     </section>
 </div>
 
 <div class="checkout-bar">
     <div class="total-info">
-        <span class="total-label">Total estimado</span>
+        <span class="total-label">Total a pagar</span>
         <span class="total-num" id="total-display">$0</span>
     </div>
     <button class="btn-ws" onclick="enviarPedido()">
-        Pedir ➜
+        Confirmar ➔
     </button>
 </div>
 
@@ -195,7 +194,7 @@
                 <div class="producto">
                     <div class="info-prod">
                         <span class="nombre-prod">${p.nombre}</span>
-                        <span class="precio-prod">$${p.precio} c/u</span>
+                        <span class="precio-prod">$${p.precio} MXN</span>
                     </div>
                     <div class="controles">
                         <button class="btn-qty" onclick="cambiar('${p.nombre}', -1)">-</button>
@@ -230,7 +229,7 @@
                 total += carrito[p] * prod.precio;
             }
         }
-        if (pedidoArray.length === 0) return alert("¡Añade algunos bolis a tu carrito!");
+        if (pedidoArray.length === 0) return alert("¡Añade algunos bolis antes de enviar!");
 
         const mensaje = `Hola M&I 👋🏻\nQuisiera estos sabores:\n${pedidoArray.join("\n")}\n\nTotal: $${total}\n\n¿Los tendrás disponible? ✨`;
         window.open(`https://wa.me/5580830028?text=${encodeURIComponent(mensaje)}`, '_blank');

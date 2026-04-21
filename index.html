@@ -10,211 +10,218 @@
         :root {
             --rosa: #ff85c1; --morado: #9b51e0; --blanco: #ffffff;
             --fondo: #fcfaff; --texto: #2d3436; --card-bg: #ffffff;
-            --shadow: rgba(0,0,0,0.05);
         }
 
         @media (prefers-color-scheme: dark) {
-            :root {
-                --fondo: #1a1a2e; --texto: #e1e1e1; --card-bg: #16213e;
-                --blanco: #16213e; --shadow: rgba(0,0,0,0.4);
-            }
-            p { color: #b2bec3 !important; }
-            .producto, .promo-card { background: #1f2a44 !important; border-color: #2d3436 !important; }
-            .nombre-prod, .total-num { color: #fff !important; }
+            :root { --fondo: #1a1a2e; --texto: #e1e1e1; --card-bg: #16213e; }
+            .producto { background: #1f2a44 !important; border-color: transparent !important; }
+            .nombre-prod { color: #fff !important; }
             .controles { background: #0f3460 !important; }
-            .checkout-bar { background: rgba(22, 33, 62, 0.95) !important; border-color: var(--morado) !important; }
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 130px; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; }
 
         header { 
             background: linear-gradient(135deg, var(--rosa) 0%, var(--morado) 100%); 
-            color: white; text-align: center; padding: 4.5rem 1.5rem;
-            border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
+            color: white; text-align: center; padding: 5rem 1.5rem;
+            border-bottom-left-radius: 60px; border-bottom-right-radius: 60px;
+            box-shadow: 0 10px 30px rgba(155, 81, 224, 0.3);
         }
 
-        .container { padding: 0 1.2rem; max-width: 550px; margin: -40px auto 0; }
+        .container { padding: 0 1.2rem; max-width: 550px; margin: -50px auto 0; }
         
+        /* BARRA DE PROGRESO "Glow" */
+        .progress-container {
+            background: var(--card-bg); padding: 20px; border-radius: 30px;
+            margin-bottom: 1.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 2px solid rgba(255, 133, 193, 0.1);
+        }
+        .progress-text { font-size: 0.9rem; font-weight: 800; margin-bottom: 12px; display: block; text-align: center; color: var(--morado); }
+        .progress-bg { background: #eee; height: 12px; border-radius: 20px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, var(--rosa), var(--morado)); width: 0%; height: 100%; box-shadow: 0 0 15px var(--rosa); }
+
         section { 
-            background: var(--card-bg); padding: 2rem; border-radius: 30px; 
-            margin-bottom: 1.5rem; box-shadow: 0 10px 40px var(--shadow);
-            border: 1px solid rgba(155, 81, 224, 0.1);
+            background: var(--card-bg); padding: 1.8rem; border-radius: 35px; 
+            margin-bottom: 1.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.03);
         }
 
-        .sabor-mes {
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-            color: #d6249f; padding: 15px; border-radius: 20px;
-            text-align: center; font-weight: 800; margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(255, 133, 193, 0.3);
-            border: 2px solid white;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% {transform: scale(1);} 50% {transform: scale(1.02);} 100% {transform: scale(1);} }
+        h2 { color: var(--morado); font-weight: 800; font-size: 1.6rem; margin-top: 0; }
 
-        .promo-card {
-            border: 2px dashed var(--morado); background: #fdfaff;
-            padding: 15px; border-radius: 20px; margin-bottom: 20px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        h2 { color: var(--morado); font-size: 1.5rem; margin-top: 0; font-weight: 700; }
-        
+        /* PRODUCTOS CON EFECTO CLICK */
         .producto { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 20px; background: #fff; border: 2px solid rgba(0,0,0,0.03);
-            border-radius: 20px; margin-bottom: 12px;
+            padding: 18px 20px; background: #fff; border-radius: 25px; margin-bottom: 15px;
+            border: 1px solid rgba(0,0,0,0.02);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
+        .producto:active { transform: scale(0.96); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        .controles { display: flex; align-items: center; background: #f8f9fa; border-radius: 15px; padding: 5px; }
+        .nombre-prod { font-weight: 700; font-size: 1.1rem; display: block; }
+        .precio-prod { color: var(--rosa); font-weight: 800; font-size: 0.95rem; }
+
+        /* CONTROLES TÁCTILES */
+        .controles { display: flex; align-items: center; background: #f0f2f5; border-radius: 20px; padding: 6px; }
         .btn-qty { 
             background: var(--morado); border: none; color: white; 
-            width: 32px; height: 32px; border-radius: 12px; font-size: 1.3rem;
-            display: flex; align-items: center; justify-content: center;
+            width: 38px; height: 38px; border-radius: 15px; font-size: 1.4rem; font-weight: 800;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
-        .cant { width: 35px; text-align: center; font-weight: 700; }
+        .btn-qty:active { transform: scale(1.3); background: var(--rosa); }
+        .cant { width: 35px; text-align: center; font-weight: 900; font-size: 1.1rem; color: var(--morado); }
 
-        .btn-insta {
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-            color: white; width: 100%; padding: 15px; border-radius: 20px;
-            border: none; font-weight: 800; margin-top: 20px; cursor: pointer;
-        }
-
+        /* CHECKOUT BAR ANIMADA */
         .checkout-bar {
-            position: fixed; bottom: 25px; left: 20px; right: 20px;
-            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(15px);
-            padding: 18px 25px; border-radius: 28px; display: flex;
+            position: fixed; bottom: 25px; left: 15px; right: 15px;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(20px);
+            padding: 20px 25px; border-radius: 35px; display: flex;
             justify-content: space-between; align-items: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12); border: 1px solid var(--rosa); z-index: 1000;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); border: 2px solid var(--rosa); z-index: 1000;
         }
+
+        .total-num { font-size: 1.8rem; font-weight: 900; color: var(--morado); display: block; }
+        .total-label { font-size: 0.7rem; font-weight: 700; color: var(--rosa); text-transform: uppercase; letter-spacing: 1px; }
 
         .btn-ws { 
             background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); 
-            color: white; border: none; padding: 14px 24px; border-radius: 20px; font-weight: 700; 
+            color: white; border: none; padding: 16px 28px; border-radius: 22px; 
+            font-weight: 800; font-size: 1rem; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
+        .btn-ws:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(37, 211, 102, 0.5); }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>M&I Antojitos</h1>
-    <p>Gourmet & Artesanal ✨</p>
+    <h1 style="margin:0; font-size: 3rem; font-weight: 800;">M&I Antojitos</h1>
+    <p style="opacity: 0.9; font-weight: 600;">El sabor artesanal que te mueve ✨</p>
 </header>
 
 <div class="container">
-    <div class="sabor-mes">🍦 SABOR DEL MES: DUVALÍN 🍫🥛</div>
+    <div class="progress-container">
+        <span class="progress-text" id="progreso-texto">¡Arma tu pedido! 🍧</span>
+        <div class="progress-bg"><div class="progress-fill" id="barra-fill"></div></div>
+    </div>
 
     <section>
-        <h2>¿Quiénes somos? 👫</h2>
-        <p>Somos <strong>Iker y Michelle</strong> (15 años). Cada boli es artesanal y hecho con amor en Coapa. ¡Gracias por apoyarnos!</p>
-        <button class="btn-insta" onclick="window.open('https://instagram.com/antojitos_mi', '_blank')">📸 SÍGUENOS EN INSTAGRAM</button>
+        <h2>Menú Gourmet</h2>
+        <div id="lista-completa"></div>
     </section>
 
-    <section id="tienda">
-        <h2>Menú Gourmet</h2>
-        
-        <div class="promo-card">
-            <div>
-                <strong>🎉 Paquete Fiesta</strong><br>
-                <small>10 Bolis Surtidos</small><br>
-                <span style="color: var(--rosa); font-weight: bold;">$230 (Ahorra $20)</span>
-            </div>
-            <div class="controles">
-                <button class="btn-qty" onclick="cambiar('Paquete Fiesta', -1)">-</button>
-                <span class="cant" id="cant-Paquete-Fiesta">0</span>
-                <button class="btn-qty" onclick="cambiar('Paquete Fiesta', 1)">+</button>
-            </div>
-        </div>
-
-        <h3>✨ De Leche ($25)</h3>
-        <div id="lista-leche"></div>
-        <h3>🌊 De Agua ($20)</h3>
-        <div id="lista-agua"></div>
+    <section style="text-align: center;">
+        <h2 style="margin-bottom: 10px;">¡Síguenos! 👫</h2>
+        <p>Iker y Michelle en Instagram:</p>
+        <button style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); color: white; width: 100%; padding: 18px; border-radius: 25px; border: none; font-weight: 800; cursor: pointer; font-size: 1.1rem;" onclick="window.open('https://instagram.com/antojitos_mi', '_blank')">📸 @antojitos_mi</button>
     </section>
 </div>
 
 <div class="checkout-bar">
-    <div class="total-info">
+    <div>
+        <span class="total-label">Tu total</span>
         <span class="total-num" id="total-display">$0</span>
     </div>
-    <button class="btn-ws" onclick="enviarPedido()">Confirmar ➔</button>
+    <button class="btn-ws" onclick="enviarPedido()">PEDIR POR WHATS ➔</button>
 </div>
 
 <script>
     const productos = [
-        {nombre: "Duvalín", tipo: "leche", precio: 25},
-        {nombre: "Coco", tipo: "leche", precio: 25}, 
-        {nombre: "Piña Colada", tipo: "leche", precio: 25},
-        {nombre: "Queso Zarzamora", tipo: "leche", precio: 25}, 
-        {nombre: "Mazapán", tipo: "leche", precio: 25}, 
-        {nombre: "Oreo", tipo: "leche", precio: 25},
-        {nombre: "Mango Chamoy", tipo: "agua", precio: 20}, 
-        {nombre: "Jamaica Chamoy", tipo: "agua", precio: 20}, 
-        {nombre: "Jamaica", tipo: "agua", precio: 20}, 
-        {nombre: "Skwinkles", tipo: "agua", precio: 20}
+        {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
+        {nombre: "Mazapán 🥜", tipo: "leche", precio: 25},
+        {nombre: "Oreo 🍪", tipo: "leche", precio: 25},
+        {nombre: "Queso Zarzamora 🍰", tipo: "leche", precio: 25},
+        {nombre: "Mango Chamoy 🥭", tipo: "agua", precio: 20},
+        {nombre: "Skwinkles 🍭", tipo: "agua", precio: 20},
+        {nombre: "Jamaica Chamoy 🌺", tipo: "agua", precio: 20}
     ];
 
-    let carrito = {"Paquete Fiesta": 0};
+    let carrito = {};
 
     function renderar() {
-        const lecheDiv = document.getElementById('lista-leche');
-        const aguaDiv = document.getElementById('lista-agua');
-        lecheDiv.innerHTML = ''; aguaDiv.innerHTML = '';
+        const lista = document.getElementById('lista-completa');
+        lista.innerHTML = '';
         
-        document.getElementById('cant-Paquete-Fiesta').innerText = carrito["Paquete Fiesta"];
-
         productos.forEach(p => {
             const cant = carrito[p.nombre] || 0;
-            const html = `<div class="producto">
-                <div class="info-prod"><span class="nombre-prod">${p.nombre}</span><span class="precio-prod">$${p.precio}</span></div>
-                <div class="controles">
-                    <button class="btn-qty" onclick="cambiar('${p.nombre}', -1)">-</button>
-                    <span class="cant">${cant}</span>
-                    <button class="btn-qty" onclick="cambiar('${p.nombre}', 1)">+</button>
-                </div>
-            </div>`;
-            p.tipo === 'leche' ? lecheDiv.innerHTML += html : aguaDiv.innerHTML += html;
+            lista.innerHTML += `
+                <div class="producto">
+                    <div>
+                        <span class="nombre-prod">${p.nombre}</span>
+                        <span class="precio-prod">$${p.precio} MXN</span>
+                    </div>
+                    <div class="controles">
+                        <button class="btn-qty" onclick="cambiar('${p.nombre}', -1)">-</button>
+                        <span class="cant">${cant}</span>
+                        <button class="btn-qty" onclick="cambiar('${p.nombre}', 1)">+</button>
+                    </div>
+                </div>`;
         });
-        actualizarTotal();
+        actualizarTodo();
     }
 
     function cambiar(nombre, delta) {
         carrito[nombre] = (carrito[nombre] || 0) + delta;
         if (carrito[nombre] < 0) carrito[nombre] = 0;
+        
+        // Efecto visual de "Pop" en el número
         renderar();
     }
 
-    function actualizarTotal() {
-        let total = carrito["Paquete Fiesta"] * 230;
-        productos.forEach(p => { total += (carrito[p.nombre] || 0) * p.precio; });
+    function actualizarTodo() {
+        let total = 0;
+        let piezas = 0;
+        for (let p in carrito) {
+            let prod = productos.find(x => x.nombre === p);
+            if(prod) {
+                total += carrito[p] * prod.precio;
+                piezas += carrito[p];
+            }
+        }
+
+        // Lógica de Descuento Fiesta ($20 pesos si son 10 o más)
+        if (piezas >= 10) {
+            total -= 20;
+            document.getElementById('progreso-texto').innerText = "¡PAQUETE FIESTA ACTIVADO! 🥳 -$20 OFF";
+            document.getElementById('barra-fill').style.width = "100%";
+            document.getElementById('barra-fill').style.boxShadow = "0 0 20px #25d366";
+        } else {
+            let faltan = 10 - piezas;
+            document.getElementById('progreso-texto').innerText = piezas > 0 ? `¡Faltan ${faltan} para el descuento! 🍦` : "¡Arma tu pedido! 🍧";
+            document.getElementById('barra-fill').style.width = (piezas * 10) + "%";
+            document.getElementById('barra-fill').style.boxShadow = "0 0 15px var(--rosa)";
+        }
+
+        // Animación simple del total
         document.getElementById('total-display').innerText = `$${total}`;
     }
 
     function enviarPedido() {
-        let pedidoArray = [];
+        let items = [];
         let total = 0;
-
-        if(carrito["Paquete Fiesta"] > 0) {
-            pedidoArray.push(`• ${carrito["Paquete Fiesta"]} Paquete Fiesta ($${carrito["Paquete Fiesta"]*230})`);
-            total += carrito["Paquete Fiesta"] * 230;
-        }
+        let piezas = 0;
 
         for (let p in carrito) {
-            if (p !== "Paquete Fiesta" && carrito[p] > 0) {
+            if (carrito[p] > 0) {
                 let prod = productos.find(x => x.nombre === p);
-                pedidoArray.push(`• ${carrito[p]} de ${p} ($${carrito[p]*prod.precio})`);
+                items.push(`• ${carrito[p]} de ${p}`);
                 total += carrito[p] * prod.precio;
+                piezas += carrito[p];
             }
         }
         
-        if (pedidoArray.length === 0) return alert("¡Añade algo al carrito!");
+        if (piezas === 0) return alert("¡Agrega algo rico al carrito!");
+        if (piezas >= 10) total -= 20;
 
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        confetti({
+            particleCount: 200,
+            spread: 80,
+            origin: { y: 0.7 },
+            colors: ['#ff85c1', '#9b51e0', '#ffffff']
+        });
 
         setTimeout(() => {
-            const mensaje = `Hola M&I 👋🏻\nQuisiera estos sabores:\n${pedidoArray.join("\n")}\n\nTotal: $${total}\n\n¿Los tendrás disponible? ✨`;
-            window.open(`https://wa.me/5580830028?text=${encodeURIComponent(mensaje)}`, '_blank');
-        }, 800);
+            const txt = `¡Hola M&I! 👋🏻 Quisiera este pedido:\n${items.join("\n")}\n\nTotal: $${total}\n\n¿Tienen disponible? ✨`;
+            window.open(`https://wa.me/5580830028?text=${encodeURIComponent(txt)}`, '_blank');
+        }, 900);
     }
 
     renderar();

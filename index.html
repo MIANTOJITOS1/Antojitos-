@@ -3,68 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M&I Antojitos - Bolis Gourmet</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>M&I Antojitos | Gourmet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --rosa: #ff66b2; --azul: #89cff0; --oscuro: #333; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: #f9f9f9; color: var(--oscuro); line-height: 1.6; }
-        header { background: linear-gradient(45deg, var(--rosa), var(--azul)); color: white; text-align: center; padding: 3rem 1rem; }
-        section { padding: 2rem; max-width: 600px; margin: 1rem auto; background: white; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        h2 { color: var(--rosa); border-bottom: 3px solid var(--azul); padding-bottom: 5px; }
-        .producto { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0; }
-        .controles { display: flex; align-items: center; gap: 15px; }
-        button.btn-qty { background: var(--azul); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-weight: bold; cursor: pointer; }
-        .precio { font-weight: bold; color: #555; }
-        .btn-ws { background: #25d366; width: 100%; padding: 18px; color: white; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 20px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
-        .total-container { background: #fefefe; border: 2px dashed var(--rosa); padding: 15px; text-align: center; border-radius: 15px; margin-top: 20px; }
+        :root {
+            --primary: #ff66b2;
+            --secondary: #89cff0;
+            --bg: #fdfdfd;
+            --text: #2d3436;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            margin: 0; 
+            background-color: var(--bg); 
+            color: var(--text);
+            padding-bottom: 100px;
+        }
+
+        /* Hero Moderno */
+        header { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+            color: white; 
+            text-align: center; 
+            padding: 4rem 1.5rem;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 20px rgba(255, 102, 178, 0.2);
+        }
+
+        header h1 { margin: 0; font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+        header p { margin-top: 10px; font-weight: 300; opacity: 0.9; }
+
+        /* Contenedores Estéticos */
+        .container { padding: 0 1.5rem; max-width: 500px; margin: -30px auto 0; }
+        
+        section { 
+            background: var(--white); 
+            padding: 1.8rem; 
+            border-radius: 24px; 
+            margin-bottom: 1.5rem; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        h2 { color: var(--primary); font-size: 1.4rem; margin-top: 0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        h2::before { content: ''; width: 4px; height: 20px; background: var(--secondary); border-radius: 10px; display: inline-block; }
+
+        p { font-size: 0.95rem; color: #636e72; line-height: 1.6; }
+
+        /* Estilo de Productos tipo App */
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 1rem; color: #b2bec3; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .producto { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 12px 15px; 
+            background: #f8f9fa;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            transition: transform 0.2s;
+        }
+
+        .producto:active { transform: scale(0.98); }
+
+        .info-prod { display: flex; flex-direction: column; }
+        .nombre-prod { font-weight: 600; font-size: 1rem; color: var(--text); }
+        .precio-prod { font-size: 0.85rem; color: var(--primary); font-weight: 600; }
+
+        .controles { display: flex; align-items: center; background: white; border-radius: 12px; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .btn-qty { 
+            background: var(--secondary); 
+            border: none; 
+            color: white; 
+            width: 28px; 
+            height: 28px; 
+            border-radius: 10px; 
+            font-size: 1.2rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            cursor: pointer;
+        }
+        .cant { width: 30px; text-align: center; font-weight: 700; color: var(--text); }
+
+        /* Footer Flotante de Compra */
+        .checkout-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 5%;
+            right: 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255, 102, 178, 0.1);
+            z-index: 1000;
+        }
+
+        .total-info { display: flex; flex-direction: column; }
+        .total-label { font-size: 0.7rem; color: #b2bec3; text-transform: uppercase; }
+        .total-num { font-size: 1.4rem; font-weight: 800; color: var(--text); }
+
+        .btn-ws { 
+            background: #25d366; 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 15px; 
+            font-weight: 700; 
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>M&I Antojitos</h1>
-    <p>Hechos con amor por manos jóvenes</p>
+    <p>Bolis Gourmet Artesanales ✨</p>
 </header>
 
-<section>
-    <h2>Nuestros Bolis Gourmet</h2>
-    <p>Nuestros bolis son mucho más que un postre helado; son piezas <strong>Gourmet y totalmente artesanales</strong>. Utilizamos procesos tradicionales y los mejores ingredientes para lograr una cremosidad inigualable.</p>
-    <p>La historia de M&I comenzó con el deseo de ofrecer algo refrescante pero de alta calidad, cuidando que cada sabor cuente una historia de dedicación y frescura artesanal.</p>
-</section>
+<div class="container">
+    <section>
+        <h2>Nuestra Esencia</h2>
+        <p>Creamos experiencias heladas 100% artesanales. Cada boli es una mezcla perfecta de cremosidad y frescura, hecha con pasión para transformar un antojo en un momento inolvidable.</p>
+    </section>
 
-<section>
-    <h2>¡Hola! Somos M&I Antojitos</h2>
-    <p>Somos una pareja de adolescentes en busca de un sueño. Queremos demostrar que con esfuerzo todo es posible. Esto que ves hoy no es solo algo de una hielera; trabajamos día a día con la visión de que muy pronto dejaremos de ser un negocio ambulante para convertirnos en locales establecidos.</p>
-    <p>¡Gracias por creer en nuestro proyecto y ser parte de nuestro crecimiento!</p>
-</section>
+    <section>
+        <h2>El Sueño M&I</h2>
+        <p>Somos una pareja de adolescentes con una visión clara: pasar de la hielera a nuestros propios locales. ¡Gracias por elegirnos y ser parte de esta historia!</p>
+    </section>
 
-<section id="tienda">
-    <h2>Haz tu pedido</h2>
-    <p style="text-align: center; color: var(--rosa); font-weight: bold;">¡Gracias por elegirnos!</p>
-    
-    <h3>Bolis de Leche ($25)</h3>
-    <div id="lista-leche"></div>
+    <section id="tienda">
+        <h2>Menú Gourmet</h2>
+        <p style="margin-bottom: 20px;"><em>"Gracias por elegirnos!!"</em></p>
+        
+        <h3>🥛 Cremosos ($25)</h3>
+        <div id="lista-leche"></div>
 
-    <h3>Bolis de Agua ($20)</h3>
-    <div id="lista-agua"></div>
+        <h3>💧 Frutales ($20)</h3>
+        <div id="lista-agua"></div>
+    </section>
+</div>
 
-    <div class="total-container">
-        <div id="total-display" style="font-size: 1.6rem; color: var(--oscuro);">Total: $0</div>
+<div class="checkout-bar">
+    <div class="total-info">
+        <span class="total-label">Total estimado</span>
+        <span class="total-num" id="total-display">$0</span>
     </div>
-    
-    <button class="btn-ws" onclick="enviarPedido()">Terminar pedido en WhatsApp</button>
-</section>
+    <button class="btn-ws" onclick="enviarPedido()">
+        Pedir ➜
+    </button>
+</div>
 
 <script>
     const productos = [
         {nombre: "Coco", tipo: "leche", precio: 25},
         {nombre: "Piña Colada", tipo: "leche", precio: 25},
-        {nombre: "Queso con Zarzamora", tipo: "leche", precio: 25},
+        {nombre: "Queso Zarzamora", tipo: "leche", precio: 25},
         {nombre: "Duvalín", tipo: "leche", precio: 25},
         {nombre: "Mazapán", tipo: "leche", precio: 25},
         {nombre: "Oreo", tipo: "leche", precio: 25},
-        {nombre: "Mango con Chamoy", tipo: "agua", precio: 20},
-        {nombre: "Jamaica con Chamoy", tipo: "agua", precio: 20},
+        {nombre: "Mango Chamoy", tipo: "agua", precio: 20},
+        {nombre: "Jamaica Chamoy", tipo: "agua", precio: 20},
         {nombre: "Jamaica", tipo: "agua", precio: 20},
         {nombre: "Skwinkles", tipo: "agua", precio: 20}
     ];
@@ -78,16 +191,19 @@
 
         productos.forEach(p => {
             const cant = carrito[p.nombre] || 0;
-            const itemHTML = `
+            const html = `
                 <div class="producto">
-                    <span><strong>${p.nombre}</strong></span>
+                    <div class="info-prod">
+                        <span class="nombre-prod">${p.nombre}</span>
+                        <span class="precio-prod">$${p.precio} c/u</span>
+                    </div>
                     <div class="controles">
                         <button class="btn-qty" onclick="cambiar('${p.nombre}', -1)">-</button>
-                        <span>${cant}</span>
+                        <span class="cant">${cant}</span>
                         <button class="btn-qty" onclick="cambiar('${p.nombre}', 1)">+</button>
                     </div>
                 </div>`;
-            p.tipo === 'leche' ? lecheDiv.innerHTML += itemHTML : aguaDiv.innerHTML += itemHTML;
+            p.tipo === 'leche' ? lecheDiv.innerHTML += html : aguaDiv.innerHTML += html;
         });
         actualizarTotal();
     }
@@ -100,32 +216,24 @@
 
     function actualizarTotal() {
         let total = 0;
-        productos.forEach(p => {
-            total += (carrito[p.nombre] || 0) * p.precio;
-        });
-        document.getElementById('total-display').innerText = `Total: $${total}`;
+        productos.forEach(p => { total += (carrito[p.nombre] || 0) * p.precio; });
+        document.getElementById('total-display').innerText = `$${total}`;
     }
 
     function enviarPedido() {
         let pedidoArray = [];
         let total = 0;
-
         for (let p in carrito) {
             if (carrito[p] > 0) {
-                pedidoArray.push(`${carrito[p]} boli(s) de ${p}`);
                 let prod = productos.find(x => x.nombre === p);
+                pedidoArray.push(`• ${carrito[p]} de ${p} ($${carrito[p]*prod.precio})`);
                 total += carrito[p] * prod.precio;
             }
         }
+        if (pedidoArray.length === 0) return alert("¡Añade algunos bolis a tu carrito!");
 
-        if (pedidoArray.length === 0) {
-            alert("Por favor, selecciona al menos un boli.");
-            return;
-        }
-
-        const mensaje = `Hola M&I, quiero ${pedidoArray.join(", ")}. El total es $${total}. ¿Tienen disponibles?`;
-        const url = `https://wa.me/5580830028?text=${encodeURIComponent(mensaje)}`;
-        window.open(url, '_blank');
+        const mensaje = `Hola M&I 👋🏻\nQuisiera estos sabores:\n${pedidoArray.join("\n")}\n\nTotal: $${total}\n\n¿Los tendrás disponible? ✨`;
+        window.open(`https://wa.me/5580830028?text=${encodeURIComponent(mensaje)}`, '_blank');
     }
 
     renderar();

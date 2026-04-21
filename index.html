@@ -5,147 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M&I Antojitos | Gourmet & Artesanal</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --rosa: #ff85c1;
-            --morado: #9b51e0;
-            --blanco: #ffffff;
-            --fondo: #fcfaff;
-            --texto: #2d3436;
-            --card-bg: #ffffff;
+            --rosa: #ff85c1; --morado: #9b51e0; --blanco: #ffffff;
+            --fondo: #fcfaff; --texto: #2d3436; --card-bg: #ffffff;
             --shadow: rgba(0,0,0,0.05);
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --fondo: #1a1a2e;
-                --texto: #e1e1e1;
-                --card-bg: #16213e;
-                --blanco: #16213e;
-                --shadow: rgba(0,0,0,0.4);
+                --fondo: #1a1a2e; --texto: #e1e1e1; --card-bg: #16213e;
+                --blanco: #16213e; --shadow: rgba(0,0,0,0.4);
             }
             p { color: #b2bec3 !important; }
-            .producto { background: #1f2a44 !important; border-color: #2d3436 !important; }
-            .nombre-prod { color: #fff !important; }
+            .producto, .promo-card { background: #1f2a44 !important; border-color: #2d3436 !important; }
+            .nombre-prod, .total-num { color: #fff !important; }
             .controles { background: #0f3460 !important; }
             .checkout-bar { background: rgba(22, 33, 62, 0.95) !important; border-color: var(--morado) !important; }
-            .total-num { color: #fff !important; }
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        body { 
-            font-family: 'Outfit', sans-serif; 
-            margin: 0; 
-            background-color: var(--fondo); 
-            color: var(--texto);
-            padding-bottom: 120px;
-        }
+        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 130px; }
 
         header { 
             background: linear-gradient(135deg, var(--rosa) 0%, var(--morado) 100%); 
-            color: white; 
-            text-align: center; 
-            padding: 4.5rem 1.5rem;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
+            color: white; text-align: center; padding: 4.5rem 1.5rem;
+            border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
         }
-
-        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; }
 
         .container { padding: 0 1.2rem; max-width: 550px; margin: -40px auto 0; }
         
         section { 
-            background: var(--card-bg); 
-            padding: 2rem; 
-            border-radius: 30px; 
-            margin-bottom: 1.5rem; 
-            box-shadow: 0 10px 40px var(--shadow);
+            background: var(--card-bg); padding: 2rem; border-radius: 30px; 
+            margin-bottom: 1.5rem; box-shadow: 0 10px 40px var(--shadow);
             border: 1px solid rgba(155, 81, 224, 0.1);
         }
 
-        h2 { color: var(--morado); font-size: 1.5rem; margin-top: 0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-        p { font-size: 1rem; color: #57606f; line-height: 1.7; margin-bottom: 15px; }
+        /* BANNER SABOR DEL MES */
+        .sabor-mes {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: #d6249f; padding: 15px; border-radius: 20px;
+            text-align: center; font-weight: 800; margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(255, 133, 193, 0.3);
+            border: 2px solid white;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% {transform: scale(1);} 50% {transform: scale(1.02);} 100% {transform: scale(1);} }
 
-        .info-tag {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(155, 81, 224, 0.1);
-            color: var(--morado);
-            padding: 5px 12px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            margin-right: 5px;
+        /* PAQUETE FIESTA */
+        .promo-card {
+            border: 2px dashed var(--morado); background: #fdfaff;
+            padding: 15px; border-radius: 20px; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
+        h2 { color: var(--morado); font-size: 1.5rem; margin-top: 0; font-weight: 700; }
+        
         .producto { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 15px 20px; 
-            background: #fff;
-            border: 2px solid rgba(0,0,0,0.03);
-            border-radius: 20px;
-            margin-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 20px; background: #fff; border: 2px solid rgba(0,0,0,0.03);
+            border-radius: 20px; margin-bottom: 12px;
         }
-
-        .info-prod { display: flex; flex-direction: column; }
-        .nombre-prod { font-weight: 600; font-size: 1.1rem; }
-        .precio-prod { font-size: 0.9rem; color: var(--rosa); font-weight: 700; }
 
         .controles { display: flex; align-items: center; background: #f8f9fa; border-radius: 15px; padding: 5px; }
         .btn-qty { 
-            background: var(--morado); 
-            border: none; 
-            color: white; 
-            width: 32px; 
-            height: 32px; 
-            border-radius: 12px; 
-            font-size: 1.3rem; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
+            background: var(--morado); border: none; color: white; 
+            width: 32px; height: 32px; border-radius: 12px; font-size: 1.3rem;
+            display: flex; align-items: center; justify-content: center;
         }
         .cant { width: 35px; text-align: center; font-weight: 700; }
 
-        .btn-share {
-            background: var(--blanco);
-            color: var(--morado);
-            border: 2px solid var(--morado);
-            width: 100%;
-            padding: 12px;
-            border-radius: 18px;
-            font-weight: 700;
-            margin-top: 10px;
-            font-family: 'Outfit';
+        .btn-insta {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+            color: white; width: 100%; padding: 15px; border-radius: 20px;
+            border: none; font-weight: 800; margin-top: 20px; cursor: pointer;
         }
 
         .checkout-bar {
-            position: fixed;
-            bottom: 25px;
-            left: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(15px);
-            padding: 18px 25px;
-            border-radius: 28px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-            border: 1px solid var(--rosa);
-            z-index: 1000;
+            position: fixed; bottom: 25px; left: 20px; right: 20px;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(15px);
+            padding: 18px 25px; border-radius: 28px; display: flex;
+            justify-content: space-between; align-items: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12); border: 1px solid var(--rosa); z-index: 1000;
         }
 
         .btn-ws { 
             background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); 
-            color: white; 
-            border: none; 
-            padding: 14px 24px; 
-            border-radius: 20px; 
-            font-weight: 700; 
+            color: white; border: none; padding: 14px 24px; border-radius: 20px; font-weight: 700; 
         }
     </style>
 </head>
@@ -157,28 +104,30 @@
 </header>
 
 <div class="container">
-    <section>
-        <h2>Entregas y Pedidos</h2>
-        <div class="info-tag">📍 Coapa y Cuemanco</div>
-        <div class="info-tag">⏰ Lun - Sáb: 2pm - 6pm</div>
-        <p>Somos un emprendimiento local. Entregamos personalmente para asegurar que tus bolis lleguen en el punto perfecto de congelación.</p>
-        <button class="btn-share" onclick="compartir()">🚀 Compartir con un amigo</button>
-    </section>
+    <div class="sabor-mes">🍦 SABOR DEL MES: DUVALÍN 🍫🥛</div>
 
     <section>
         <h2>¿Quiénes somos? 👫</h2>
-        <p>Detrás de cada sabor de <strong>M&I Antojitos</strong> estamos nosotros: <strong>Iker y Michelle</strong>. Somos una pareja de adolescentes de 15 años que comparte mucho más que una hielera; compartimos el sueño de construir algo propio desde cero.</p>
-        <p>Nuestro nombre, M&I, representa la unión de nuestras iniciales y el esfuerzo que ponemos cada día para equilibrar la escuela con nuestra pasión por los negocios. No somos solo una marca; somos dos jóvenes de Coapa que creen que con dedicación, los sueños se congelan... ¡pero para hacerse realidad!</p>
-        <p>Cada boli que preparas en este carrito es hecho a mano por nosotros, cuidando la calidad y la limpieza, porque sabemos que mereces lo mejor. Al elegirnos, no solo compras un postre, apoyas el futuro de dos emprendedores que buscan pasar de las calles a tener sus propios locales establecidos.</p>
-    </section>
-
-    <section>
-        <h2>¿Qué nos hace diferentes? ✨</h2>
-        <p>Nuestros bolis son <strong>Gourmet</strong>. ¿Qué significa esto? Que no usamos colorantes artificiales ni exceso de azúcar. Buscamos la cremosidad perfecta en los de leche (como el de Mazapán u Oreo) y la frescura más vibrante en los de agua con toppings reales como Skwinkles o Chamoy.</p>
+        <p>Somos <strong>Iker y Michelle</strong> (15 años). Cada boli es artesanal y hecho con amor en Coapa. ¡Gracias por apoyarnos!</p>
+        <button class="btn-insta" onclick="window.open('https://instagram.com/tu_usuario', '_blank')">📸 SÍGUENOS EN INSTAGRAM</button>
     </section>
 
     <section id="tienda">
         <h2>Menú Gourmet</h2>
+        
+        <div class="promo-card">
+            <div>
+                <strong>🎉 Paquete Fiesta</strong><br>
+                <small>10 Bolis Surtidos</small><br>
+                <span style="color: var(--rosa); font-weight: bold;">$220 (Ahorra $30)</span>
+            </div>
+            <div class="controles">
+                <button class="btn-qty" onclick="cambiar('Paquete Fiesta', -1)">-</button>
+                <span class="cant" id="cant-Paquete-Fiesta">0</span>
+                <button class="btn-qty" onclick="cambiar('Paquete Fiesta', 1)">+</button>
+            </div>
+        </div>
+
         <h3>✨ De Leche ($25)</h3>
         <div id="lista-leche"></div>
         <h3>🌊 De Agua ($20)</h3>
@@ -195,31 +144,31 @@
 
 <script>
     const productos = [
-        {nombre: "Coco", tipo: "leche", precio: 25},
-        {nombre: "Piña Colada", tipo: "leche", precio: 25},
-        {nombre: "Queso Zarzamora", tipo: "leche", precio: 25},
         {nombre: "Duvalín", tipo: "leche", precio: 25},
-        {nombre: "Mazapán", tipo: "leche", precio: 25},
+        {nombre: "Coco", tipo: "leche", precio: 25}, 
+        {nombre: "Piña Colada", tipo: "leche", precio: 25},
+        {nombre: "Queso Zarzamora", tipo: "leche", precio: 25}, 
+        {nombre: "Mazapán", tipo: "leche", precio: 25}, 
         {nombre: "Oreo", tipo: "leche", precio: 25},
-        {nombre: "Mango Chamoy", tipo: "agua", precio: 20},
-        {nombre: "Jamaica Chamoy", tipo: "agua", precio: 20},
-        {nombre: "Jamaica", tipo: "agua", precio: 20},
+        {nombre: "Mango Chamoy", tipo: "agua", precio: 20}, 
+        {nombre: "Jamaica Chamoy", tipo: "agua", precio: 20}, 
+        {nombre: "Jamaica", tipo: "agua", precio: 20}, 
         {nombre: "Skwinkles", tipo: "agua", precio: 20}
     ];
 
-    let carrito = {};
+    let carrito = {"Paquete Fiesta": 0};
 
     function renderar() {
         const lecheDiv = document.getElementById('lista-leche');
         const aguaDiv = document.getElementById('lista-agua');
         lecheDiv.innerHTML = ''; aguaDiv.innerHTML = '';
+        
+        document.getElementById('cant-Paquete-Fiesta').innerText = carrito["Paquete Fiesta"];
+
         productos.forEach(p => {
             const cant = carrito[p.nombre] || 0;
             const html = `<div class="producto">
-                <div class="info-prod">
-                    <span class="nombre-prod">${p.nombre}</span>
-                    <span class="precio-prod">$${p.precio} MXN</span>
-                </div>
+                <div class="info-prod"><span class="nombre-prod">${p.nombre}</span><span class="precio-prod">$${p.precio}</span></div>
                 <div class="controles">
                     <button class="btn-qty" onclick="cambiar('${p.nombre}', -1)">-</button>
                     <span class="cant">${cant}</span>
@@ -238,7 +187,7 @@
     }
 
     function actualizarTotal() {
-        let total = 0;
+        let total = carrito["Paquete Fiesta"] * 220;
         productos.forEach(p => { total += (carrito[p.nombre] || 0) * p.precio; });
         document.getElementById('total-display').innerText = `$${total}`;
     }
@@ -246,28 +195,28 @@
     function enviarPedido() {
         let pedidoArray = [];
         let total = 0;
+
+        if(carrito["Paquete Fiesta"] > 0) {
+            pedidoArray.push(`• ${carrito["Paquete Fiesta"]} Paquete Fiesta ($${carrito["Paquete Fiesta"]*220})`);
+            total += carrito["Paquete Fiesta"] * 220;
+        }
+
         for (let p in carrito) {
-            if (carrito[p] > 0) {
+            if (p !== "Paquete Fiesta" && carrito[p] > 0) {
                 let prod = productos.find(x => x.nombre === p);
                 pedidoArray.push(`• ${carrito[p]} de ${p} ($${carrito[p]*prod.precio})`);
                 total += carrito[p] * prod.precio;
             }
         }
-        if (pedidoArray.length === 0) return alert("¡Añade algunos bolis!");
-        const mensaje = `Hola M&I 👋🏻\nQuisiera estos sabores:\n${pedidoArray.join("\n")}\n\nTotal: $${total}\n\n¿Los tendrás disponible? ✨`;
-        window.open(`https://wa.me/5580830028?text=${encodeURIComponent(mensaje)}`, '_blank');
-    }
+        
+        if (pedidoArray.length === 0) return alert("¡Añade algo al carrito!");
 
-    function compartir() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'M&I Antojitos',
-                text: '¡Mira los bolis gourmet de Iker y Michelle en Coapa! 🍦',
-                url: window.location.href
-            });
-        } else {
-            alert("Copia el link y pásalo por WhatsApp 🚀");
-        }
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+
+        setTimeout(() => {
+            const mensaje = `Hola M&I 👋🏻\nQuisiera estos sabores:\n${pedidoArray.join("\n")}\n\nTotal: $${total}\n\n¿Los tendrás disponible? ✨`;
+            window.open(`https://wa.me/5580830028?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }, 800);
     }
 
     renderar();

@@ -36,7 +36,6 @@
 
         .container { padding: 0 1.2rem; max-width: 550px; margin: -40px auto 0; }
         
-        /* BARRA DE PROGRESO INTERACTIVA */
         .progress-container {
             background: var(--card-bg); padding: 15px; border-radius: 20px;
             margin-bottom: 1.5rem; box-shadow: 0 5px 15px var(--shadow);
@@ -45,7 +44,6 @@
         .progress-bg { background: #eee; height: 10px; border-radius: 10px; overflow: hidden; }
         .progress-fill { background: linear-gradient(to right, var(--rosa), var(--morado)); width: 0%; height: 100%; }
 
-        /* FILTROS */
         .filters { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding: 5px 0; }
         .filter-btn { 
             padding: 8px 18px; border-radius: 50px; border: 2px solid var(--morado);
@@ -189,9 +187,8 @@
             }
         }
 
-        // Si llega a 10, aplicar descuento de Paquete Fiesta ($20 menos)
         if (totalPiezas >= 10) {
-            total -= 20;
+            total -= 20; // DESCUENTO CORREGIDO A $20
             document.getElementById('progreso-texto').innerText = "¡Paquete Fiesta activado! -$20 de descuento ✅";
             document.getElementById('barra-fill').style.width = "100%";
         } else {
@@ -218,7 +215,7 @@
         }
         
         if (totalPiezas === 0) return alert("¡El carrito está vacío!");
-        if (totalPiezas >= 10) total -= 20;
+        if (totalPiezas >= 10) total -= 20; // DESCUENTO CORREGIDO A $20
 
         confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
 
@@ -232,3 +229,4 @@
 </script>
 </body>
 </html>
+ 

@@ -12,6 +12,25 @@
             --blanco: #ffffff;
             --fondo: #fcfaff;
             --texto: #2d3436;
+            --card-bg: #ffffff;
+            --shadow: rgba(0,0,0,0.05);
+        }
+
+        /* MODO OSCURO AUTOMÁTICO */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --fondo: #1a1a2e;
+                --texto: #e1e1e1;
+                --card-bg: #16213e;
+                --blanco: #16213e;
+                --shadow: rgba(0,0,0,0.4);
+            }
+            p { color: #b2bec3 !important; }
+            .producto { background: #1f2a44 !important; border-color: #2d3436 !important; }
+            .nombre-prod { color: #fff !important; }
+            .controles { background: #0f3460 !important; }
+            .checkout-bar { background: rgba(22, 33, 62, 0.95) !important; border-color: var(--morado) !important; }
+            .total-num { color: #fff !important; }
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -21,10 +40,10 @@
             margin: 0; 
             background-color: var(--fondo); 
             color: var(--texto);
-            padding-bottom: 110px;
+            padding-bottom: 120px;
+            transition: 0.3s;
         }
 
-        /* Encabezado con degradado Rosa-Morado */
         header { 
             background: linear-gradient(135deg, var(--rosa) 0%, var(--morado) 100%); 
             color: white; 
@@ -36,43 +55,48 @@
         }
 
         header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; }
-        header p { margin-top: 8px; font-weight: 300; font-size: 1.1rem; opacity: 0.9; }
 
         .container { padding: 0 1.2rem; max-width: 550px; margin: -40px auto 0; }
         
         section { 
-            background: var(--blanco); 
+            background: var(--card-bg); 
             padding: 2rem; 
             border-radius: 30px; 
             margin-bottom: 1.5rem; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 40px var(--shadow);
             border: 1px solid rgba(155, 81, 224, 0.1);
         }
 
-        h2 { color: var(--morado); font-size: 1.5rem; margin-top: 0; font-weight: 700; display: flex; align-items: center; gap: 12px; }
-        h2::after { content: '✨'; font-size: 1.2rem; }
-
+        h2 { color: var(--morado); font-size: 1.5rem; margin-top: 0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
         p { font-size: 1rem; color: #57606f; line-height: 1.7; }
 
-        h3 { font-size: 1rem; margin: 1.8rem 0 1rem; color: var(--morado); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; opacity: 0.7; }
-        
-        /* Tarjetas de Productos */
+        /* NUEVA SECCIÓN INFO */
+        .info-tag {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(155, 81, 224, 0.1);
+            color: var(--morado);
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            margin-right: 5px;
+        }
+
         .producto { 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             padding: 15px 20px; 
             background: #fff;
-            border: 2px solid #f1f2f6;
+            border: 2px solid rgba(0,0,0,0.03);
             border-radius: 20px;
             margin-bottom: 12px;
-            transition: all 0.3s ease;
         }
 
-        .producto:active { transform: translateY(-3px); border-color: var(--rosa); }
-
         .info-prod { display: flex; flex-direction: column; }
-        .nombre-prod { font-weight: 600; font-size: 1.1rem; color: var(--texto); }
+        .nombre-prod { font-weight: 600; font-size: 1.1rem; }
         .precio-prod { font-size: 0.9rem; color: var(--rosa); font-weight: 700; }
 
         .controles { display: flex; align-items: center; background: #f8f9fa; border-radius: 15px; padding: 5px; }
@@ -87,11 +111,23 @@
             display: flex; 
             align-items: center; 
             justify-content: center;
-            cursor: pointer;
         }
-        .cant { width: 35px; text-align: center; font-weight: 700; font-size: 1.1rem; }
+        .cant { width: 35px; text-align: center; font-weight: 700; }
 
-        /* Checkout Moderno */
+        /* BOTÓN COMPARTIR */
+        .btn-share {
+            background: var(--blanco);
+            color: var(--morado);
+            border: 2px solid var(--morado);
+            width: 100%;
+            padding: 12px;
+            border-radius: 18px;
+            font-weight: 700;
+            margin-top: 10px;
+            cursor: pointer;
+            font-family: 'Outfit';
+        }
+
         .checkout-bar {
             position: fixed;
             bottom: 25px;
@@ -109,10 +145,6 @@
             z-index: 1000;
         }
 
-        .total-info { display: flex; flex-direction: column; }
-        .total-label { font-size: 0.75rem; color: #a4b0be; text-transform: uppercase; font-weight: 600; }
-        .total-num { font-size: 1.6rem; font-weight: 800; color: var(--texto); }
-
         .btn-ws { 
             background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); 
             color: white; 
@@ -120,7 +152,6 @@
             padding: 14px 24px; 
             border-radius: 20px; 
             font-weight: 700; 
-            font-size: 1rem;
             box-shadow: 0 8px 15px rgba(37, 211, 102, 0.2);
         }
     </style>
@@ -129,29 +160,27 @@
 
 <header>
     <h1>M&I Antojitos</h1>
-    <p>El sabor artesanal que mereces</p>
+    <p>Gourmet & Artesanal ✨</p>
 </header>
 
 <div class="container">
     <section>
-        <h2>¿Qué es un Boli Gourmet?</h2>
-        <p>En <strong>M&I Antojitos</strong>, no hacemos simples congeladas; creamos experiencias de sabor. Nuestros bolis son piezas de repostería helada <strong>100% artesanales</strong>. A diferencia de los industriales, utilizamos ingredientes naturales de primera calidad y procesos manuales que garantizan una cremosidad extrema en los de leche y una explosión frutal en los de agua.</p>
-        <p>Cada sabor está diseñado para ser un viaje directo a tu antojo favorito, cuidando la textura desde el primer mordisco hasta el final.</p>
+        <h2>Información de Pedido</h2>
+        <div class="info-tag">📍 Coapa y Cuemanco</div>
+        <div class="info-tag">⏰ Lun - Sáb: 2pm - 6pm</div>
+        <p>Hacemos entregas personales en la zona. Si tienes duda sobre tu ubicación, ¡escríbenos al confirmar tu carrito!</p>
+        <button class="btn-share" onclick="compartir()">🚀 Compartir con un amigo</button>
     </section>
 
     <section>
-        <h2>Detrás del Sueño</h2>
-        <p>¡Hola! Somos <strong>Iker y Michelle</strong>. Tenemos 15 años y somos una pareja de adolescentes con un sueño gigante. M&I nació de nuestra pasión por emprender juntos y demostrar que la edad no es un límite cuando hay ganas y dedicación.</p>
-        <p>Lo que empezó con una pequeña hielera compartida entre nosotros, hoy es un proyecto que busca crecer. Nuestra meta es transformar este emprendimiento local en una cadena de locales establecidos. Cada boli que compras nos ayuda a estar un paso más cerca de ese sueño.</p>
+        <h2>Nuestra Historia</h2>
+        <p>Somos <strong>Iker y Michelle</strong>, tenemos 15 años y este es nuestro sueño. Creamos bolis 100% artesanales con la meta de tener nuestros propios locales. ¡Gracias por apoyarnos!</p>
     </section>
 
     <section id="tienda">
-        <h2>Elige tu favorito</h2>
-        <p style="text-align: center; color: var(--rosa); font-weight: bold;">"Gracias por elegirnos!!"</p>
-        
+        <h2>Menú Gourmet</h2>
         <h3>✨ De Leche ($25)</h3>
         <div id="lista-leche"></div>
-
         <h3>🌊 De Agua ($20)</h3>
         <div id="lista-agua"></div>
     </section>
@@ -159,12 +188,9 @@
 
 <div class="checkout-bar">
     <div class="total-info">
-        <span class="total-label">Total a pagar</span>
         <span class="total-num" id="total-display">$0</span>
     </div>
-    <button class="btn-ws" onclick="enviarPedido()">
-        Confirmar ➔
-    </button>
+    <button class="btn-ws" onclick="enviarPedido()">Confirmar ➔</button>
 </div>
 
 <script>
@@ -187,21 +213,19 @@
         const lecheDiv = document.getElementById('lista-leche');
         const aguaDiv = document.getElementById('lista-agua');
         lecheDiv.innerHTML = ''; aguaDiv.innerHTML = '';
-
         productos.forEach(p => {
             const cant = carrito[p.nombre] || 0;
-            const html = `
-                <div class="producto">
-                    <div class="info-prod">
-                        <span class="nombre-prod">${p.nombre}</span>
-                        <span class="precio-prod">$${p.precio} MXN</span>
-                    </div>
-                    <div class="controles">
-                        <button class="btn-qty" onclick="cambiar('${p.nombre}', -1)">-</button>
-                        <span class="cant">${cant}</span>
-                        <button class="btn-qty" onclick="cambiar('${p.nombre}', 1)">+</button>
-                    </div>
-                </div>`;
+            const html = `<div class="producto">
+                <div class="info-prod">
+                    <span class="nombre-prod">${p.nombre}</span>
+                    <span class="precio-prod">$${p.precio} MXN</span>
+                </div>
+                <div class="controles">
+                    <button class="btn-qty" onclick="cambiar('${p.nombre}', -1)">-</button>
+                    <span class="cant">${cant}</span>
+                    <button class="btn-qty" onclick="cambiar('${p.nombre}', 1)">+</button>
+                </div>
+            </div>`;
             p.tipo === 'leche' ? lecheDiv.innerHTML += html : aguaDiv.innerHTML += html;
         });
         actualizarTotal();
@@ -229,14 +253,24 @@
                 total += carrito[p] * prod.precio;
             }
         }
-        if (pedidoArray.length === 0) return alert("¡Añade algunos bolis antes de enviar!");
-
+        if (pedidoArray.length === 0) return alert("¡Añade algunos bolis!");
         const mensaje = `Hola M&I 👋🏻\nQuisiera estos sabores:\n${pedidoArray.join("\n")}\n\nTotal: $${total}\n\n¿Los tendrás disponible? ✨`;
         window.open(`https://wa.me/5580830028?text=${encodeURIComponent(mensaje)}`, '_blank');
     }
 
+    function compartir() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'M&I Antojitos',
+                text: '¡Mira estos bolis gourmet artesanales en Coapa! 🍦',
+                url: window.location.href
+            });
+        } else {
+            alert("Copia el link de la barra de arriba y pásalo por WhatsApp 🚀");
+        }
+    }
+
     renderar();
 </script>
-
 </body>
 </html>

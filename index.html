@@ -12,23 +12,23 @@
             --card-bg: #161b22; --texto: #ffffff;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: 0.3s ease; }
-        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; overflow-x: hidden; }
 
         header { 
             background: linear-gradient(180deg, #d6249f, var(--morado)); 
             padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; }
+        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; animation: fadeInDown 1s ease; }
         
-        .slogan-box {
-            text-align: center; padding: 30px 20px; margin-top: -50px;
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .slogan-box { text-align: center; padding: 30px 20px; margin-top: -50px; }
         .eslogan {
             font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa);
             line-height: 1.1; text-shadow: 0 0 15px rgba(255,133,193,0.5); margin: 0;
         }
-        /* ESTILO PARA LA RIMA CONTINUA */
         .poesia-continua {
             font-family: 'Caveat', cursive; font-size: 1.5rem; color: #cbd5e0;
             margin-top: 15px; line-height: 1.4; font-style: italic; opacity: 0.9;
@@ -39,17 +39,19 @@
         .story-card {
             background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);
+            position: relative; overflow: hidden;
         }
+        .story-card:active { transform: scale(0.98); }
         .story-card h2 { color: var(--rosa); margin-top: 0; font-size: 1.4rem; font-weight: 800; }
         .story-card p { font-size: 0.95rem; line-height: 1.6; color: #cbd5e0; }
 
         .progress-card {
             background: rgba(155, 81, 224, 0.1); padding: 18px; border-radius: 20px; margin-bottom: 30px;
-            border: 2px solid var(--morado);
+            border: 2px solid var(--morado); position: relative;
         }
         .progress-text { font-size: 0.9rem; font-weight: 700; text-align: center; display: block; margin-bottom: 10px; }
         .progress-bg { background: rgba(255,255,255,0.05); height: 10px; border-radius: 10px; overflow: hidden; }
-        .progress-fill { background: linear-gradient(90deg, var(--rosa), var(--morado)); width: 0%; height: 100%; box-shadow: 0 0 10px var(--rosa); }
+        .progress-fill { background: linear-gradient(90deg, var(--rosa), var(--morado)); width: 0%; height: 100%; box-shadow: 0 0 15px var(--rosa); transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
 
         .categoria-label { 
             font-size: 1.4rem; font-weight: 800; margin: 30px 0 15px 5px; 
@@ -59,8 +61,9 @@
         .producto { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 15px 20px; background: var(--card-bg); border-radius: 20px; margin-bottom: 12px;
-            border: 1px solid rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.03); transform: translateX(0);
         }
+        .producto:hover { border-color: rgba(255, 133, 193, 0.3); background: #1c232d; }
         .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; }
         .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
 
@@ -68,25 +71,29 @@
         .btn-qty { 
             background: var(--morado); border: none; color: white; width: 35px; height: 35px; 
             border-radius: 8px; font-size: 1.3rem; font-weight: 800; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
         }
-        .btn-qty:active { transform: scale(1.2); }
+        .btn-qty:active { transform: scale(0.8); background: var(--rosa); }
         .cant { width: 35px; text-align: center; font-weight: 800; }
 
         .btn-insta {
             background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
             color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .footer-bar {
-            position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.98);
+            position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.95);
             padding: 20px; display: flex; justify-content: space-between; align-items: center;
             border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000;
         }
-        .total-display { font-size: 1.8rem; font-weight: 900; }
+        .total-display { font-size: 1.8rem; font-weight: 900; background: linear-gradient(to right, #fff, var(--rosa)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .btn-ws { 
             background: #25d366; color: white; border: none; padding: 14px 24px; 
             border-radius: 15px; font-weight: 800; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+            animation: pulse 2s infinite;
         }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -109,8 +116,8 @@
     
     <section class="story-card">
         <h2>El Arte de lo Artesanal 🍨</h2>
-        <p>Olvídate de lo ordinario. En M&I, cada boli es una **pieza de repostería helada**. Los creamos desde cero, infusionando la leche con ingredientes reales y seleccionando las frutas más frescas.</p>
-        <p>Nuestro secreto está en el batido manual, ese que logra una **cremosidad extrema** que se funde en tu boca, convirtiendo un simple antojo en una verdadera poesía para tus sentidos.</p>
+        <p>Olvídate de lo ordinario. En M&I, cada boli es una <strong>pieza de repostería helada</strong>. Los creamos desde cero, infusionando la leche con ingredientes reales y seleccionando las frutas más frescas.</p>
+        <p>Nuestro secreto está en el batido manual, ese que logra una <strong>cremosidad extrema</strong> que se funde en tu boca, convirtiendo un simple antojo en una verdadera poesía para tus sentidos.</p>
     </section>
 
     <section class="story-card">
@@ -146,7 +153,8 @@
         {nombre: "Queso Zarzamora 🍰", tipo: "leche", precio: 25},
         {nombre: "Mango Chamoy 🥭", tipo: "agua", precio: 20},
         {nombre: "Skwinkles 🍭", tipo: "agua", precio: 20},
-        {nombre: "Jamaica 🌺", tipo: "agua", precio: 20}
+        {nombre: "Jamaica con Chamoy 🌺", tipo: "agua", precio: 20},
+        {nombre: "Jamaica Natural 🌸", tipo: "agua", precio: 20}
     ];
 
     let carrito = {};
@@ -219,7 +227,13 @@
         if (piezas === 0) return alert("¡Elige tus bolis!");
         if (piezas >= 10) t -= 20;
 
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.7 } });
+        confetti({ 
+            particleCount: 150, 
+            spread: 70, 
+            origin: { y: 0.7 },
+            colors: ['#ff85c1', '#9b51e0', '#ffffff']
+        });
+        
         setTimeout(() => {
             const msg = `¡Hola M&I! 👋🏻 Quisiera este pedido:\n${items.join("\n")}\n\nTotal: $${t}\n\n¿Me confirman si tienen disponible? ✨`;
             window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`, '_blank');

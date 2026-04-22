@@ -2,268 +2,257 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M&E Antojitos | Gourmet & Artesanal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0a0c10;
+            --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117;
             --card-bg: #161b22; --texto: #ffffff;
-            --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* 200 detalles: Reset de sistema y optimización de scroll */
-        html { 
-            scroll-behavior: smooth; 
-            -webkit-user-select: none; /* Evita selección accidental al navegar */
-            user-select: none;
-            overflow-y: scroll;
-            overscroll-behavior-y: contain;
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; overflow-x: hidden; }
+
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(155, 81, 224, 0.05) 0%, transparent 80%);
+            z-index: -1; pointer-events: none;
         }
 
-        body { 
-            font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); 
-            color: var(--texto); padding-bottom: 200px; line-height: 1.5;
-            animation: appEntry 0.6s ease-out;
-        }
-
-        @keyframes appEntry { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Header con Parallax Visual */
         header { 
-            background: linear-gradient(180deg, #d6249f 0%, var(--morado) 100%);
-            padding: 5rem 1.5rem 8rem; text-align: center; border-bottom-left-radius: 60px; border-bottom-right-radius: 60px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4); position: relative;
+            background: linear-gradient(180deg, #d6249f, var(--morado)); 
+            padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; animation: fadeInDown 1s ease; }
+        
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .slogan-box { text-align: center; padding: 40px 20px; margin-top: -85px; position: relative; z-index: 5; }
+        .slogan-box { text-align: center; padding: 30px 20px; margin-top: -50px; }
         .eslogan {
-            font-family: 'Caveat', cursive; font-size: 2.8rem; color: var(--rosa);
-            line-height: 1; text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa);
+            line-height: 1.1; text-shadow: 0 0 15px rgba(255,133,193,0.5); margin: 0;
+        }
+        .poesia-continua {
+            font-family: 'Caveat', cursive; font-size: 1.5rem; color: #cbd5e0;
+            margin-top: 15px; line-height: 1.4; font-style: italic; opacity: 0.9;
         }
 
-        .container { padding: 0 1.2rem; max-width: 480px; margin: 0 auto; }
+        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* Story Cards con Profundidad Z-Index */
         .story-card {
-            background: var(--card-bg); padding: 25px; border-radius: 35px; margin-bottom: 25px;
-            border: 1px solid rgba(255,255,255,0.05); transform: translateZ(0);
-            transition: transform 0.3s var(--spring), box-shadow 0.3s ease;
+            background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);
         }
-        .story-card:active { transform: scale(0.98) translateY(2px); }
-
-        /* Barra de progreso interactiva */
+        .story-card h2 { color: var(--rosa); margin-top: 0; font-size: 1.4rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; }
+        .badge-info { font-size: 0.7rem; background: var(--morado); color: white; padding: 4px 10px; border-radius: 20px; font-weight: 400; }
+        
         .progress-card {
-            background: rgba(155, 81, 224, 0.1); padding: 20px; border-radius: 25px; margin: 30px 0;
-            border: 1.5px solid rgba(155, 81, 224, 0.2);
+            background: rgba(155, 81, 224, 0.1); padding: 18px; border-radius: 20px; margin-bottom: 30px;
+            border: 2px solid var(--morado); position: relative;
         }
-        .progress-bg { background: #000; height: 12px; border-radius: 10px; overflow: hidden; }
-        .progress-fill { 
-            background: linear-gradient(90deg, var(--rosa), var(--morado)); width: 0%; height: 100%; 
-            transition: width 0.7s var(--spring);
-        }
+        .progress-fill { background: linear-gradient(90deg, var(--rosa), var(--morado)); width: 0%; height: 100%; box-shadow: 0 0 15px var(--rosa); transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
 
-        /* Categorías y Listas */
         .categoria-label { 
-            font-size: 1.1rem; font-weight: 900; margin: 40px 0 20px; 
-            color: var(--rosa); letter-spacing: 1.5px; text-transform: uppercase;
-            opacity: 0.8; padding-left: 5px;
+            font-size: 1.4rem; font-weight: 800; margin: 30px 0 15px 5px; 
+            color: var(--rosa); text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* Producto: Área de navegación optimizada */
         .producto { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 18px 20px; background: var(--card-bg); border-radius: 25px; margin-bottom: 12px;
-            border: 1px solid transparent; transition: 0.2s ease;
+            padding: 15px 20px; background: var(--card-bg); border-radius: 20px; margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.03);
         }
-        .producto.active { border-color: rgba(255,133,193,0.3); background: #1c232d; }
+        .producto:active { transform: scale(0.97); }
+        .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; }
+        .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
 
-        /* Botones Pro: Feedback Táctil Mejorado */
-        .controles { display: flex; align-items: center; gap: 8px; }
+        .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 15px; padding: 5px; }
         .btn-qty { 
-            background: #2d3436; border: none; color: white; width: 44px; height: 44px; 
-            border-radius: 16px; font-size: 1.5rem; font-weight: 800; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: transform 0.1s active, background 0.2s;
+            background: var(--morado); border: none; color: white; width: 32px; height: 32px; 
+            border-radius: 10px; font-size: 1.2rem; font-weight: 800; cursor: pointer;
         }
-        .btn-qty.plus { background: var(--morado); }
-        .btn-qty:active { transform: scale(0.9); opacity: 0.8; }
+        .btn-qty:active { transform: translateY(-3px); }
+        .cant { width: 35px; text-align: center; font-weight: 900; color: var(--rosa); }
 
-        .cant { width: 30px; text-align: center; font-weight: 900; font-size: 1.2rem; }
+        .btn-insta {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+            color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px;
+        }
 
-        /* Footer Flotante con efecto Blur */
         .footer-bar {
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: rgba(10, 12, 16, 0.8); padding: 20px 25px 40px;
-            display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
+            position: fixed; bottom: 0; left: 0; right: 0; background: rgba(22, 27, 34, 0.85);
+            padding: 20px; display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); z-index: 1000;
         }
-
-        .total-info { display: flex; flex-direction: column; }
-        .total-val { font-size: 2.2rem; font-weight: 900; color: #fff; }
-        .total-label { font-size: 0.75rem; color: var(--rosa); font-weight: 800; letter-spacing: 1px; }
-
+        .total-display { font-size: 1.8rem; font-weight: 900; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
         .btn-ws { 
-            background: #25d366; color: white; border: none; padding: 18px 30px; 
-            border-radius: 22px; font-weight: 900; font-size: 1rem;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); cursor: pointer;
-            transition: 0.3s var(--spring);
+            background: #25d366; color: white; border: none; padding: 14px 24px; 
+            border-radius: 15px; font-weight: 800; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+            animation: pulse 2s infinite;
         }
-        .btn-ws:active { transform: scale(0.95); }
-
-        /* Partículas de ambiente */
-        .dot { position: fixed; width: 2px; height: 2px; background: white; border-radius: 50%; opacity: 0.2; pointer-events: none; z-index: -1; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        
+        .sparkle {
+            position: absolute; background: white; border-radius: 50%;
+            pointer-events: none; opacity: 0; animation: sparkleAnim 4s linear infinite;
+        }
+        @keyframes sparkleAnim {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 style="margin:0; font-size:3.5rem; font-weight:900; letter-spacing:-3px;">M&E</h1>
+    <h1>M&E Antojitos</h1>
 </header>
 
 <div class="slogan-box">
-    <p class="eslogan">"Amor en cada bocado."</p>
-    <div style="font-family:'Caveat'; font-size:1.6rem; color:#888; margin-top:10px; font-style:italic;">
-        Hechos a mano con el corazón.
+    <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
+    <div class="poesia-continua">
+        En cada bocado un dulce cantar,<br>
+        un frío que invita a soñar y amar,<br>
+        textura de seda que te ha de hechizar,<br>
+        pues M&E vino a tu alma endulzar.
     </div>
 </div>
 
 <div class="container">
     <section class="story-card">
-        <h2 style="margin:0 0 10px 0; color:var(--rosa);">Nuestra Historia 👫</h2>
-        <p style="margin:0; color:#ccc; font-size:0.95rem;">Somos Iker y Michelle. Creamos M&E para demostrar que los mejores sabores nacen de la pasión y el trabajo en pareja.</p>
+        <h2>El Arte de lo Artesanal 🍨 <span class="badge-info">100% Casero</span></h2>
+        <p>Olvídate de lo ordinario. En M&E, cada boli es una <strong>pieza de repostería helada</strong>. Los creamos desde cero, infusionando la leche con ingredientes reales y seleccionando las frutas más frescas.</p>
+        <p>Nuestro secreto está en el batido manual, ese que logra una <strong>cremosidad extrema</strong> que se funde en tu boca.</p>
+    </section>
+
+    <section class="story-card">
+        <h2>Detrás del Sueño 👫</h2>
+        <p>¡Hola! Somos <strong>Iker y Michelle</strong>. M&E nació de nuestra pasión por emprender juntos y demostrar que la edad no es un límite para la calidad.</p>
+        <button class="btn-insta" onclick="window.open('https://instagram.com/antojitos_mi', '_blank')">📸 SÍGUENOS EN @antojitos_mi</button>
     </section>
 
     <div class="progress-card">
-        <span id="progreso-texto" style="font-size:0.85rem; font-weight:800; display:block; text-align:center; margin-bottom:10px;">¡FALTAN 10 PARA EL DESCUENTO!</span>
-        <div class="progress-bg"><div id="barra-fill" class="progress-fill"></div></div>
+        <span class="progress-text" id="progreso-texto">¡Pide 10 bolis para el descuento Fiesta! 🥳</span>
+        <div class="progress-bg"><div class="progress-fill" id="barra-fill"></div></div>
     </div>
 
     <div class="categoria-label">🥛 Cremosos</div>
     <div id="lista-leche"></div>
 
-    <div class="categoria-label">🍓 Frutales</div>
+    <div class="categoria-label">🥭 Frutales</div>
     <div id="lista-agua"></div>
 </div>
 
 <div class="footer-bar">
-    <div class="total-info">
-        <span class="total-label" id="label-piezas">0 BOLIS SELECCIONADOS</span>
-        <span class="total-val" id="total-val">$0</span>
-    </div>
-    <button class="btn-ws" onclick="enviarPedido()">PEDIR ➔</button>
+    <div class="total-display" id="total-val">$0</div>
+    <button class="btn-ws" onclick="enviarPedido()">Hacer Pedido ➔</button>
 </div>
 
 <script>
     const productos = [
-        {n: "Duvalín 🍦", t: "leche", p: 25},
-        {n: "Mazapán 🥜", t: "leche", p: 25},
-        {n: "Oreo 🍪", t: "leche", p: 25},
-        {n: "Queso Zarzamora 🍰", t: "leche", p: 25},
-        {n: "Mango Chamoy 🥭", t: "agua", p: 20},
-        {n: "Skwinkles 🍭", t: "agua", p: 20},
-        {n: "Jamaica con Chamoy 🌺", t: "agua", p: 20},
-        {n: "Jamaica Natural 🌸", t: "agua", p: 20}
+        {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
+        {nombre: "Mazapán 🥜", tipo: "leche", precio: 25},
+        {nombre: "Oreo 🍪", tipo: "leche", precio: 25},
+        {nombre: "Queso Zarzamora 🍰", tipo: "leche", precio: 25},
+        {nombre: "Mango Chamoy 🥭", tipo: "agua", precio: 20},
+        {nombre: "Skwinkles 🍭", tipo: "agua", precio: 20},
+        {nombre: "Jamaica con Chamoy 🌺", tipo: "agua", precio: 20},
+        {nombre: "Jamaica Natural 🌸", tipo: "agua", precio: 20}
     ];
 
     let carrito = {};
 
+    function createSparkles() {
+        const container = document.body;
+        for(let i = 0; i < 12; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            const size = Math.random() * 3 + 1 + 'px';
+            sparkle.style.width = size;
+            sparkle.style.height = size;
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.animationDelay = Math.random() * 4 + 's';
+            container.appendChild(sparkle);
+        }
+    }
+
     function render() {
-        const dL = document.getElementById('lista-leche');
-        const dA = document.getElementById('lista-agua');
-        dL.innerHTML = ''; dA.innerHTML = '';
+        const divLeche = document.getElementById('lista-leche');
+        const divAgua = document.getElementById('lista-agua');
+        divLeche.innerHTML = ''; divAgua.innerHTML = '';
 
         productos.forEach(p => {
-            const c = carrito[p.n] || 0;
+            const cant = carrito[p.nombre] || 0;
             const html = `
-                <div class="producto ${c > 0 ? 'active' : ''}">
-                    <div style="flex:1">
-                        <div style="font-weight:700; font-size:1.1rem">${p.n}</div>
-                        <div style="color:#777; font-size:0.9rem">$${p.p} MXN</div>
+                <div class="producto">
+                    <div class="info-p">
+                        <span class="nombre">${p.nombre}</span>
+                        <span class="precio">$${p.precio} MXN</span>
                     </div>
                     <div class="controles">
-                        <button class="btn-qty" onclick="update('${p.n}', -1)">-</button>
-                        <span class="cant">${c}</span>
-                        <button class="btn-qty plus" onclick="update('${p.n}', 1)">+</button>
+                        <button class="btn-qty" onclick="update('${p.nombre}', -1)">-</button>
+                        <span class="cant">${cant}</span>
+                        <button class="btn-qty" onclick="update('${p.nombre}', 1)">+</button>
                     </div>
                 </div>`;
-            p.t === 'leche' ? dL.innerHTML += html : dA.innerHTML += html;
+            if (p.tipo === 'leche') divLeche.innerHTML += html;
+            else divAgua.innerHTML += html;
         });
         updateUI();
     }
 
-    function update(n, d) {
-        carrito[n] = (carrito[n] || 0) + d;
-        if (carrito[n] < 0) carrito[n] = 0;
-        
-        // 200 detalles: Feedback de vibración visual al tocar
-        if(d > 0) {
-            const val = document.getElementById('total-val');
-            val.style.transform = "scale(1.1)";
-            setTimeout(() => val.style.transform = "scale(1)", 100);
-        }
+    function update(nombre, delta) {
+        carrito[nombre] = (carrito[nombre] || 0) + delta;
+        if (carrito[nombre] < 0) carrito[nombre] = 0;
         render();
     }
 
     function updateUI() {
-        let t = 0, pz = 0;
+        let t = 0, piezas = 0;
         for (let n in carrito) {
-            let p = productos.find(x => x.n === n);
-            t += (carrito[n] * p.p);
-            pz += carrito[n];
+            let p = productos.find(x => x.nombre === n);
+            t += (carrito[n] * p.precio);
+            piezas += carrito[n];
         }
-
         const bar = document.getElementById('barra-fill');
         const txt = document.getElementById('progreso-texto');
-        const lab = document.getElementById('label-piezas');
-        
-        lab.innerText = `${pz} ${pz === 1 ? 'BOLI SELECCIONADO' : 'BOLIS SELECCIONADOS'}`;
-
-        if (pz >= 10) {
+        if (piezas >= 10) {
             t -= 20;
-            txt.innerText = "¡DESCUENTO FIESTA APLICADO! -$20 ✅";
+            txt.innerText = "¡Paquete Fiesta activado! -$20 ✅";
             bar.style.width = "100%";
         } else {
-            txt.innerText = pz === 0 ? "¡PIDE 10 PARA EL DESCUENTO!" : `FALTAN ${10-pz} PARA EL REGALO`;
-            bar.style.width = (pz * 10) + "%";
+            txt.innerText = piezas === 0 ? "¡Pide 10 bolis para el descuento! 🥳" : `Faltan ${10-piezas} para el descuento`;
+            bar.style.width = (piezas * 10) + "%";
         }
         document.getElementById('total-val').innerText = `$${t}`;
     }
 
     function enviarPedido() {
-        let items = [], t = 0, pz = 0;
+        let items = [], t = 0, piezas = 0;
         for (let n in carrito) {
             if (carrito[n] > 0) {
-                let p = productos.find(x => x.n === n);
+                let p = productos.find(x => x.nombre === n);
                 items.push(`• ${carrito[n]} de ${n}`);
-                t += (carrito[n] * p.p);
-                pz += carrito[n];
+                t += (carrito[n] * p.precio);
+                piezas += carrito[n];
             }
         }
-        if (pz === 0) return;
+        if (piezas === 0) return alert("¡Elige tus bolis!");
+        if (piezas >= 10) t -= 20;
 
-        confetti({ 
-            particleCount: 100, spread: 60, origin: { y: 0.85 },
-            colors: ['#ff85c1', '#9b51e0']
-        });
-        
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.7 }, colors: ['#ff85c1', '#9b51e0', '#ffffff'] });
         setTimeout(() => {
-            const msg = `¡Hola M&E! 🍦 Quiero este pedido:\n${items.join("\n")}\n\nTotal: $${t}\n¿Me confirman disponibilidad?`;
+            const msg = `¡Hola M&E! 👋🏻 Quisiera este pedido:\n${items.join("\n")}\n\nTotal: $${t}\n\n¿Me confirman disponibilidad? ✨`;
             window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`, '_blank');
-        }, 600);
+        }, 800);
     }
 
-    // Partículas de navegación ambiental
-    for(let i=0; i<20; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'dot';
-        dot.style.left = Math.random() * 100 + 'vw';
-        dot.style.top = Math.random() * 100 + 'vh';
-        document.body.appendChild(dot);
-    }
-
+    createSparkles();
     render();
 </script>
 </body>

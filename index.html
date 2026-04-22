@@ -4,75 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M&I Antojitos | Gourmet & Artesanal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --rosa: #ff85c1; --morado: #9b51e0; --fondo: #101429;
-            --card-bg: #1a1f3c; --texto: #ffffff;
+            --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117;
+            --card-bg: #161b22; --texto: #ffffff;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: 0.2s ease; }
-        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 120px; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: 0.3s ease; }
+        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; }
 
         header { 
             background: linear-gradient(180deg, #d6249f, var(--morado)); 
-            padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
+            padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
         }
-        header h1 { margin: 0; font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
-        header p { margin: 5px 0 0; opacity: 0.9; font-size: 1.1rem; }
+        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; }
+        
+        .slogan-box {
+            text-align: center; padding: 30px 20px; margin-top: -50px;
+        }
+        .eslogan {
+            font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa);
+            line-height: 1.1; text-shadow: 0 0 15px rgba(255,133,193,0.5); margin: 0;
+        }
 
-        .container { padding: 0 1.2rem; max-width: 500px; margin: -50px auto 0; }
+        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; }
 
-        /* SECCIONES DE HISTORIA */
         .story-card {
-            background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);
+            background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);
         }
         .story-card h2 { color: var(--rosa); margin-top: 0; font-size: 1.4rem; font-weight: 800; }
-        .story-card p { font-size: 0.95rem; line-height: 1.6; color: #d1d5db; margin-bottom: 15px; }
-        .story-card strong { color: #fff; }
+        .story-card p { font-size: 0.95rem; line-height: 1.6; color: #cbd5e0; }
 
         .progress-card {
-            background: #161b33; padding: 18px; border-radius: 25px; margin-bottom: 25px;
-            border: 1px solid rgba(155, 81, 224, 0.3);
+            background: rgba(155, 81, 224, 0.1); padding: 18px; border-radius: 20px; margin-bottom: 30px;
+            border: 2px solid var(--morado);
         }
-        .progress-text { font-size: 0.9rem; font-weight: 700; text-align: center; display: block; margin-bottom: 12px; }
-        .progress-bg { background: rgba(255,255,255,0.1); height: 10px; border-radius: 10px; overflow: hidden; }
-        .progress-fill { background: linear-gradient(to right, var(--rosa), var(--morado)); width: 0%; height: 100%; transition: width 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+        .progress-text { font-size: 0.9rem; font-weight: 700; text-align: center; display: block; margin-bottom: 10px; }
+        .progress-bg { background: rgba(255,255,255,0.05); height: 10px; border-radius: 10px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, var(--rosa), var(--morado)); width: 0%; height: 100%; box-shadow: 0 0 10px var(--rosa); }
 
-        .menu-title { font-size: 1.8rem; font-weight: 800; margin: 30px 0 15px 10px; display: block; }
+        .categoria-label { 
+            font-size: 1.4rem; font-weight: 800; margin: 30px 0 15px 5px; 
+            display: flex; align-items: center; gap: 10px; color: var(--rosa);
+        }
 
         .producto { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 20px; background: var(--card-bg); border-radius: 22px; margin-bottom: 12px;
+            padding: 15px 20px; background: var(--card-bg); border-radius: 20px; margin-bottom: 12px;
             border: 1px solid rgba(255,255,255,0.03);
         }
-        .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 2px; }
-        .info-p .precio { color: var(--rosa); font-weight: 800; font-size: 1rem; }
+        .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; }
+        .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
 
-        .controles { display: flex; align-items: center; background: rgba(155, 81, 224, 0.15); border-radius: 15px; padding: 5px; }
+        .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 4px; }
         .btn-qty { 
-            background: var(--morado); border: none; color: white; width: 36px; height: 36px; 
-            border-radius: 10px; font-size: 1.4rem; font-weight: 800; cursor: pointer;
+            background: var(--morado); border: none; color: white; width: 35px; height: 35px; 
+            border-radius: 8px; font-size: 1.3rem; font-weight: 800; cursor: pointer;
         }
         .btn-qty:active { transform: scale(1.2); }
-        .cant { width: 35px; text-align: center; font-weight: 800; font-size: 1.1rem; }
+        .cant { width: 35px; text-align: center; font-weight: 800; }
 
         .btn-insta {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white; border: none; padding: 16px; width: 100%; border-radius: 20px; font-weight: 800; cursor: pointer; font-size: 1rem;
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+            color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px;
         }
 
         .footer-bar {
-            position: fixed; bottom: 0; left: 0; right: 0; background: rgba(16, 20, 41, 0.98);
+            position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.98);
             padding: 20px; display: flex; justify-content: space-between; align-items: center;
-            border-top: 2px solid var(--morado); backdrop-filter: blur(15px); z-index: 1000;
+            border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000;
         }
-        .total-display { font-size: 1.8rem; font-weight: 900; color: #fff; }
+        .total-display { font-size: 1.8rem; font-weight: 900; }
         .btn-ws { 
-            background: #25d366; color: white; border: none; padding: 14px 25px; 
-            border-radius: 18px; font-weight: 800; font-size: 1rem; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            background: #25d366; color: white; border: none; padding: 14px 24px; 
+            border-radius: 15px; font-weight: 800; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
         }
     </style>
 </head>
@@ -80,31 +88,31 @@
 
 <header>
     <h1>M&I Antojitos</h1>
-    <p>Gourmet & Artesanal ✨</p>
 </header>
+
+<div class="slogan-box">
+    <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
+</div>
 
 <div class="container">
     
     <section class="story-card">
-        <h2>¿Qué es un Boli Gourmet? 🍨</h2>
-        <p>En <strong>M&I Antojitos</strong>, no hacemos simples congeladas; creamos experiencias de sabor. Nuestros bolis son piezas de repostería helada <strong>100% artesanales</strong>.</p>
-        <p>A diferencia de los industriales, utilizamos ingredientes naturales de primera calidad y procesos manuales que garantizan una <strong>cremosidad extrema</strong> en los de leche y una <strong>explosión frutal</strong> en los de agua. Cada sabor está diseñado para ser un viaje directo a tu antojo favorito.</p>
-    </section>
-
-    <section class="story-card">
         <h2>Detrás del Sueño 👫</h2>
-        <p>¡Hola! Somos <strong>Iker y Michelle</strong>. Tenemos 15 años y somos una pareja de adolescentes con un sueño gigante. M&I nació de nuestra pasión por emprender juntos y demostrar que la edad no es un límite cuando se tiene compromiso y amor por lo que se hace.</p>
-        <p>Lo que empezó como una pequeña idea en nuestras tardes libres, hoy es nuestra forma de compartir un poquito de felicidad contigo. Cada boli que llega a tus manos lleva nuestro esfuerzo, nuestras ganas de crecer y, sobre todo, la mejor calidad que podemos ofrecerte.</p>
+        <p>¡Hola! Somos <strong>Iker y Michelle</strong>. Tenemos 15 años y somos una pareja de adolescentes con un sueño gigante. M&I nació de nuestra pasión por emprender juntos y demostrar que la edad no es un límite para la calidad.</p>
+        <p>Lo que empezó como una pequeña idea en nuestras tardes libres, hoy es nuestra forma de compartir un poquito de felicidad contigo. Cada boli lleva nuestro esfuerzo y el deseo de crecer juntos.</p>
         <button class="btn-insta" onclick="window.open('https://instagram.com/antojitos_mi', '_blank')">📸 SÍGUENOS EN @antojitos_mi</button>
     </section>
 
     <div class="progress-card">
-        <span class="progress-text" id="progreso-texto">¡Pide 10 bolis para el Paquete Fiesta! 🎉</span>
+        <span class="progress-text" id="progreso-texto">¡Pide 10 bolis para el descuento Fiesta! 🥳</span>
         <div class="progress-bg"><div class="progress-fill" id="barra-fill"></div></div>
     </div>
 
-    <span class="menu-title">Nuestros Sabores 🍧</span>
-    <div id="lista-productos"></div>
+    <div class="categoria-label">🥛 Cremosos de Leche</div>
+    <div id="lista-leche"></div>
+
+    <div class="categoria-label">🥭 Salados y Frutales</div>
+    <div id="lista-agua"></div>
 
 </div>
 
@@ -115,24 +123,26 @@
 
 <script>
     const productos = [
-        {nombre: "Duvalín 🍦", precio: 25},
-        {nombre: "Mazapán 🥜", precio: 25},
-        {nombre: "Oreo 🍪", precio: 25},
-        {nombre: "Queso Zarzamora 🍰", precio: 25},
-        {nombre: "Mango Chamoy 🥭", precio: 20},
-        {nombre: "Skwinkles 🍭", precio: 20},
-        {nombre: "Jamaica 🌺", precio: 20}
+        {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
+        {nombre: "Mazapán 🥜", tipo: "leche", precio: 25},
+        {nombre: "Oreo 🍪", tipo: "leche", precio: 25},
+        {nombre: "Queso Zarzamora 🍰", tipo: "leche", precio: 25},
+        {nombre: "Mango Chamoy 🥭", tipo: "agua", precio: 20},
+        {nombre: "Skwinkles 🍭", tipo: "agua", precio: 20},
+        {nombre: "Jamaica 🌺", tipo: "agua", precio: 20}
     ];
 
     let carrito = {};
 
     function render() {
-        const div = document.getElementById('lista-productos');
-        div.innerHTML = '';
+        const divLeche = document.getElementById('lista-leche');
+        const divAgua = document.getElementById('lista-agua');
+        divLeche.innerHTML = '';
+        divAgua.innerHTML = '';
 
         productos.forEach(p => {
             const cant = carrito[p.nombre] || 0;
-            div.innerHTML += `
+            const html = `
                 <div class="producto">
                     <div class="info-p">
                         <span class="nombre">${p.nombre}</span>
@@ -144,6 +154,9 @@
                         <button class="btn-qty" onclick="update('${p.nombre}', 1)">+</button>
                     </div>
                 </div>`;
+            
+            if (p.tipo === 'leche') divLeche.innerHTML += html;
+            else divAgua.innerHTML += html;
         });
         updateUI();
     }
@@ -167,10 +180,10 @@
         
         if (piezas >= 10) {
             t -= 20;
-            txt.innerText = "¡PAQUETE FIESTA ACTIVADO! -$20 OFF ✅";
+            txt.innerText = "¡Paquete Fiesta activado! -$20 de descuento ✅";
             bar.style.width = "100%";
         } else {
-            txt.innerText = piezas === 0 ? "¡Pide 10 bolis para el Paquete Fiesta! 🎉" : `¡Faltan ${10-piezas} bolis para el descuento!`;
+            txt.innerText = piezas === 0 ? "¡Pide 10 bolis para el descuento Fiesta! 🥳" : `¡Faltan ${10-piezas} bolis para el descuento!`;
             bar.style.width = (piezas * 10) + "%";
         }
         document.getElementById('total-val').innerText = `$${t}`;
@@ -186,12 +199,12 @@
                 piezas += carrito[n];
             }
         }
-        if (piezas === 0) return alert("¡Elige tus bolis favoritos!");
+        if (piezas === 0) return alert("¡Elige tus bolis!");
         if (piezas >= 10) t -= 20;
 
         confetti({ particleCount: 150, spread: 70, origin: { y: 0.7 } });
         setTimeout(() => {
-            const msg = `¡Hola M&I! 👋🏻 Quisiera este pedido:\n${items.join("\n")}\n\nTotal: $${t}\n\n¿Me confirman disponibilidad? ✨`;
+            const msg = `¡Hola M&I! 👋🏻 Quisiera este pedido:\n${items.join("\n")}\n\nTotal: $${t}\n\n¿Me confirman si tienen disponible? ✨`;
             window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`, '_blank');
         }, 800);
     }

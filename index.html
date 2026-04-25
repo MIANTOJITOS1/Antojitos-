@@ -3,252 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M&E Antojitos | Gourmet & Artesanal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <title>Gorras Dandy & Barbas Hats | M&I</title>
     <style>
         :root {
-            --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117;
-            --card-bg: #161b22; --texto: #ffffff;
+            --primary-color: #f7f7f7;
+            --secondary-color: #a88d5e;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; overflow-x: hidden; }
-
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(155, 81, 224, 0.05) 0%, transparent 80%);
-            z-index: -1; pointer-events: none;
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: var(--text-color);
         }
 
-        header { 
-            background: linear-gradient(180deg, #d6249f, var(--morado)); 
-            padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; animation: fadeInDown 1s ease; }
-        
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .slogan-box { text-align: center; padding: 30px 20px; margin-top: -50px; }
-        .eslogan {
-            font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa);
-            line-height: 1.1; text-shadow: 0 0 15px rgba(255,133,193,0.5); margin: 0;
-        }
-        .poesia-continua {
-            font-family: 'Caveat', cursive; font-size: 1.5rem; color: #cbd5e0;
-            margin-top: 15px; line-height: 1.4; font-style: italic; opacity: 0.9;
+        header {
+            background-color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
         }
 
-        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
-
-        .story-card {
-            background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);
-            position: relative; overflow: hidden;
-        }
-        .story-card:active { transform: scale(0.98); }
-        .story-card h2 { color: var(--rosa); margin-top: 0; font-size: 1.4rem; font-weight: 800; }
-        .story-card p { font-size: 0.95rem; line-height: 1.6; color: #cbd5e0; }
-
-        /* Estilo especial para el Paquete Fiesta */
-        .producto.promo {
-            border: 2px solid var(--rosa);
-            background: rgba(255, 133, 193, 0.05);
+        #logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
-        .categoria-label { 
-            font-size: 1.4rem; font-weight: 800; margin: 30px 0 15px 5px; 
-            display: flex; align-items: center; gap: 10px; color: var(--rosa);
+        h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: normal;
+            letter-spacing: 2px;
         }
 
-        .producto { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 20px; background: var(--card-bg); border-radius: 20px; margin-bottom: 12px;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-        .producto:hover { border-color: rgba(255, 133, 193, 0.3); background: #1c232d; }
-        .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; }
-        .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
-
-        .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 4px; }
-        .btn-qty { 
-            background: var(--morado); border: none; color: white; width: 35px; height: 35px; 
-            border-radius: 8px; font-size: 1.3rem; font-weight: 800; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .btn-qty:active { transform: scale(0.8); background: var(--rosa); }
-        .cant { width: 35px; text-align: center; font-weight: 800; }
-
-        .btn-insta {
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-            color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        nav {
+            background-color: #333;
         }
 
-        .footer-bar {
-            position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.95);
-            padding: 20px; display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000;
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
         }
-        .total-display { font-size: 1.8rem; font-weight: 900; background: linear-gradient(to right, #fff, var(--rosa)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .btn-ws { 
-            background: #25d366; color: white; border: none; padding: 14px 24px; 
-            border-radius: 15px; font-weight: 800; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
-            animation: pulse 2s infinite;
+
+        nav ul li a {
+            display: block;
+            text-decoration: none;
+            color: #ccc;
+            padding: 15px 25px;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-        
-        .sparkle {
-            position: absolute; background: white; border-radius: 50%;
-            pointer-events: none; opacity: 0; animation: sparkleAnim 4s linear infinite;
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--secondary-color);
+            color: var(--white);
         }
-        @keyframes sparkleAnim {
-            0% { transform: translateY(0) scale(0); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 30px;
+        }
+
+        .product-section {
+            background-color: var(--white);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin: 10px 0;
+        }
+
+        .selector-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .selector {
+            padding: 8px;
+            width: 100%;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-btn {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            text-transform: uppercase;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        aside {
+            background-color: var(--white);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .aside-title {
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>M&E Antojitos</h1>
-</header>
+    <header>
+        <div id="logo-container">
+            <h1>M&I: GORRAS DANDY & BARBAS HATS</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">INICIO</a></li>
+                <li><a href="#">COLECCIONES</a></li>
+                <li><a href="#">SABORES EXCLUSIVOS</a></li>
+                <li><a href="#">CONTACTO</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="slogan-box">
-    <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
-    <div class="poesia-continua">
-        En cada bocado un dulce cantar,<br>
-        un frío que invita a soñar y amar,<br>
-        textura de seda que te ha de hechizar,<br>
-        pues M&E vino a tu alma endulzar.
-    </div>
-</div>
-
-<div class="container" id="main-container">
-    <section class="story-card">
-        <h2>El Arte de lo Artesanal 🍨</h2>
-        <p>Olvídate de lo ordinario. En M&E, cada boli es una <strong>pieza de repostería helada</strong>. Los creamos desde cero, infusionando la leche con ingredientes reales y seleccionando las frutas más frescas.</p>
-    </section>
-
-    <div class="categoria-label">🎉 Promociones Especiales</div>
-    <div id="lista-promos"></div>
-
-    <div class="categoria-label">🥛 Cremosos de Leche</div>
-    <div id="lista-leche"></div>
-
-    <div class="categoria-label">🥭 Salados y Frutales</div>
-    <div id="lista-agua"></div>
-</div>
-
-<div class="footer-bar">
-    <div class="total-display" id="total-val">$0</div>
-    <button class="btn-ws" onclick="enviarPedido()">Confirmar Pedido ➔</button>
-</div>
-
-<script>
-    const productos = [
-        {nombre: "Paquete Fiesta (10 Bolis Surtidos) 🥳", tipo: "promo", precio: 230},
-        {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
-        {nombre: "Mazapán 🥜", tipo: "leche", precio: 25},
-        {nombre: "Oreo 🍪", tipo: "leche", precio: 25},
-        {nombre: "Queso Zarzamora 🍰", tipo: "leche", precio: 25},
-        {nombre: "Mango Chamoy 🥭", tipo: "agua", precio: 20},
-        {nombre: "Skwinkles 🍭", tipo: "agua", precio: 20},
-        {nombre: "Jamaica con Chamoy 🌺", tipo: "agua", precio: 20},
-        {nombre: "Jamaica Natural 🌸", tipo: "agua", precio: 20}
-    ];
-
-    let carrito = {};
-
-    function createSparkles() {
-        const container = document.body;
-        for(let i = 0; i < 8; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            const size = Math.random() * 3 + 1 + 'px';
-            sparkle.style.width = size;
-            sparkle.style.height = size;
-            sparkle.style.left = Math.random() * 100 + 'vw';
-            sparkle.style.top = Math.random() * 100 + 'vh';
-            sparkle.style.animationDelay = Math.random() * 4 + 's';
-            container.appendChild(sparkle);
-        }
-    }
-
-    function render() {
-        const divPromo = document.getElementById('lista-promos');
-        const divLeche = document.getElementById('lista-leche');
-        const divAgua = document.getElementById('lista-agua');
-        divPromo.innerHTML = '';
-        divLeche.innerHTML = '';
-        divAgua.innerHTML = '';
-
-        productos.forEach(p => {
-            const cant = carrito[p.nombre] || 0;
-            const html = `
-                <div class="producto ${p.tipo === 'promo' ? 'promo' : ''}">
-                    <div class="info-p">
-                        <span class="nombre">${p.nombre}</span>
-                        <span class="precio">$${p.precio} MXN</span>
+    <main>
+        <div id="products-container">
+            <section class="product-section">
+                <h2 class="section-title">Nueva Selección Premium</h2>
+                <div class="product-grid">
+                    
+                    <div class="product-card">
+                        <div class="product-image-placeholder">MODELO M&I PREMIUM</div>
+                        <h3 class="product-name">Gorra Edición Especial M&I</h3>
+                        <p class="product-price">$1,200 MXN</p>
+                        
+                        <label class="selector-label">Selecciona el Sabor / Aroma</label>
+                        <select class="selector">
+                            <option value="original">Original Black</option>
+                            <option value="chocolate">Chocolate</option>
+                            <option value="pina-colada">Piña Colada</option>
+                        </select>
+                        
+                        <button class="add-to-cart-btn">AGREGAR AL CARRITO</button>
                     </div>
-                    <div class="controles">
-                        <button class="btn-qty" onclick="update('${p.nombre}', -1)">-</button>
-                        <span class="cant">${cant}</span>
-                        <button class="btn-qty" onclick="update('${p.nombre}', 1)">+</button>
+
                     </div>
-                </div>`;
-            
-            if (p.tipo === 'promo') divPromo.innerHTML += html;
-            else if (p.tipo === 'leche') divLeche.innerHTML += html;
-            else divAgua.innerHTML += html;
-        });
-        updateUI();
-    }
+            </section>
+        </div>
 
-    function update(nombre, delta) {
-        carrito[nombre] = (carrito[nombre] || 0) + delta;
-        if (carrito[nombre] < 0) carrito[nombre] = 0;
-        render();
-    }
+        <aside>
+            <div class="aside-widget">
+                <h3 class="aside-title">Filtrar por Sabor</h3>
+                <ul style="list-style: none; padding: 0; font-size: 14px;">
+                    <li><input type="checkbox"> Chocolate</li>
+                    <li><input type="checkbox"> Piña Colada</li>
+                    <li><input type="checkbox"> Original</li>
+                </ul>
+            </div>
+            <div class="aside-widget">
+                <h3 class="aside-title">Precio</h3>
+                <p style="font-size: 14px;">$1,000 - $15,000</p>
+            </div>
+        </aside>
+    </main>
 
-    function updateUI() {
-        let t = 0;
-        for (let n in carrito) {
-            let p = productos.find(x => x.nombre === n);
-            t += (carrito[n] * p.precio);
-        }
-        document.getElementById('total-val').innerText = `$${t}`;
-    }
+    <footer>
+        <p>&copy; 2026 M&I Gorras Dandy & Barbas Hats - Todos los derechos reservados</p>
+    </footer>
 
-    function enviarPedido() {
-        let items = [], t = 0, piezas = 0;
-        for (let n in carrito) {
-            if (carrito[n] > 0) {
-                let p = productos.find(x => x.nombre === n);
-                items.push(`• ${carrito[n]} x ${p.nombre}`);
-                t += (carrito[n] * p.precio);
-                piezas += carrito[n];
-            }
-        }
-        if (piezas === 0) return alert("¡Elige tus bolis!");
-
-        confetti({ 
-            particleCount: 150, 
-            spread: 70, 
-            origin: { y: 0.7 },
-            colors: ['#ff85c1', '#9b51e0', '#ffffff']
-        });
-        
-        setTimeout(() => {
-            const msg = `¡Hola M&E! 👋🏻 Quisiera este pedido:\n${items.join("\n")}\n\nTotal: $${t}\n\n¿Me confirman disponibilidad? ✨`;
-            window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`, '_blank');
-        }, 800);
-    }
-
-    createSparkles();
-    render();
-</script>
 </body>
 </html>

@@ -35,26 +35,8 @@
             font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa);
             line-height: 1.1; text-shadow: 0 0 15px rgba(255,133,193,0.5); margin: 0;
         }
-        .poesia-continua {
-            font-family: 'Caveat', cursive; font-size: 1.5rem; color: #cbd5e0;
-            margin-top: 15px; line-height: 1.4; font-style: italic; opacity: 0.9;
-        }
 
         .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
-
-        .story-card {
-            background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);
-            position: relative; overflow: hidden;
-        }
-        .story-card:active { transform: scale(0.98); }
-        .story-card h2 { color: var(--rosa); margin-top: 0; font-size: 1.4rem; font-weight: 800; }
-        .story-card p { font-size: 0.95rem; line-height: 1.6; color: #cbd5e0; }
-
-        .producto.promo {
-            border: 2px solid var(--rosa);
-            background: rgba(255, 133, 193, 0.05);
-        }
 
         .categoria-label { 
             font-size: 1.4rem; font-weight: 800; margin: 30px 0 15px 5px; 
@@ -66,7 +48,24 @@
             padding: 15px 20px; background: var(--card-bg); border-radius: 20px; margin-bottom: 12px;
             border: 1px solid rgba(255,255,255,0.03);
         }
-        .producto:hover { border-color: rgba(255, 133, 193, 0.3); background: #1c232d; }
+        
+        .producto.promo { border: 2px solid var(--rosa); background: rgba(255, 133, 193, 0.05); }
+
+        .producto.soon {
+            opacity: 0.6;
+            border: 1px dashed var(--morado);
+            filter: grayscale(0.5);
+        }
+        .badge-soon {
+            background: var(--morado);
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
         .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; }
         .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
 
@@ -79,12 +78,6 @@
         .btn-qty:active { transform: scale(0.8); background: var(--rosa); }
         .cant { width: 35px; text-align: center; font-weight: 800; }
 
-        .btn-insta {
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-            color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
         .footer-bar {
             position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.95);
             padding: 20px; display: flex; justify-content: space-between; align-items: center;
@@ -94,18 +87,6 @@
         .btn-ws { 
             background: #25d366; color: white; border: none; padding: 14px 24px; 
             border-radius: 15px; font-weight: 800; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-        
-        .sparkle {
-            position: absolute; background: white; border-radius: 50%;
-            pointer-events: none; opacity: 0; animation: sparkleAnim 4s linear infinite;
-        }
-        @keyframes sparkleAnim {
-            0% { transform: translateY(0) scale(0); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-100px) scale(1); opacity: 0; }
         }
     </style>
 </head>
@@ -117,20 +98,9 @@
 
 <div class="slogan-box">
     <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
-    <div class="poesia-continua">
-        En cada bocado un dulce cantar,<br>
-        un frío que invita a soñar y amar,<br>
-        textura de seda que te ha de hechizar,<br>
-        pues M&E vino a tu alma endulzar.
-    </div>
 </div>
 
-<div class="container" id="main-container">
-    <section class="story-card">
-        <h2>El Arte de lo Artesanal 🍨</h2>
-        <p>Olvídate de lo ordinario. En M&E, cada boli es una <strong>pieza de repostería helada</strong>. Los creamos desde cero, infusionando la leche con ingredientes reales y seleccionando las frutas más frescas.</p>
-    </section>
-
+<div class="container">
     <div class="categoria-label">🎉 Promociones Especiales</div>
     <div id="lista-promos"></div>
 
@@ -139,6 +109,9 @@
 
     <div class="categoria-label">🥭 Salados y Frutales</div>
     <div id="lista-agua"></div>
+
+    <div class="categoria-label">✨ Próximos Lanzamientos</div>
+    <div id="lista-proximos"></div>
 </div>
 
 <div class="footer-bar">
@@ -152,40 +125,33 @@
         {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
         {nombre: "Mazapán 🥜", tipo: "leche", precio: 25},
         {nombre: "Oreo 🍪", tipo: "leche", precio: 25},
-        {nombre: "Queso Zarzamora 🍰", tipo: "leche", precio: 25},
         {nombre: "Piña Colada 🥥🍍", tipo: "leche", precio: 25},
         {nombre: "Coco 🥥", tipo: "leche", precio: 25},
         {nombre: "Chocolate 🍫", tipo: "leche", precio: 25},
+        {nombre: "Mango (Leche) 🥭🥛", tipo: "leche", precio: 25},
         {nombre: "Mango Chamoy 🥭", tipo: "agua", precio: 20},
         {nombre: "Skwinkles 🍭", tipo: "agua", precio: 20},
         {nombre: "Jamaica con Chamoy 🌺", tipo: "agua", precio: 20},
         {nombre: "Jamaica Natural 🌸", tipo: "agua", precio: 20}
     ];
 
-    let carrito = {};
+    const proximos = [
+        {nombre: "Queso con Zarzamora 🍰", tag: "Cremoso"},
+        {nombre: "Carlota de Limón 🍋", tag: "Cremoso"},
+        {nombre: "Chocorrol 🌀", tag: "Cremoso"},
+        {nombre: "Panditas 🧸", tag: "Frutal"},
+        {nombre: "Fresas con Crema 🍓", tag: "Cremoso"}
+    ];
 
-    function createSparkles() {
-        const container = document.body;
-        for(let i = 0; i < 8; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            const size = Math.random() * 3 + 1 + 'px';
-            sparkle.style.width = size;
-            sparkle.style.height = size;
-            sparkle.style.left = Math.random() * 100 + 'vw';
-            sparkle.style.top = Math.random() * 100 + 'vh';
-            sparkle.style.animationDelay = Math.random() * 4 + 's';
-            container.appendChild(sparkle);
-        }
-    }
+    let carrito = {};
 
     function render() {
         const divPromo = document.getElementById('lista-promos');
         const divLeche = document.getElementById('lista-leche');
         const divAgua = document.getElementById('lista-agua');
-        divPromo.innerHTML = '';
-        divLeche.innerHTML = '';
-        divAgua.innerHTML = '';
+        const divSoon = document.getElementById('lista-proximos');
+        
+        divPromo.innerHTML = ''; divLeche.innerHTML = ''; divAgua.innerHTML = ''; divSoon.innerHTML = '';
 
         productos.forEach(p => {
             const cant = carrito[p.nombre] || 0;
@@ -201,11 +167,22 @@
                         <button class="btn-qty" onclick="update('${p.nombre}', 1)">+</button>
                     </div>
                 </div>`;
-            
             if (p.tipo === 'promo') divPromo.innerHTML += html;
             else if (p.tipo === 'leche') divLeche.innerHTML += html;
             else divAgua.innerHTML += html;
         });
+
+        proximos.forEach(p => {
+            divSoon.innerHTML += `
+                <div class="producto soon">
+                    <div class="info-p">
+                        <span class="nombre">${p.nombre}</span>
+                        <span class="precio" style="color:var(--morado)">Muy pronto...</span>
+                    </div>
+                    <span class="badge-soon">${p.tag}</span>
+                </div>`;
+        });
+
         updateUI();
     }
 
@@ -231,25 +208,17 @@
                 let p = productos.find(x => x.nombre === n);
                 items.push(`• ${carrito[n]} x ${p.nombre}`);
                 t += (carrito[n] * p.precio);
-                pz = piezas += carrito[n];
+                piezas += carrito[n];
             }
         }
         if (piezas === 0) return alert("¡Elige tus bolis!");
-
-        confetti({ 
-            particleCount: 150, 
-            spread: 70, 
-            origin: { y: 0.7 },
-            colors: ['#ff85c1', '#9b51e0', '#ffffff']
-        });
-        
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.7 } });
         setTimeout(() => {
             const msg = `¡Hola M&E! 👋🏻 Quisiera este pedido:\n${items.join("\n")}\n\nTotal: $${t}\n\n¿Me confirman disponibilidad? ✨`;
             window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`, '_blank');
         }, 800);
     }
 
-    createSparkles();
     render();
 </script>
 </body>

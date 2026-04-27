@@ -5,65 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>M&E Antojitos | Gourmet & Artesanal</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
-
     <style>
         :root {
             --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117;
             --card-bg: #161b22; --texto: #ffffff;
         }
 
-        /* --- ESTILOS DEL INICIO INTERACTIVO (FÍSICAS) --- */
-        #interactivo-overlay {
+        /* --- JUEGO DE ENTRADA: BOLI NINJA --- */
+        #game-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 9999;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            overflow: hidden;
+            background: radial-gradient(circle, #1a1a2e 0%, #000 100%);
+            z-index: 10000; overflow: hidden; touch-action: none;
         }
-        
-        /* Contenedor para el motor de físicas */
-        #physics-container {
-            width: 100%; height: 100%;
-            position: absolute; top: 0; left: 0;
+        #game-canvas { width: 100%; height: 100%; }
+        .game-ui {
+            position: absolute; top: 20%; width: 100%; text-align: center;
+            pointer-events: none; color: white;
         }
+        .game-ui h1 { font-size: 3rem; margin: 0; text-shadow: 0 0 20px var(--rosa); font-weight: 800; }
+        .game-ui p { font-size: 1.5rem; font-family: 'Caveat', cursive; color: var(--rosa); }
+        .score-bar { position: absolute; top: 20px; right: 20px; font-size: 1.8rem; font-weight: 800; color: var(--rosa); }
 
-        /* UI sobre las físicas */
-        .ui-interactiva {
-            position: absolute; bottom: 10%; left: 50%;
-            transform: translateX(-50%); text-align: center;
-            z-index: 10; width: 90%; max-width: 400px;
-            pointer-events: none; /* Dejar pasar los clics a las físicas al principio */
-        }
-
-        .titulo-interactivo {
-            font-family: 'Outfit', sans-serif; color: #fff;
-            font-size: 1.8rem; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 2px; text-shadow: 0 0 15px var(--rosa);
-            margin-bottom: 20px;
-            animation: pulse-text 2s infinite;
-        }
-
-        .btn-entrar {
-            background: var(--morado); color: white; border: none;
-            padding: 18px 40px; border-radius: 50px; font-weight: 900;
-            cursor: pointer; box-shadow: 0 0 20px var(--morado); font-size: 1.1rem;
-            pointer-events: auto; /* Este botón sí recibe clics */
-            transition: 0.3s ease;
-        }
-        .btn-entrar:active { transform: scale(0.95); background: var(--rosa); box-shadow: 0 0 30px var(--rosa); }
-
-        @keyframes pulse-text { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-
-        /* Estados de ocultado */
-        body.locked { overflow: hidden; }
-        .hide-overlay { opacity: 0; pointer-events: none; transform: scale(1.1); }
-
-        /* --- TUS ESTILOS ORIGINALES (SIN TOCAR) --- */
+        /* --- ESTILOS ORIGINALES (TODO IGUAL) --- */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; overflow-x: hidden; }
+        body.locked { overflow: hidden; }
 
         header { 
             background: linear-gradient(180deg, #d6249f, var(--morado)); 
@@ -79,34 +46,38 @@
         .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
 
         .story-card { background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); }
-        .btn-insta { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px; }
+        .story-card h2 { margin-top: 0; font-size: 1.5rem; color: #fff; }
+        
+        .btn-insta { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px; font-size: 1rem; }
 
-        .categoria-label { font-size: 1.4rem; font-weight: 800; margin: 30px 0 15px 5px; color: var(--rosa); }
+        .categoria-label { font-size: 1.4rem; font-weight: 800; margin: 30px 0 15px 5px; color: var(--rosa); text-transform: uppercase; letter-spacing: 1px; }
+        
         .producto { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); border-radius: 20px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.03); }
         .producto.promo { border: 2px solid var(--rosa); background: rgba(255, 133, 193, 0.05); }
         .producto.soon { opacity: 0.6; border: 1px dashed var(--morado); filter: grayscale(0.5); }
         .badge-soon { background: var(--morado); color: white; font-size: 0.7rem; padding: 4px 8px; border-radius: 8px; font-weight: 800; text-transform: uppercase; }
 
-        .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; }
+        .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; color: #fff; }
         .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
 
         .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 4px; }
         .btn-qty { background: var(--morado); border: none; color: white; width: 35px; height: 35px; border-radius: 8px; font-size: 1.3rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .cant { width: 35px; text-align: center; font-weight: 800; }
+        .cant { width: 35px; text-align: center; font-weight: 800; color: #fff; }
 
         .footer-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.95); padding: 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000; }
         .total-display { font-size: 1.8rem; font-weight: 900; background: linear-gradient(to right, #fff, var(--rosa)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .btn-ws { background: #25d366; color: white; border: none; padding: 14px 24px; border-radius: 15px; font-weight: 800; }
+        .btn-ws { background: #25d366; color: white; border: none; padding: 14px 24px; border-radius: 15px; font-weight: 800; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); cursor: pointer; }
     </style>
 </head>
 <body class="locked">
 
-<div id="interactivo-overlay">
-    <div id="physics-container"></div>
-    <div class="ui-interactiva">
-        <div class="titulo-interactivo">Universo Congelado</div>
-        <button class="btn-entrar" onclick="entrarAlMenu()">EXPLORAR SABORES ➔</button>
+<div id="game-container">
+    <canvas id="game-canvas"></canvas>
+    <div class="game-ui">
+        <h1>M&E NINJA</h1>
+        <p>¡Rebana 5 bolis para entrar!</p>
     </div>
+    <div class="score-bar" id="score">0/5</div>
 </div>
 
 <header>
@@ -126,12 +97,12 @@
 <div class="container">
     <section class="story-card">
         <h2>El Arte de lo Artesanal 🍨</h2>
-        <p>Olvídate de lo ordinario. En M&E, cada boli es una <strong>pieza de repostería helada</strong>. Los creamos desde cero, infusionando la leche con ingredientes reales.</p>
+        <p>Olvídate de lo ordinario. En M&E, cada boli es una <strong>pieza de repostería helada</strong>. Los creamos desde cero, infusionando la leche con ingredientes reales para lograr esa cremosidad que nos distingue.</p>
     </section>
 
     <section class="story-card">
         <h2>Detrás del Sueño 👫</h2>
-        <p>¡Hola! Somos <strong>Iker y Michelle</strong>. Tenemos 15 años y somos una pareja de adolescentes con un sueño gigante.</p>
+        <p>¡Hola! Somos <strong>Iker y Michelle</strong>. Tenemos 15 años y somos una pareja de adolescentes con un sueño gigante: endulzar cada rincón con nuestros bolis gourmet hechos en casa.</p>
         <button class="btn-insta" onclick="window.open('https://instagram.com/antojitos_mi', '_blank')">📸 SÍGUENOS EN @antojitos_mi</button>
     </section>
 
@@ -154,87 +125,66 @@
 </div>
 
 <script>
-    // --- LÓGICA DE FÍSICAS (Matter.js) ---
-    const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint } = Matter;
+    // --- LÓGICA NINJA ---
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('score');
+    let score = 0, targets = [], trail = [];
 
-    const physicsContainer = document.getElementById('physics-container');
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    // 1. Crear motor y renderizador
-    const engine = Engine.create();
-    const render = Render.create({
-        element: physicsContainer,
-        engine: engine,
-        options: {
-            width: width, height: height,
-            background: 'transparent', wireframes: false, // Wireframes false para ver colores
-            pixelRatio: window.devicePixelRatio // Para que se vea nítido en cel
+    class Target {
+        constructor() {
+            this.x = Math.random() * (canvas.width - 60) + 30;
+            this.y = canvas.height + 50;
+            this.speedY = -(Math.random() * 7 + 13);
+            this.speedX = (Math.random() - 0.5) * 5;
+            this.radius = 40;
+            this.emoji = ["🍦", "🍓", "🥭", "🥥", "🍫", "🍪", "🍼"][Math.floor(Math.random() * 7)];
+            this.sliced = false;
         }
-    });
-
-    // 2. Crear objetos físicos (Letras M y E, y Bolis)
-    const estiloTexto = { fillStyle: '#ffffff', strokeStyle: '#ff85c1', lineWidth: 3 };
-    const estiloBoliLeche = { fillStyle: '#9b51e0', strokeStyle: '#ffffff', lineWidth: 2 };
-    const estiloBoliAgua = { fillStyle: '#ff85c1', strokeStyle: '#ffffff', lineWidth: 2 };
-
-    // Letras M y E (como rectángulos para simplificar físicas)
-    const letraM = Bodies.rectangle(width * 0.3, height * 0.3, 80, 80, { 
-        render: { ...estiloTexto, sprite: { texture: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48dGV4dCB4PSI0MCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJPdXRmaXQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2ZmODVjMSIgc3Ryb2tlLXdpZHRoPSIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NPC90ZXh0Pjwvc3ZnPg==' } },
-        restitution: 0.8, friction: 0.1
-    });
-    const letraE = Bodies.rectangle(width * 0.7, height * 0.3, 80, 80, { 
-        render: { ...estiloTexto, sprite: { texture: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48dGV4dCB4PSI0MCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJPdXRmaXQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2ZmODVjMSIgc3Ryb2tlLXdpZHRoPSIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FPC90ZXh0Pjwvc3ZnPg==' } },
-        restitution: 0.8, friction: 0.1
-    });
-
-    // Crear varios bolis (cápsulas)
-    const crearBoli = (x, y, estilo) => Bodies.rectangle(x, y, 30, 100, {
-        render: { ...estilo, chamfer: { radius: 15 } }, // Bordes redondeados
-        restitution: 0.9, friction: 0.05, angle: Math.random() * Math.PI
-    });
-
-    const bolis = [
-        crearBoli(width * 0.2, height * 0.5, estiloBoliLeche),
-        crearBoli(width * 0.4, height * 0.6, estiloBoliAgua),
-        crearBoli(width * 0.6, height * 0.5, estiloBoliLeche),
-        crearBoli(width * 0.8, height * 0.6, estiloBoliAgua)
-    ];
-
-    // 3. Crear paredes (suelo, techo, laterales) invisibles
-    const paredWidth = 50;
-    const suelo = Bodies.rectangle(width / 2, height + paredWidth / 2, width, paredWidth, { isStatic: true, render: { visible: false } });
-    const techo = Bodies.rectangle(width / 2, -paredWidth / 2, width, paredWidth, { isStatic: true, render: { visible: false } });
-    const paredIzquierda = Bodies.rectangle(-paredWidth / 2, height / 2, paredWidth, height, { isStatic: true, render: { visible: false } });
-    const paredDerecha = Bodies.rectangle(width + paredWidth / 2, height / 2, paredWidth, height, { isStatic: true, render: { visible: false } });
-
-    // 4. Añadir interacción con el ratón/dedo
-    const mouse = Mouse.create(render.canvas);
-    const mouseConstraint = MouseConstraint.create(engine, {
-        mouse: mouse,
-        constraint: { stiffness: 0.2, render: { visible: false } }
-    });
-
-    // 5. Añadir todo al mundo y correr
-    Composite.add(engine.world, [letraM, letraE, ...bolis, suelo, techo, paredIzquierda, paredDerecha, mouseConstraint]);
-    Render.run(render);
-    Runner.run(Runner.create(), engine);
-
-    // FUNCIÓN PARA ENTRAR AL MENÚ
-    function entrarAlMenu() {
-        confetti({ particleCount: 100, spread: 70, origin: { y: 0.7 }, colors: ['#ff85c1', '#9b51e0'] });
-        document.getElementById('interactivo-overlay').classList.add('hide-overlay');
-        document.body.classList.remove('locked');
-        
-        // Detener el motor de físicas después de ocultar para ahorrar batería
-        setTimeout(() => {
-            Render.stop(render);
-            Engine.clear(engine);
-            physicsContainer.innerHTML = ''; // Limpiar el canvas
-        }, 1000);
+        update() { this.y += this.speedY; this.x += this.speedX; this.speedY += 0.28; }
+        draw() { 
+            ctx.shadowBlur = 15; ctx.shadowColor = "rgba(255,133,193,0.5)";
+            ctx.font = "50px serif"; ctx.fillText(this.emoji, this.x - 25, this.y);
+            ctx.shadowBlur = 0;
+        }
     }
 
-    // --- TU LÓGICA DE PRODUCTOS (SIN TOCAR) ---
+    function handleInput(e) {
+        const x = e.touches ? e.touches[0].clientX : e.clientX;
+        const y = e.touches ? e.touches[0].clientY : e.clientY;
+        trail.push({x, y, life: 12});
+        targets.forEach(t => {
+            if (!t.sliced && Math.hypot(t.x - x, t.y - y) < t.radius) {
+                t.sliced = true; score++;
+                scoreEl.innerText = `${score}/5`;
+                if (score >= 5) {
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                    setTimeout(() => {
+                        document.getElementById('game-container').style.display = 'none';
+                        document.body.classList.remove('locked');
+                    }, 500);
+                }
+            }
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath(); ctx.strokeStyle = '#ff85c1'; ctx.lineWidth = 4;
+        trail.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); p.life--; });
+        ctx.stroke(); trail = trail.filter(p => p.life > 0);
+        if (Math.random() < 0.04) targets.push(new Target());
+        targets.forEach((t, i) => { t.update(); t.draw(); if (t.y > canvas.height + 100) targets.splice(i, 1); });
+        requestAnimationFrame(animate);
+    }
+    canvas.addEventListener('mousemove', handleInput);
+    canvas.addEventListener('touchmove', handleInput);
+    animate();
+
+    // --- LÓGICA DEL MENÚ (RESTAURADA AL 100%) ---
     const productos = [
         {nombre: "Paquete Fiesta (10 Bolis Surtidos) 🥳", tipo: "promo", precio: 230},
         {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
@@ -261,10 +211,7 @@
     let carrito = {};
 
     function render() {
-        const divPromo = document.getElementById('lista-promos');
-        const divLeche = document.getElementById('lista-leche');
-        const divAgua = document.getElementById('lista-agua');
-        const divSoon = document.getElementById('lista-proximos');
+        const divPromo = document.getElementById('lista-promos'), divLeche = document.getElementById('lista-leche'), divAgua = document.getElementById('lista-agua'), divSoon = document.getElementById('lista-proximos');
         divPromo.innerHTML = ''; divLeche.innerHTML = ''; divAgua.innerHTML = ''; divSoon.innerHTML = '';
 
         productos.forEach(p => {
@@ -289,29 +236,16 @@
 
     function updateUI() {
         let t = 0;
-        for (let n in carrito) {
-            let p = productos.find(x => x.nombre === n);
-            t += (carrito[n] * p.precio);
-        }
+        for (let n in carrito) { t += (carrito[n] * productos.find(x => x.nombre === n).precio); }
         document.getElementById('total-val').innerText = `$${t}`;
     }
 
     function enviarPedido() {
-        let items = [], t = 0, pz = 0;
-        for (let n in carrito) {
-            if (carrito[n] > 0) {
-                let p = productos.find(x => x.nombre === n);
-                items.push(`• ${carrito[n]} x ${p.nombre}`);
-                t += (carrito[n] * p.precio);
-                pz += carrito[n];
-            }
-        }
-        if (pz === 0) return alert("¡Elige tus bolis!");
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.7 } });
-        setTimeout(() => {
-            const msg = `¡Hola M&E! 👋🏻 Quisiera este pedido:\n${items.join("\n")}\n\nTotal: $${t}\n\n¿Me confirman disponibilidad? ✨`;
-            window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`, '_blank');
-        }, 800);
+        let items = [], t = 0;
+        for (let n in carrito) { if (carrito[n] > 0) { items.push(`• ${carrito[n]} x ${n}`); t += (carrito[n] * productos.find(x => x.nombre === n).precio); } }
+        if (items.length === 0) return alert("¡Elige tus bolis!");
+        const msg = `¡Hola M&E! 👋🏻 Quisiera este pedido:\n${items.join("\n")}\n\nTotal: $${t}\n\n¿Me confirman disponibilidad? ✨`;
+        window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     render();

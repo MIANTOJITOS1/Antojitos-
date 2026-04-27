@@ -10,33 +10,45 @@
         :root { --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117; --card-bg: #161b22; --texto: #ffffff; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; overflow-x: hidden; }
-        body.locked { overflow: hidden; }
+        body.locked { overflow: hidden; height: 100vh; }
 
-        /* --- M&E NINJA PRO --- */
+        /* --- M&E NINJA PRO ENGINE --- */
         #game-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10000; touch-action: none; }
         #game-canvas { width: 100%; height: 100%; }
         .game-ui { position: absolute; top: 15%; width: 100%; text-align: center; pointer-events: none; }
-        .game-ui h1 { font-size: 3rem; margin: 0; text-shadow: 0 0 20px var(--rosa); color: white; font-weight: 800; }
-        .score-bar { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; font-weight: 900; color: var(--rosa); text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        .game-ui h1 { font-size: 3.5rem; margin: 0; text-shadow: 0 0 20px var(--rosa); color: white; font-weight: 800; }
+        .score-bar { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; font-weight: 900; color: var(--rosa); }
 
-        /* --- ESTILOS MENÚ --- */
-        header { background: linear-gradient(180deg, #d6249f, var(--morado)); padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
-        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; }
+        /* --- ESTILOS DE LA PÁGINA --- */
+        header { background: linear-gradient(180deg, #d6249f, var(--morado)); padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; }
+        
         .slogan-box { text-align: center; padding: 30px 20px; margin-top: -50px; }
-        .eslogan { font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa); margin: 0; }
-        .poesia-continua { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #cbd5e0; margin-top: 15px; font-style: italic; line-height: 1.2; }
-        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; }
-        .story-card { background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
-        .categoria-label { font-size: 1.4rem; font-weight: 800; margin: 30px 0 15px 5px; color: var(--rosa); text-transform: uppercase; }
-        .producto { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); border-radius: 20px; margin-bottom: 12px; }
+        .eslogan { font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa); line-height: 1.1; margin: 0; text-shadow: 0 0 15px rgba(255,133,193,0.5); }
+        .poesia-continua { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #cbd5e0; margin-top: 15px; font-style: italic; line-height: 1.4; opacity: 0.9; }
+
+        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
+        .story-card { background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .story-card h2 { margin-top: 0; font-size: 1.5rem; color: #fff; }
+        
+        .btn-insta { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px; font-size: 1rem; }
+
+        .categoria-label { font-size: 1.4rem; font-weight: 800; margin: 35px 0 15px 5px; color: var(--rosa); text-transform: uppercase; letter-spacing: 1px; }
+        
+        .producto { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; background: var(--card-bg); border-radius: 22px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.03); }
         .producto.soon { opacity: 0.6; border: 1px dashed var(--morado); }
-        .badge-soon { background: var(--morado); color: white; font-size: 0.7rem; padding: 4px 8px; border-radius: 8px; font-weight: 800; }
+        .badge-soon { background: var(--morado); color: white; font-size: 0.7rem; padding: 4px 8px; border-radius: 8px; font-weight: 800; text-transform: uppercase; }
+
+        .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; color: #fff; }
+        .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
+
         .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 4px; }
-        .btn-qty { background: var(--morado); border: none; color: white; width: 35px; height: 35px; border-radius: 8px; font-size: 1.3rem; font-weight: 800; }
-        .cant { width: 35px; text-align: center; font-weight: 800; }
-        .footer-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.95); padding: 20px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(15px); z-index: 1000; border-top: 1px solid rgba(255,255,255,0.1); }
-        .total-display { font-size: 1.8rem; font-weight: 900; color: var(--rosa); }
-        .btn-ws { background: #25d366; color: white; border: none; padding: 14px 24px; border-radius: 15px; font-weight: 800; cursor: pointer; }
+        .btn-qty { background: var(--morado); border: none; color: white; width: 38px; height: 38px; border-radius: 10px; font-size: 1.4rem; font-weight: 800; cursor: pointer; }
+        .cant { width: 35px; text-align: center; font-weight: 800; color: #fff; }
+
+        .footer-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.95); padding: 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000; }
+        .total-display { font-size: 1.8rem; font-weight: 900; background: linear-gradient(to right, #fff, var(--rosa)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-ws { background: #25d366; color: white; border: none; padding: 14px 24px; border-radius: 15px; font-weight: 800; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); cursor: pointer; }
     </style>
 </head>
 <body class="locked">
@@ -45,36 +57,45 @@
     <canvas id="game-canvas"></canvas>
     <div class="game-ui">
         <h1>M&E NINJA</h1>
-        <p style="color:var(--rosa); font-family:'Caveat'; font-size:1.8rem;">¡Rebana los bolis! Evita las 💣</p>
+        <p style="color:var(--rosa); font-family:'Caveat'; font-size:1.8rem;">¡Rebana 5 Bolis! Cuidado con las 💣</p>
     </div>
     <div class="score-bar" id="score">0/5</div>
 </div>
 
 <header><h1>M&E Antojitos</h1></header>
+
 <div class="slogan-box">
     <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
-    <p class="poesia-continua">En cada bocado un dulce cantar, un frío que invita a soñar y amar...</p>
+    <div class="poesia-continua">
+        En cada bocado un dulce cantar,<br>
+        un frío que invita a soñar y amar,<br>
+        textura de seda que te ha de hechizar,<br>
+        pues M&E vino a tu alma endulzar.
+    </div>
 </div>
 
 <div class="container">
     <section class="story-card">
         <h2>El Arte de lo Artesanal 🍨</h2>
-        <p>En M&E, cada boli es una pieza de repostería helada. Hechos desde cero con ingredientes reales.</p>
+        <p>Olvídate de lo ordinario. En M&E, cada boli es una <strong>pieza de repostería helada</strong>. Los creamos desde cero, infusionando la leche con ingredientes reales para lograr esa cremosidad que nos distingue.</p>
     </section>
 
     <section class="story-card">
         <h2>Detrás del Sueño 👫</h2>
-        <p>Somos <strong>Iker y Michelle</strong>, emprendiendo con amor a los 15 años.</p>
-        <button style="width:100%;" onclick="window.open('https://instagram.com/antojitos_mi')" class="btn-ws">📸 @antojitos_mi</button>
+        <p>¡Hola! Somos <strong>Iker y Michelle</strong>. Tenemos 15 años y somos una pareja de adolescentes con un sueño gigante: endulzar cada rincón con nuestros bolis gourmet hechos en casa.</p>
+        <button class="btn-insta" onclick="window.open('https://instagram.com/antojitos_mi')">📸 SÍGUENOS EN @antojitos_mi</button>
     </section>
 
-    <div class="categoria-label">🎉 Promociones</div>
+    <div class="categoria-label">🎉 Promociones Especiales</div>
     <div id="lista-promos"></div>
-    <div class="categoria-label">🥛 Cremosos</div>
+
+    <div class="categoria-label">🥛 Cremosos de Leche</div>
     <div id="lista-leche"></div>
-    <div class="categoria-label">🥭 Frutales</div>
+
+    <div class="categoria-label">🥭 Salados y Frutales</div>
     <div id="lista-agua"></div>
-    <div class="categoria-label">✨ Próximamente</div>
+
+    <div class="categoria-label">✨ Próximos Lanzamientos</div>
     <div id="lista-proximos"></div>
 </div>
 
@@ -84,6 +105,7 @@
 </div>
 
 <script>
+    // --- ENGINE NINJA PRO ---
     const canvas = document.getElementById('game-canvas');
     const ctx = canvas.getContext('2d');
     let score = 0, targets = [], trail = [], fragments = [], gameActive = true;
@@ -100,44 +122,28 @@
             this.emoji = isBomb ? "💣" : ["🍦", "🍓", "🥭", "🥥", "🍫"][Math.floor(Math.random() * 5)];
             this.sliced = false;
             this.angle = 0;
-            this.rotationSpeed = (Math.random() - 0.5) * 0.1;
+            this.rotationSpeed = (Math.random() - 0.5) * 0.12;
         }
         update() { this.y += this.speedY; this.x += this.speedX; this.speedY += 0.28; this.angle += this.rotationSpeed; }
         draw() {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.angle);
-            ctx.font = "55px serif";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(this.emoji, 0, 0);
-            ctx.restore();
+            ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle);
+            ctx.font = "55px serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+            ctx.fillText(this.emoji, 0, 0); ctx.restore();
         }
     }
 
     class Fragment {
         constructor(x, y, emoji, side) {
-            this.x = x; this.y = y; this.emoji = emoji;
-            this.side = side; // -1 izquierda, 1 derecha
-            this.speedX = side * (Math.random() * 5 + 2);
-            this.speedY = (Math.random() - 0.5) * 10;
-            this.gravity = 0.5;
-            this.life = 30;
-            this.angle = side * 0.5;
+            this.x = x; this.y = y; this.emoji = emoji; this.side = side;
+            this.speedX = side * (Math.random() * 6 + 2); this.speedY = (Math.random() - 0.5) * 12;
+            this.gravity = 0.6; this.life = 25; this.angle = side * 0.5;
         }
-        update() { this.x += this.speedX; this.y += this.speedY; this.speedY += this.gravity; this.life--; this.angle += 0.1 * this.side; }
+        update() { this.x += this.speedX; this.y += this.speedY; this.speedY += this.gravity; this.life--; this.angle += 0.15 * this.side; }
         draw() {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.angle);
-            ctx.font = "55px serif";
-            // Recortar el emoji a la mitad
+            ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle); ctx.font = "55px serif";
             ctx.beginPath();
-            if(this.side === -1) ctx.rect(-50, -50, 50, 100);
-            else ctx.rect(0, -50, 50, 100);
-            ctx.clip();
-            ctx.fillText(this.emoji, 0, 0);
-            ctx.restore();
+            if(this.side === -1) ctx.rect(-60, -60, 60, 120); else ctx.rect(0, -60, 60, 120);
+            ctx.clip(); ctx.fillText(this.emoji, 0, 0); ctx.restore();
         }
     }
 
@@ -146,25 +152,25 @@
         const x = e.touches ? e.touches[0].clientX : e.clientX;
         const y = e.touches ? e.touches[0].clientY : e.clientY;
         trail.push({x, y, life: 15});
-
-        targets.forEach((t, index) => {
+        targets.forEach(t => {
             if (!t.sliced && Math.hypot(t.x - x, t.y - y) < t.radius) {
                 t.sliced = true;
                 if(t.isBomb) {
                     score = Math.max(0, score - 1);
-                    canvas.style.filter = "invert(1)"; setTimeout(()=>canvas.style.filter="none", 100);
+                    canvas.style.filter = "invert(1) contrast(2)"; setTimeout(()=>canvas.style.filter="none", 100);
                 } else {
                     score++;
-                    // Crear fragmentos de la "fruta cortada"
-                    fragments.push(new Fragment(t.x, t.y, t.emoji, -1));
-                    fragments.push(new Fragment(t.x, t.y, t.emoji, 1));
+                    fragments.push(new Fragment(t.x, t.y, t.emoji, -1), new Fragment(t.x, t.y, t.emoji, 1));
                 }
                 document.getElementById('score').innerText = `${score}/5`;
                 if (score >= 5) {
                     gameActive = false;
-                    if(Math.random() < 0.2) alert("¡SUERTE NINJA! Ganaste un 10% de descuento. Captura esta pantalla.");
-                    confetti(); setTimeout(()=>document.getElementById('game-container').remove(), 500);
-                    document.body.classList.remove('locked');
+                    const gana = Math.random() < 0.2;
+                    if(gana) alert("¡ERES UN MAESTRO! 🍦 Has ganado un 10% de descuento. ¡Captura esto!");
+                    confetti(); setTimeout(()=> { 
+                        document.getElementById('game-container').remove();
+                        document.body.classList.remove('locked');
+                    }, 600);
                 }
             }
         });
@@ -173,21 +179,14 @@
     function animate() {
         if(!gameActive) return;
         ctx.fillStyle = "rgba(0,0,0,0.3)"; ctx.fillRect(0,0,canvas.width, canvas.height);
-        
-        // Slash Trail (Efecto neón)
-        ctx.shadowBlur = 10; ctx.shadowColor = var(--rosa);
+        ctx.shadowBlur = 15; ctx.shadowColor = "#ff85c1";
         ctx.beginPath(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 5; ctx.lineCap = "round";
         trail.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); p.life--; });
         ctx.stroke(); ctx.shadowBlur = 0;
         trail = trail.filter(p => p.life > 0);
-
         fragments.forEach((f, i) => { f.update(); f.draw(); if(f.life <= 0) fragments.splice(i, 1); });
-
         if (Math.random() < 0.05) targets.push(new Target(Math.random() < 0.15));
-        targets.forEach((t, i) => {
-            t.update(); t.draw();
-            if (t.y > canvas.height + 100 || t.sliced) targets.splice(i, 1);
-        });
+        targets.forEach((t, i) => { t.update(); t.draw(); if (t.y > canvas.height + 100 || t.sliced) targets.splice(i, 1); });
         requestAnimationFrame(animate);
     }
     canvas.addEventListener('touchmove', (e) => { e.preventDefault(); handleInput(e); }, {passive: false});
@@ -195,7 +194,7 @@
 
     // --- LÓGICA DE PRODUCTOS ---
     const productos = [
-        {nombre: "Paquete Fiesta (10 Bolis) 🥳", tipo: "promo", precio: 230},
+        {nombre: "Paquete Fiesta (10 Bolis Surtidos) 🥳", tipo: "promo", precio: 230},
         {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
         {nombre: "Mazapán 🥜", tipo: "leche", precio: 25},
         {nombre: "Oreo 🍪", tipo: "leche", precio: 25},
@@ -208,6 +207,7 @@
         {nombre: "Jamaica con Chamoy 🌺", tipo: "agua", precio: 20},
         {nombre: "Jamaica Natural 🌸", tipo: "agua", precio: 20}
     ];
+
     const proximos = [
         {nombre: "Queso con Zarzamora 🍰", tag: "Cremoso"},
         {nombre: "Carlota de Limón 🍋", tag: "Cremoso"},
@@ -215,6 +215,7 @@
         {nombre: "Panditas 🧸", tag: "Frutal"},
         {nombre: "Fresas con Crema 🍓", tag: "Cremoso"}
     ];
+
     let carrito = {};
 
     function render() {
@@ -222,12 +223,13 @@
         dP.innerHTML = ''; dL.innerHTML = ''; dA.innerHTML = ''; dS.innerHTML = '';
         productos.forEach(p => {
             const c = carrito[p.nombre] || 0;
-            const h = `<div class="producto"><div><b>${p.nombre}</b><br><small>$${p.precio} MXN</small></div><div class="controles"><button class="btn-qty" onclick="update('${p.nombre}',-1)">-</button><span class="cant">${c}</span><button class="btn-qty" onclick="update('${p.nombre}',1)">+</button></div></div>`;
+            const h = `<div class="producto"><div class="info-p"><span class="nombre">${p.nombre}</span><span class="precio">$${p.precio} MXN</span></div><div class="controles"><button class="btn-qty" onclick="update('${p.nombre}',-1)">-</button><span class="cant">${c}</span><button class="btn-qty" onclick="update('${p.nombre}',1)">+</button></div></div>`;
             if (p.tipo === 'promo') dP.innerHTML += h; else if (p.tipo === 'leche') dL.innerHTML += h; else dA.innerHTML += h;
         });
-        proximos.forEach(p => { dS.innerHTML += `<div class="producto soon"><div>${p.nombre}</div><span class="badge-soon">${p.tag}</span></div>`; });
+        proximos.forEach(p => { dS.innerHTML += `<div class="producto soon"><div><b>${p.nombre}</b><br><small>Próximamente</small></div><span class="badge-soon">${p.tag}</span></div>`; });
         updateUI();
     }
+
     function update(n, d) { carrito[n] = (carrito[n] || 0) + d; if (carrito[n] < 0) carrito[n] = 0; render(); }
     function updateUI() {
         let t = 0; for (let n in carrito) { t += (carrito[n] * productos.find(x => x.nombre === n).precio); }
@@ -236,7 +238,8 @@
     function enviarPedido() {
         let it = []; for (let n in carrito) { if (carrito[n] > 0) it.push(`• ${carrito[n]} x ${n}`); }
         if (it.length === 0) return alert("¡Elige tus bolis!");
-        window.open(`https://wa.me/5580830028?text=${encodeURIComponent("¡Hola M&E! Mi pedido:\n" + it.join("\n"))}`);
+        const msg = `¡Hola M&E! 👋🏻 Mi pedido es:\n${it.join("\n")}\n\nTotal: $${document.getElementById('total-val').innerText}`;
+        window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`);
     }
     render();
 </script>

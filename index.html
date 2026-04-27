@@ -7,56 +7,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root {
-            --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117;
-            --card-bg: #161b22; --texto: #ffffff;
-        }
-
-        /* --- JUEGO DE ENTRADA: M&E NINJA --- */
-        #game-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, #1a1a2e 0%, #000 100%);
-            z-index: 10000; overflow: hidden; touch-action: none;
-        }
-        #game-canvas { width: 100%; height: 100%; }
-        .game-ui {
-            position: absolute; top: 15%; width: 100%; text-align: center;
-            pointer-events: none; color: white;
-        }
-        .game-ui h1 { font-size: 3rem; margin: 0; text-shadow: 0 0 20px var(--rosa); font-weight: 800; }
-        .game-ui p { font-size: 1.4rem; font-family: 'Caveat', cursive; color: var(--rosa); }
-        .score-bar { position: absolute; top: 20px; right: 20px; font-size: 1.8rem; font-weight: 800; color: var(--rosa); }
-
-        /* --- ESTILOS ORIGINALES --- */
+        :root { --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117; --card-bg: #161b22; --texto: #ffffff; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; overflow-x: hidden; }
         body.locked { overflow: hidden; }
 
-        header { 
-            background: linear-gradient(180deg, #d6249f, var(--morado)); 
-            padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
-        }
+        /* --- M&E NINJA PRO --- */
+        #game-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10000; touch-action: none; }
+        #game-canvas { width: 100%; height: 100%; }
+        .game-ui { position: absolute; top: 15%; width: 100%; text-align: center; pointer-events: none; }
+        .game-ui h1 { font-size: 3rem; margin: 0; text-shadow: 0 0 20px var(--rosa); color: white; font-weight: 800; }
+        .score-bar { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; font-weight: 900; color: var(--rosa); text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+
+        /* --- ESTILOS MENÚ --- */
+        header { background: linear-gradient(180deg, #d6249f, var(--morado)); padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
         header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; }
-        
         .slogan-box { text-align: center; padding: 30px 20px; margin-top: -50px; }
-        .eslogan { font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa); line-height: 1.1; margin: 0; }
-        .poesia-continua { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #cbd5e0; margin-top: 15px; font-style: italic; opacity: 0.9; }
-
-        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
+        .eslogan { font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa); margin: 0; }
+        .poesia-continua { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #cbd5e0; margin-top: 15px; font-style: italic; line-height: 1.2; }
+        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; }
         .story-card { background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
-        .btn-insta { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px; }
-
         .categoria-label { font-size: 1.4rem; font-weight: 800; margin: 30px 0 15px 5px; color: var(--rosa); text-transform: uppercase; }
         .producto { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); border-radius: 20px; margin-bottom: 12px; }
-        .producto.promo { border: 2px solid var(--rosa); }
-        .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; }
-        .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
-
+        .producto.soon { opacity: 0.6; border: 1px dashed var(--morado); }
+        .badge-soon { background: var(--morado); color: white; font-size: 0.7rem; padding: 4px 8px; border-radius: 8px; font-weight: 800; }
         .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 4px; }
-        .btn-qty { background: var(--morado); border: none; color: white; width: 35px; height: 35px; border-radius: 8px; font-size: 1.3rem; font-weight: 800; cursor: pointer; }
+        .btn-qty { background: var(--morado); border: none; color: white; width: 35px; height: 35px; border-radius: 8px; font-size: 1.3rem; font-weight: 800; }
         .cant { width: 35px; text-align: center; font-weight: 800; }
-
-        .footer-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.95); padding: 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000; }
+        .footer-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.95); padding: 20px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(15px); z-index: 1000; border-top: 1px solid rgba(255,255,255,0.1); }
         .total-display { font-size: 1.8rem; font-weight: 900; color: var(--rosa); }
         .btn-ws { background: #25d366; color: white; border: none; padding: 14px 24px; border-radius: 15px; font-weight: 800; cursor: pointer; }
     </style>
@@ -67,28 +45,27 @@
     <canvas id="game-canvas"></canvas>
     <div class="game-ui">
         <h1>M&E NINJA</h1>
-        <p>¡Rebana 5 para entrar!</p>
+        <p style="color:var(--rosa); font-family:'Caveat'; font-size:1.8rem;">¡Rebana los bolis! Evita las 💣</p>
     </div>
     <div class="score-bar" id="score">0/5</div>
 </div>
 
 <header><h1>M&E Antojitos</h1></header>
-
 <div class="slogan-box">
     <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
-    <div class="poesia-continua">En cada bocado un dulce cantar, un frío que invita a soñar y amar...</div>
+    <p class="poesia-continua">En cada bocado un dulce cantar, un frío que invita a soñar y amar...</p>
 </div>
 
 <div class="container">
     <section class="story-card">
         <h2>El Arte de lo Artesanal 🍨</h2>
-        <p>En M&E, cada boli es una pieza de repostería helada. Los creamos desde cero con ingredientes reales.</p>
+        <p>En M&E, cada boli es una pieza de repostería helada. Hechos desde cero con ingredientes reales.</p>
     </section>
 
     <section class="story-card">
         <h2>Detrás del Sueño 👫</h2>
         <p>Somos <strong>Iker y Michelle</strong>, emprendiendo con amor a los 15 años.</p>
-        <button class="btn-insta" onclick="window.open('https://instagram.com/antojitos_mi', '_blank')">📸 @antojitos_mi</button>
+        <button style="width:100%;" onclick="window.open('https://instagram.com/antojitos_mi')" class="btn-ws">📸 @antojitos_mi</button>
     </section>
 
     <div class="categoria-label">🎉 Promociones</div>
@@ -107,75 +84,116 @@
 </div>
 
 <script>
-    // --- LÓGICA NINJA AJUSTADA ---
     const canvas = document.getElementById('game-canvas');
     const ctx = canvas.getContext('2d');
-    const scoreEl = document.getElementById('score');
-    let score = 0, targets = [], trail = [], gameActive = true;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    let score = 0, targets = [], trail = [], fragments = [], gameActive = true;
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
 
     class Target {
-        constructor() {
-            this.x = Math.random() * (canvas.width - 60) + 30;
+        constructor(isBomb = false) {
+            this.x = Math.random() * (canvas.width - 100) + 50;
             this.y = canvas.height + 50;
-            this.speedY = -(Math.random() * 5 + 8); // VELOCIDAD REDUCIDA (Antes era 13)
-            this.speedX = (Math.random() - 0.5) * 3;
-            this.radius = 40;
-            this.emoji = ["🍦", "🍓", "🥭", "🥥", "🍫", "🍪"][Math.floor(Math.random() * 6)];
+            this.speedY = -(Math.random() * 5 + 11);
+            this.speedX = (Math.random() - 0.5) * 6;
+            this.radius = 45;
+            this.isBomb = isBomb;
+            this.emoji = isBomb ? "💣" : ["🍦", "🍓", "🥭", "🥥", "🍫"][Math.floor(Math.random() * 5)];
             this.sliced = false;
+            this.angle = 0;
+            this.rotationSpeed = (Math.random() - 0.5) * 0.1;
         }
-        update() { this.y += this.speedY; this.x += this.speedX; this.speedY += 0.22; }
-        draw() { ctx.font = "50px serif"; ctx.fillText(this.emoji, this.x - 25, this.y); }
+        update() { this.y += this.speedY; this.x += this.speedX; this.speedY += 0.28; this.angle += this.rotationSpeed; }
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.font = "55px serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(this.emoji, 0, 0);
+            ctx.restore();
+        }
+    }
+
+    class Fragment {
+        constructor(x, y, emoji, side) {
+            this.x = x; this.y = y; this.emoji = emoji;
+            this.side = side; // -1 izquierda, 1 derecha
+            this.speedX = side * (Math.random() * 5 + 2);
+            this.speedY = (Math.random() - 0.5) * 10;
+            this.gravity = 0.5;
+            this.life = 30;
+            this.angle = side * 0.5;
+        }
+        update() { this.x += this.speedX; this.y += this.speedY; this.speedY += this.gravity; this.life--; this.angle += 0.1 * this.side; }
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.font = "55px serif";
+            // Recortar el emoji a la mitad
+            ctx.beginPath();
+            if(this.side === -1) ctx.rect(-50, -50, 50, 100);
+            else ctx.rect(0, -50, 50, 100);
+            ctx.clip();
+            ctx.fillText(this.emoji, 0, 0);
+            ctx.restore();
+        }
     }
 
     function handleInput(e) {
         if(!gameActive) return;
         const x = e.touches ? e.touches[0].clientX : e.clientX;
         const y = e.touches ? e.touches[0].clientY : e.clientY;
-        trail.push({x, y, life: 10});
-        targets.forEach(t => {
+        trail.push({x, y, life: 15});
+
+        targets.forEach((t, index) => {
             if (!t.sliced && Math.hypot(t.x - x, t.y - y) < t.radius) {
-                t.sliced = true; score++;
-                scoreEl.innerText = `${score}/5`;
-                if (score >= 5) finishGame();
+                t.sliced = true;
+                if(t.isBomb) {
+                    score = Math.max(0, score - 1);
+                    canvas.style.filter = "invert(1)"; setTimeout(()=>canvas.style.filter="none", 100);
+                } else {
+                    score++;
+                    // Crear fragmentos de la "fruta cortada"
+                    fragments.push(new Fragment(t.x, t.y, t.emoji, -1));
+                    fragments.push(new Fragment(t.x, t.y, t.emoji, 1));
+                }
+                document.getElementById('score').innerText = `${score}/5`;
+                if (score >= 5) {
+                    gameActive = false;
+                    if(Math.random() < 0.2) alert("¡SUERTE NINJA! Ganaste un 10% de descuento. Captura esta pantalla.");
+                    confetti(); setTimeout(()=>document.getElementById('game-container').remove(), 500);
+                    document.body.classList.remove('locked');
+                }
             }
         });
     }
 
-    function finishGame() {
-        gameActive = false;
-        // PROBABILIDAD DEL 20% (2 de cada 10)
-        const ganaDescuento = Math.random() < 0.20; 
-        
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-
-        if (ganaDescuento) {
-            alert("¡QUÉ SUERTE! 💥 Has ganado un 10% de DESCUENTO. Tómale captura a esto y mándala con tu pedido.");
-        }
-
-        setTimeout(() => {
-            document.getElementById('game-container').style.display = 'none';
-            document.body.classList.remove('locked');
-        }, 600);
-    }
-
     function animate() {
         if(!gameActive) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.beginPath(); ctx.strokeStyle = '#ff85c1'; ctx.lineWidth = 4;
+        ctx.fillStyle = "rgba(0,0,0,0.3)"; ctx.fillRect(0,0,canvas.width, canvas.height);
+        
+        // Slash Trail (Efecto neón)
+        ctx.shadowBlur = 10; ctx.shadowColor = var(--rosa);
+        ctx.beginPath(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 5; ctx.lineCap = "round";
         trail.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); p.life--; });
-        ctx.stroke(); trail = trail.filter(p => p.life > 0);
-        if (Math.random() < 0.025) targets.push(new Target()); // Menos frecuencia de aparición
-        targets.forEach((t, i) => { t.update(); t.draw(); if (t.y > canvas.height + 100) targets.splice(i, 1); });
+        ctx.stroke(); ctx.shadowBlur = 0;
+        trail = trail.filter(p => p.life > 0);
+
+        fragments.forEach((f, i) => { f.update(); f.draw(); if(f.life <= 0) fragments.splice(i, 1); });
+
+        if (Math.random() < 0.05) targets.push(new Target(Math.random() < 0.15));
+        targets.forEach((t, i) => {
+            t.update(); t.draw();
+            if (t.y > canvas.height + 100 || t.sliced) targets.splice(i, 1);
+        });
         requestAnimationFrame(animate);
     }
-    canvas.addEventListener('mousemove', handleInput);
-    canvas.addEventListener('touchmove', handleInput);
+    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); handleInput(e); }, {passive: false});
     animate();
 
-    // --- LÓGICA DEL MENÚ ---
+    // --- LÓGICA DE PRODUCTOS ---
     const productos = [
         {nombre: "Paquete Fiesta (10 Bolis) 🥳", tipo: "promo", precio: 230},
         {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
@@ -190,34 +208,31 @@
         {nombre: "Jamaica con Chamoy 🌺", tipo: "agua", precio: 20},
         {nombre: "Jamaica Natural 🌸", tipo: "agua", precio: 20}
     ];
-
+    const proximos = [
+        {nombre: "Queso con Zarzamora 🍰", tag: "Cremoso"},
+        {nombre: "Carlota de Limón 🍋", tag: "Cremoso"},
+        {nombre: "Chocorrol 🌀", tag: "Cremoso"},
+        {nombre: "Panditas 🧸", tag: "Frutal"},
+        {nombre: "Fresas con Crema 🍓", tag: "Cremoso"}
+    ];
     let carrito = {};
 
     function render() {
         const dP = document.getElementById('lista-promos'), dL = document.getElementById('lista-leche'), dA = document.getElementById('lista-agua'), dS = document.getElementById('lista-proximos');
         dP.innerHTML = ''; dL.innerHTML = ''; dA.innerHTML = ''; dS.innerHTML = '';
-
         productos.forEach(p => {
             const c = carrito[p.nombre] || 0;
-            const h = `<div class="producto ${p.tipo==='promo'?'promo':''}">
-                <div class="info-p"><span class="nombre">${p.nombre}</span><span class="precio">$${p.precio} MXN</span></div>
-                <div class="controles">
-                    <button class="btn-qty" onclick="update('${p.nombre}',-1)">-</button>
-                    <span class="cant">${c}</span>
-                    <button class="btn-qty" onclick="update('${p.nombre}',1)">+</button>
-                </div>
-            </div>`;
+            const h = `<div class="producto"><div><b>${p.nombre}</b><br><small>$${p.precio} MXN</small></div><div class="controles"><button class="btn-qty" onclick="update('${p.nombre}',-1)">-</button><span class="cant">${c}</span><button class="btn-qty" onclick="update('${p.nombre}',1)">+</button></div></div>`;
             if (p.tipo === 'promo') dP.innerHTML += h; else if (p.tipo === 'leche') dL.innerHTML += h; else dA.innerHTML += h;
         });
+        proximos.forEach(p => { dS.innerHTML += `<div class="producto soon"><div>${p.nombre}</div><span class="badge-soon">${p.tag}</span></div>`; });
         updateUI();
     }
-
     function update(n, d) { carrito[n] = (carrito[n] || 0) + d; if (carrito[n] < 0) carrito[n] = 0; render(); }
     function updateUI() {
         let t = 0; for (let n in carrito) { t += (carrito[n] * productos.find(x => x.nombre === n).precio); }
         document.getElementById('total-val').innerText = `$${t}`;
     }
-
     function enviarPedido() {
         let it = []; for (let n in carrito) { if (carrito[n] > 0) it.push(`• ${carrito[n]} x ${n}`); }
         if (it.length === 0) return alert("¡Elige tus bolis!");

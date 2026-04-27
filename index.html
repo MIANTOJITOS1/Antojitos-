@@ -5,37 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>M&E Antojitos | Gourmet & Artesanal</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117; --card-bg: #161b22; --texto: #ffffff; }
+        :root { 
+            --rosa: #ff85c1; 
+            --morado: #9b51e0; 
+            --fondo: #0d1117; 
+            --card-bg: #161b22; 
+            --texto: #ffffff; 
+        }
+
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); padding-bottom: 140px; overflow-x: hidden; }
-        body.locked { overflow: hidden; height: 100vh; }
+        
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            margin: 0; 
+            background-color: var(--fondo); 
+            color: var(--texto); 
+            padding-bottom: 140px; 
+            overflow-x: hidden; 
+        }
 
-        /* --- M&E NINJA PRO ENGINE --- */
-        #game-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10000; touch-action: none; }
-        #game-canvas { width: 100%; height: 100%; }
-        .game-ui { position: absolute; top: 15%; width: 100%; text-align: center; pointer-events: none; }
-        .game-ui h1 { font-size: 3.5rem; margin: 0; text-shadow: 0 0 20px var(--rosa); color: white; font-weight: 800; }
-        .score-bar { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; font-weight: 900; color: var(--rosa); }
-
-        /* --- ESTILOS DE LA PÁGINA --- */
-        header { background: linear-gradient(180deg, #d6249f, var(--morado)); padding: 4rem 1.5rem 6rem; text-align: center; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        /* --- HEADER Y SLOGAN --- */
+        header { 
+            background: linear-gradient(180deg, #d6249f, var(--morado)); 
+            padding: 4rem 1.5rem 6rem; 
+            text-align: center; 
+            border-bottom-left-radius: 50px; 
+            border-bottom-right-radius: 50px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
         header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; }
         
         .slogan-box { text-align: center; padding: 30px 20px; margin-top: -50px; }
-        .eslogan { font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--rosa); line-height: 1.1; margin: 0; text-shadow: 0 0 15px rgba(255,133,193,0.5); }
-        .poesia-continua { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #cbd5e0; margin-top: 15px; font-style: italic; line-height: 1.4; opacity: 0.9; }
+        .eslogan { 
+            font-family: 'Caveat', cursive; 
+            font-size: 2.5rem; 
+            color: var(--rosa); 
+            line-height: 1.1; 
+            margin: 0; 
+            text-shadow: 0 0 15px rgba(255,133,193,0.5); 
+        }
+        .poesia-continua { 
+            font-family: 'Caveat', cursive; 
+            font-size: 1.5rem; 
+            color: #cbd5e0; 
+            margin-top: 15px; 
+            font-style: italic; 
+            line-height: 1.4; 
+            opacity: 0.9; 
+        }
 
-        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
-        .story-card { background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        /* --- CONTENEDOR Y TARJETAS --- */
+        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; position: relative; }
+        
+        .story-card { 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border-radius: 30px; 
+            margin-bottom: 25px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
+        }
         .story-card h2 { margin-top: 0; font-size: 1.5rem; color: #fff; }
         
-        .btn-insta { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 10px; font-size: 1rem; }
+        .btn-insta { 
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); 
+            color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; 
+            font-weight: 800; cursor: pointer; margin-top: 10px; font-size: 1rem; 
+        }
 
-        .categoria-label { font-size: 1.4rem; font-weight: 800; margin: 35px 0 15px 5px; color: var(--rosa); text-transform: uppercase; letter-spacing: 1px; }
+        /* --- PRODUCTOS --- */
+        .categoria-label { 
+            font-size: 1.4rem; font-weight: 800; margin: 35px 0 15px 5px; 
+            color: var(--rosa); text-transform: uppercase; letter-spacing: 1px; 
+        }
         
-        .producto { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; background: var(--card-bg); border-radius: 22px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.03); }
+        .producto { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 18px 20px; background: var(--card-bg); border-radius: 22px; 
+            margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.03); 
+        }
         .producto.soon { opacity: 0.6; border: 1px dashed var(--morado); }
         .badge-soon { background: var(--morado); color: white; font-size: 0.7rem; padding: 4px 8px; border-radius: 8px; font-weight: 800; text-transform: uppercase; }
 
@@ -43,24 +92,33 @@
         .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
 
         .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 4px; }
-        .btn-qty { background: var(--morado); border: none; color: white; width: 38px; height: 38px; border-radius: 10px; font-size: 1.4rem; font-weight: 800; cursor: pointer; }
+        .btn-qty { 
+            background: var(--morado); border: none; color: white; 
+            width: 38px; height: 38px; border-radius: 10px; 
+            font-size: 1.4rem; font-weight: 800; cursor: pointer; 
+        }
         .cant { width: 35px; text-align: center; font-weight: 800; color: #fff; }
 
-        .footer-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 17, 23, 0.95); padding: 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000; }
-        .total-display { font-size: 1.8rem; font-weight: 900; background: linear-gradient(to right, #fff, var(--rosa)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .btn-ws { background: #25d366; color: white; border: none; padding: 14px 24px; border-radius: 15px; font-weight: 800; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); cursor: pointer; }
+        /* --- FOOTER --- */
+        .footer-bar { 
+            position: fixed; bottom: 0; left: 0; right: 0; 
+            background: rgba(13, 17, 23, 0.95); padding: 20px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000; 
+        }
+        .total-display { 
+            font-size: 1.8rem; font-weight: 900; 
+            background: linear-gradient(to right, #fff, var(--rosa)); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        }
+        .btn-ws { 
+            background: #25d366; color: white; border: none; padding: 14px 24px; 
+            border-radius: 15px; font-weight: 800; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); 
+            cursor: pointer; 
+        }
     </style>
 </head>
-<body class="locked">
-
-<div id="game-container">
-    <canvas id="game-canvas"></canvas>
-    <div class="game-ui">
-        <h1>M&E NINJA</h1>
-        <p style="color:var(--rosa); font-family:'Caveat'; font-size:1.8rem;">¡Rebana 5 Bolis! Cuidado con las 💣</p>
-    </div>
-    <div class="score-bar" id="score">0/5</div>
-</div>
+<body>
 
 <header><h1>M&E Antojitos</h1></header>
 
@@ -105,94 +163,7 @@
 </div>
 
 <script>
-    // --- ENGINE NINJA PRO ---
-    const canvas = document.getElementById('game-canvas');
-    const ctx = canvas.getContext('2d');
-    let score = 0, targets = [], trail = [], fragments = [], gameActive = true;
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-
-    class Target {
-        constructor(isBomb = false) {
-            this.x = Math.random() * (canvas.width - 100) + 50;
-            this.y = canvas.height + 50;
-            this.speedY = -(Math.random() * 5 + 11);
-            this.speedX = (Math.random() - 0.5) * 6;
-            this.radius = 45;
-            this.isBomb = isBomb;
-            this.emoji = isBomb ? "💣" : ["🍦", "🍓", "🥭", "🥥", "🍫"][Math.floor(Math.random() * 5)];
-            this.sliced = false;
-            this.angle = 0;
-            this.rotationSpeed = (Math.random() - 0.5) * 0.12;
-        }
-        update() { this.y += this.speedY; this.x += this.speedX; this.speedY += 0.28; this.angle += this.rotationSpeed; }
-        draw() {
-            ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle);
-            ctx.font = "55px serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-            ctx.fillText(this.emoji, 0, 0); ctx.restore();
-        }
-    }
-
-    class Fragment {
-        constructor(x, y, emoji, side) {
-            this.x = x; this.y = y; this.emoji = emoji; this.side = side;
-            this.speedX = side * (Math.random() * 6 + 2); this.speedY = (Math.random() - 0.5) * 12;
-            this.gravity = 0.6; this.life = 25; this.angle = side * 0.5;
-        }
-        update() { this.x += this.speedX; this.y += this.speedY; this.speedY += this.gravity; this.life--; this.angle += 0.15 * this.side; }
-        draw() {
-            ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle); ctx.font = "55px serif";
-            ctx.beginPath();
-            if(this.side === -1) ctx.rect(-60, -60, 60, 120); else ctx.rect(0, -60, 60, 120);
-            ctx.clip(); ctx.fillText(this.emoji, 0, 0); ctx.restore();
-        }
-    }
-
-    function handleInput(e) {
-        if(!gameActive) return;
-        const x = e.touches ? e.touches[0].clientX : e.clientX;
-        const y = e.touches ? e.touches[0].clientY : e.clientY;
-        trail.push({x, y, life: 15});
-        targets.forEach(t => {
-            if (!t.sliced && Math.hypot(t.x - x, t.y - y) < t.radius) {
-                t.sliced = true;
-                if(t.isBomb) {
-                    score = Math.max(0, score - 1);
-                    canvas.style.filter = "invert(1) contrast(2)"; setTimeout(()=>canvas.style.filter="none", 100);
-                } else {
-                    score++;
-                    fragments.push(new Fragment(t.x, t.y, t.emoji, -1), new Fragment(t.x, t.y, t.emoji, 1));
-                }
-                document.getElementById('score').innerText = `${score}/5`;
-                if (score >= 5) {
-                    gameActive = false;
-                    const gana = Math.random() < 0.2;
-                    if(gana) alert("¡ERES UN MAESTRO! 🍦 Has ganado un 10% de descuento. ¡Captura esto!");
-                    confetti(); setTimeout(()=> { 
-                        document.getElementById('game-container').remove();
-                        document.body.classList.remove('locked');
-                    }, 600);
-                }
-            }
-        });
-    }
-
-    function animate() {
-        if(!gameActive) return;
-        ctx.fillStyle = "rgba(0,0,0,0.3)"; ctx.fillRect(0,0,canvas.width, canvas.height);
-        ctx.shadowBlur = 15; ctx.shadowColor = "#ff85c1";
-        ctx.beginPath(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 5; ctx.lineCap = "round";
-        trail.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); p.life--; });
-        ctx.stroke(); ctx.shadowBlur = 0;
-        trail = trail.filter(p => p.life > 0);
-        fragments.forEach((f, i) => { f.update(); f.draw(); if(f.life <= 0) fragments.splice(i, 1); });
-        if (Math.random() < 0.05) targets.push(new Target(Math.random() < 0.15));
-        targets.forEach((t, i) => { t.update(); t.draw(); if (t.y > canvas.height + 100 || t.sliced) targets.splice(i, 1); });
-        requestAnimationFrame(animate);
-    }
-    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); handleInput(e); }, {passive: false});
-    animate();
-
-    // --- LÓGICA DE PRODUCTOS ---
+    // --- DATOS DE PRODUCTOS ---
     const productos = [
         {nombre: "Paquete Fiesta (10 Bolis Surtidos) 🥳", tipo: "promo", precio: 230},
         {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
@@ -221,26 +192,45 @@
     function render() {
         const dP = document.getElementById('lista-promos'), dL = document.getElementById('lista-leche'), dA = document.getElementById('lista-agua'), dS = document.getElementById('lista-proximos');
         dP.innerHTML = ''; dL.innerHTML = ''; dA.innerHTML = ''; dS.innerHTML = '';
+        
         productos.forEach(p => {
             const c = carrito[p.nombre] || 0;
             const h = `<div class="producto"><div class="info-p"><span class="nombre">${p.nombre}</span><span class="precio">$${p.precio} MXN</span></div><div class="controles"><button class="btn-qty" onclick="update('${p.nombre}',-1)">-</button><span class="cant">${c}</span><button class="btn-qty" onclick="update('${p.nombre}',1)">+</button></div></div>`;
             if (p.tipo === 'promo') dP.innerHTML += h; else if (p.tipo === 'leche') dL.innerHTML += h; else dA.innerHTML += h;
         });
-        proximos.forEach(p => { dS.innerHTML += `<div class="producto soon"><div><b>${p.nombre}</b><br><small>Próximamente</small></div><span class="badge-soon">${p.tag}</span></div>`; });
+
+        proximos.forEach(p => { 
+            dS.innerHTML += `<div class="producto soon"><div><b>${p.nombre}</b><br><small>Próximamente</small></div><span class="badge-soon">${p.tag}</span></div>`; 
+        });
         updateUI();
     }
 
-    function update(n, d) { carrito[n] = (carrito[n] || 0) + d; if (carrito[n] < 0) carrito[n] = 0; render(); }
+    function update(n, d) { 
+        carrito[n] = (carrito[n] || 0) + d; 
+        if (carrito[n] < 0) carrito[n] = 0; 
+        render(); 
+    }
+
     function updateUI() {
-        let t = 0; for (let n in carrito) { t += (carrito[n] * productos.find(x => x.nombre === n).precio); }
+        let t = 0; 
+        for (let n in carrito) { 
+            const prod = productos.find(x => x.nombre === n);
+            if(prod) t += (carrito[n] * prod.precio); 
+        }
         document.getElementById('total-val').innerText = `$${t}`;
     }
+
     function enviarPedido() {
-        let it = []; for (let n in carrito) { if (carrito[n] > 0) it.push(`• ${carrito[n]} x ${n}`); }
-        if (it.length === 0) return alert("¡Elige tus bolis!");
-        const msg = `¡Hola M&E! 👋🏻 Mi pedido es:\n${it.join("\n")}\n\nTotal: $${document.getElementById('total-val').innerText}`;
+        let it = []; 
+        let total = document.getElementById('total-val').innerText;
+        for (let n in carrito) { 
+            if (carrito[n] > 0) it.push(`• ${carrito[n]} x ${n}`); 
+        }
+        if (it.length === 0) return alert("¡Por favor, elige al menos un boli!");
+        const msg = `¡Hola M&E! 👋🏻 Me gustaría hacer un pedido:\n\n${it.join("\n")}\n\nTotal estimado: ${total}\n\n¿Tienen disponibilidad? ✨`;
         window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`);
     }
+
     render();
 </script>
 </body>

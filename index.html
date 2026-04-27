@@ -5,15 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>M&E Antojitos | Gourmet & Artesanal</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { 
-            --rosa: #ff85c1; 
-            --morado: #9b51e0; 
-            --fondo: #0d1117; 
-            --card-bg: #161b22; 
-            --texto: #ffffff; 
-        }
-
+        :root { --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117; --card-bg: #161b22; --texto: #ffffff; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body { 
@@ -21,140 +15,132 @@
             margin: 0; 
             background-color: var(--fondo); 
             color: var(--texto); 
-            padding-bottom: 140px; 
-            overflow-x: hidden; 
+            overflow-x: hidden;
         }
 
-        /* --- HEADER Y SLOGAN --- */
-        header { 
-            background: linear-gradient(180deg, #d6249f, var(--morado)); 
-            padding: 4rem 1.5rem 6rem; 
-            text-align: center; 
-            border-bottom-left-radius: 50px; 
-            border-bottom-right-radius: 50px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* --- LAYOUT 50/50 --- */
+        .main-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* Columna Izquierda (Fija en PC) */
+        .brand-side { 
+            background: linear-gradient(135deg, #d6249f, var(--morado));
+            padding: 40px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
         }
-        header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; }
+
+        /* Columna Derecha (Scroll) */
+        .menu-side { 
+            padding: 20px;
+            background: var(--fondo);
+        }
+
+        /* Desktop Adjustments */
+        @media (min-width: 850px) {
+            .main-wrapper { flex-direction: row; }
+            .brand-side { 
+                width: 50%; 
+                height: 100vh; 
+                position: fixed; 
+                left: 0; 
+                top: 0; 
+                padding: 60px;
+            }
+            .menu-side { 
+                width: 50%; 
+                margin-left: 50%; 
+                padding: 60px 40px;
+            }
+        }
+
+        /* --- ELEMENTOS DE DISEÑO --- */
+        header h1 { margin: 0; font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; text-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .eslogan { font-family: 'Caveat', cursive; font-size: 2.8rem; color: #fff; margin: 20px 0; }
+        .poesia { font-family: 'Caveat', cursive; font-size: 1.6rem; color: rgba(255,255,255,0.9); font-style: italic; max-width: 400px; line-height: 1.3; }
         
-        .slogan-box { text-align: center; padding: 30px 20px; margin-top: -50px; }
-        .eslogan { 
-            font-family: 'Caveat', cursive; 
-            font-size: 2.5rem; 
-            color: var(--rosa); 
-            line-height: 1.1; 
-            margin: 0; 
-            text-shadow: 0 0 15px rgba(255,133,193,0.5); 
-        }
-        .poesia-continua { 
-            font-family: 'Caveat', cursive; 
-            font-size: 1.5rem; 
-            color: #cbd5e0; 
-            margin-top: 15px; 
-            font-style: italic; 
-            line-height: 1.4; 
-            opacity: 0.9; 
-        }
-
-        /* --- CONTENEDOR Y TARJETAS --- */
-        .container { padding: 0 1.2rem; max-width: 500px; margin: 0 auto; position: relative; }
+        .story-card { background: var(--card-bg); padding: 25px; border-radius: 30px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
+        .categoria-label { font-size: 1.4rem; font-weight: 800; margin: 40px 0 20px; color: var(--rosa); text-transform: uppercase; }
         
-        .story-card { 
-            background: var(--card-bg); 
-            padding: 25px; 
-            border-radius: 30px; 
-            margin-bottom: 25px; 
-            border: 1px solid rgba(255,255,255,0.05); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
-        }
-        .story-card h2 { margin-top: 0; font-size: 1.5rem; color: #fff; }
+        .producto { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: var(--card-bg); border-radius: 25px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.03); transition: transform 0.2s; }
+        .producto:hover { transform: scale(1.02); }
         
-        .btn-insta { 
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); 
-            color: white; border: none; padding: 15px; width: 100%; border-radius: 18px; 
-            font-weight: 800; cursor: pointer; margin-top: 10px; font-size: 1rem; 
-        }
+        .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 15px; padding: 5px; }
+        .btn-qty { background: var(--morado); border: none; color: white; width: 40px; height: 40px; border-radius: 12px; font-size: 1.5rem; font-weight: 800; cursor: pointer; }
+        .cant { width: 40px; text-align: center; font-weight: 800; font-size: 1.2rem; }
 
-        /* --- PRODUCTOS --- */
-        .categoria-label { 
-            font-size: 1.4rem; font-weight: 800; margin: 35px 0 15px 5px; 
-            color: var(--rosa); text-transform: uppercase; letter-spacing: 1px; 
+        /* --- EL MINI JUEGO NINJA (Contenedor discreto) --- */
+        #game-box {
+            width: 100%; height: 200px; margin-top: 30px;
+            background: rgba(0,0,0,0.2); border-radius: 20px;
+            position: relative; overflow: hidden; cursor: crosshair;
+            border: 2px dashed rgba(255,255,255,0.2);
         }
-        
-        .producto { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 18px 20px; background: var(--card-bg); border-radius: 22px; 
-            margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.03); 
-        }
-        .producto.soon { opacity: 0.6; border: 1px dashed var(--morado); }
-        .badge-soon { background: var(--morado); color: white; font-size: 0.7rem; padding: 4px 8px; border-radius: 8px; font-weight: 800; text-transform: uppercase; }
+        #game-canvas { width: 100%; height: 100%; }
 
-        .info-p .nombre { font-weight: 700; font-size: 1.1rem; display: block; color: #fff; }
-        .info-p .precio { color: #a0aec0; font-weight: 600; font-size: 0.9rem; }
-
-        .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 4px; }
-        .btn-qty { 
-            background: var(--morado); border: none; color: white; 
-            width: 38px; height: 38px; border-radius: 10px; 
-            font-size: 1.4rem; font-weight: 800; cursor: pointer; 
-        }
-        .cant { width: 35px; text-align: center; font-weight: 800; color: #fff; }
-
-        /* --- FOOTER --- */
+        /* --- FOOTER FIX --- */
         .footer-bar { 
             position: fixed; bottom: 0; left: 0; right: 0; 
-            background: rgba(13, 17, 23, 0.95); padding: 20px; 
+            background: rgba(13, 17, 23, 0.98); padding: 25px; 
             display: flex; justify-content: space-between; align-items: center; 
             border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000; 
         }
-        .total-display { 
-            font-size: 1.8rem; font-weight: 900; 
-            background: linear-gradient(to right, #fff, var(--rosa)); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        @media (min-width: 850px) {
+            .footer-bar { left: 50%; width: 50%; }
         }
-        .btn-ws { 
-            background: #25d366; color: white; border: none; padding: 14px 24px; 
-            border-radius: 15px; font-weight: 800; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); 
-            cursor: pointer; 
-        }
+        .total-display { font-size: 2rem; font-weight: 900; color: var(--rosa); }
+        .btn-ws { background: #25d366; color: white; border: none; padding: 16px 30px; border-radius: 20px; font-weight: 800; cursor: pointer; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
-<header><h1>M&E Antojitos</h1></header>
+<div class="main-wrapper">
+    <div class="brand-side">
+        <header><h1>M&E Antojitos</h1></header>
+        <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
+        <div class="poesia">
+            En cada bocado un dulce cantar,<br>
+            un frío que invita a soñar y amar,<br>
+            textura de seda que te ha de hechizar.
+        </div>
 
-<div class="slogan-box">
-    <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
-    <div class="poesia-continua">
-        En cada bocado un dulce cantar,<br>
-        un frío que invita a soñar y amar,<br>
-        textura de seda que te ha de hechizar,<br>
-        pues M&E vino a tu alma endulzar.
+        <div id="game-box">
+            <canvas id="game-canvas"></canvas>
+            <div style="position:absolute; bottom:5px; width:100%; text-align:center; font-size:0.8rem; opacity:0.6;">
+                M&E NINJA: Corta 5 bolis para una sorpresa
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center; max-width: 400px;">
+            <p>Somos <b>Iker y Michelle</b>. Emprendedores de 15 años creando magia helada para ti. ✨</p>
+            <button onclick="window.open('https://instagram.com/antojitos_mi')" style="background:transparent; color:#fff; border:1px solid #fff; padding:10px 20px; border-radius:15px; cursor:pointer;">📸 @antojitos_mi</button>
+        </div>
     </div>
-</div>
 
-<div class="container">
-    <section class="story-card">
-        <h2>El Arte de lo Artesanal 🍨</h2>
-        <p>Olvídate de lo ordinario. En M&E, cada boli es una <strong>pieza de repostería helada</strong>. Los creamos desde cero, infusionando la leche con ingredientes reales para lograr esa cremosidad que nos distingue.</p>
-    </section>
+    <div class="menu-side">
+        <section class="story-card">
+            <h2>Gourmet & Artesanal 🍨</h2>
+            <p>Nuestros bolis no son simples paletas. Son infusiones cremosas hechas con ingredientes 100% reales.</p>
+        </section>
 
-    <section class="story-card">
-        <h2>Detrás del Sueño 👫</h2>
-        <p>¡Hola! Somos <strong>Iker y Michelle</strong>. Tenemos 15 años y somos una pareja de adolescentes con un sueño gigante: endulzar cada rincón con nuestros bolis gourmet hechos en casa.</p>
-        <button class="btn-insta" onclick="window.open('https://instagram.com/antojitos_mi')">📸 SÍGUENOS EN @antojitos_mi</button>
-    </section>
+        <div class="categoria-label">🎉 Promos</div>
+        <div id="lista-promos"></div>
 
-    <div class="categoria-label">🎉 Promociones Especiales</div>
-    <div id="lista-promos"></div>
+        <div class="categoria-label">🥛 Cremosos</div>
+        <div id="lista-leche"></div>
 
-    <div class="categoria-label">🥛 Cremosos de Leche</div>
-    <div id="lista-leche"></div>
+        <div class="categoria-label">🥭 Frutales</div>
+        <div id="lista-agua"></div>
 
-    <div class="categoria-label">🥭 Salados y Frutales</div>
-    <div id="lista-agua"></div>
-
-    <div class="categoria-label">✨ Próximos Lanzamientos</div>
-    <div id="lista-proximos"></div>
+        <div class="categoria-label">✨ Próximamente</div>
+        <div id="lista-proximos"></div>
+        
+        <div style="height: 100px;"></div>
+    </div>
 </div>
 
 <div class="footer-bar">
@@ -163,9 +149,70 @@
 </div>
 
 <script>
-    // --- DATOS DE PRODUCTOS ---
+    // --- LÓGICA NINJA INTEGRADA ---
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    let score = 0, targets = [], trail = [], fragments = [], gameActive = true;
+    
+    function resizeCanvas() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Target {
+        constructor() {
+            this.x = Math.random() * (canvas.width - 40) + 20;
+            this.y = canvas.height + 20;
+            this.speedY = -(Math.random() * 3 + 6);
+            this.speedX = (Math.random() - 0.5) * 4;
+            this.radius = 25;
+            this.emoji = ["🍦", "🍓", "🥭", "🥥", "🍫"][Math.floor(Math.random() * 5)];
+            this.sliced = false;
+        }
+        update() { this.y += this.speedY; this.x += this.speedX; this.speedY += 0.15; }
+        draw() {
+            ctx.font = "30px serif"; ctx.textAlign = "center";
+            ctx.fillText(this.emoji, this.x, this.y);
+        }
+    }
+
+    function handleInput(e) {
+        if(!gameActive) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+        const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+        trail.push({x, y, life: 10});
+
+        targets.forEach(t => {
+            if (!t.sliced && Math.hypot(t.x - x, t.y - y) < t.radius) {
+                t.sliced = true; score++;
+                if (score === 5) {
+                    confetti();
+                    if(Math.random() < 0.2) alert("¡NINJA! Ganaste un 10% de descuento. ¡Pide ahora!");
+                    score = 0;
+                }
+            }
+        });
+    }
+
+    function animate() {
+        ctx.fillStyle = "rgba(0,0,0,0.1)"; ctx.fillRect(0,0,canvas.width, canvas.height);
+        ctx.beginPath(); ctx.strokeStyle = '#ff85c1'; ctx.lineWidth = 3;
+        trail.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); p.life--; });
+        ctx.stroke(); trail = trail.filter(p => p.life > 0);
+        if (Math.random() < 0.03) targets.push(new Target());
+        targets.forEach((t, i) => { t.update(); t.draw(); if (t.y > canvas.height + 50 || t.sliced) targets.splice(i, 1); });
+        requestAnimationFrame(animate);
+    }
+    canvas.addEventListener('mousemove', handleInput);
+    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); handleInput(e); });
+    animate();
+
+    // --- SISTEMA DE TIENDA ---
     const productos = [
-        {nombre: "Paquete Fiesta (10 Bolis Surtidos) 🥳", tipo: "promo", precio: 230},
+        {nombre: "Paquete Fiesta (10 Bolis) 🥳", tipo: "promo", precio: 230},
         {nombre: "Duvalín 🍦", tipo: "leche", precio: 25},
         {nombre: "Mazapán 🥜", tipo: "leche", precio: 25},
         {nombre: "Oreo 🍪", tipo: "leche", precio: 25},
@@ -179,58 +226,29 @@
         {nombre: "Jamaica Natural 🌸", tipo: "agua", precio: 20}
     ];
 
-    const proximos = [
-        {nombre: "Queso con Zarzamora 🍰", tag: "Cremoso"},
-        {nombre: "Carlota de Limón 🍋", tag: "Cremoso"},
-        {nombre: "Chocorrol 🌀", tag: "Cremoso"},
-        {nombre: "Panditas 🧸", tag: "Frutal"},
-        {nombre: "Fresas con Crema 🍓", tag: "Cremoso"}
-    ];
-
     let carrito = {};
 
     function render() {
         const dP = document.getElementById('lista-promos'), dL = document.getElementById('lista-leche'), dA = document.getElementById('lista-agua'), dS = document.getElementById('lista-proximos');
-        dP.innerHTML = ''; dL.innerHTML = ''; dA.innerHTML = ''; dS.innerHTML = '';
-        
+        dP.innerHTML = dL.innerHTML = dA.innerHTML = '';
         productos.forEach(p => {
             const c = carrito[p.nombre] || 0;
-            const h = `<div class="producto"><div class="info-p"><span class="nombre">${p.nombre}</span><span class="precio">$${p.precio} MXN</span></div><div class="controles"><button class="btn-qty" onclick="update('${p.nombre}',-1)">-</button><span class="cant">${c}</span><button class="btn-qty" onclick="update('${p.nombre}',1)">+</button></div></div>`;
+            const h = `<div class="producto"><div><b>${p.nombre}</b><br><small>$${p.precio} MXN</small></div><div class="controles"><button class="btn-qty" onclick="update('${p.nombre}',-1)">-</button><span class="cant">${c}</span><button class="btn-qty" onclick="update('${p.nombre}',1)">+</button></div></div>`;
             if (p.tipo === 'promo') dP.innerHTML += h; else if (p.tipo === 'leche') dL.innerHTML += h; else dA.innerHTML += h;
         });
-
-        proximos.forEach(p => { 
-            dS.innerHTML += `<div class="producto soon"><div><b>${p.nombre}</b><br><small>Próximamente</small></div><span class="badge-soon">${p.tag}</span></div>`; 
-        });
+        dS.innerHTML = `<div class="producto" style="opacity:0.6;"><b>Queso con Zarzamora 🍰</b><span>PRÓXIMAMENTE</span></div>`;
         updateUI();
     }
-
-    function update(n, d) { 
-        carrito[n] = (carrito[n] || 0) + d; 
-        if (carrito[n] < 0) carrito[n] = 0; 
-        render(); 
-    }
-
+    function update(n, d) { carrito[n] = (carrito[n] || 0) + d; if (carrito[n] < 0) carrito[n] = 0; render(); }
     function updateUI() {
-        let t = 0; 
-        for (let n in carrito) { 
-            const prod = productos.find(x => x.nombre === n);
-            if(prod) t += (carrito[n] * prod.precio); 
-        }
+        let t = 0; for (let n in carrito) { t += (carrito[n] * productos.find(x => x.nombre === n).precio); }
         document.getElementById('total-val').innerText = `$${t}`;
     }
-
     function enviarPedido() {
-        let it = []; 
-        let total = document.getElementById('total-val').innerText;
-        for (let n in carrito) { 
-            if (carrito[n] > 0) it.push(`• ${carrito[n]} x ${n}`); 
-        }
-        if (it.length === 0) return alert("¡Por favor, elige al menos un boli!");
-        const msg = `¡Hola M&E! 👋🏻 Me gustaría hacer un pedido:\n\n${it.join("\n")}\n\nTotal estimado: ${total}\n\n¿Tienen disponibilidad? ✨`;
-        window.open(`https://wa.me/5580830028?text=${encodeURIComponent(msg)}`);
+        let it = []; for (let n in carrito) { if (carrito[n] > 0) it.push(`• ${carrito[n]} x ${n}`); }
+        if (it.length === 0) return alert("¡Elige tus bolis!");
+        window.open(`https://wa.me/5580830028?text=${encodeURIComponent("¡Hola M&E! Mi pedido:\n" + it.join("\n") + "\n\nTotal: " + document.getElementById('total-val').innerText)}`);
     }
-
     render();
 </script>
 </body>

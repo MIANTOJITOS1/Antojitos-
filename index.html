@@ -7,11 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --rosa-neon: #ff007f; 
-            --morado-neon: #bc13fe; 
+            --rosa-neon: #ff85c1; 
+            --morado-principal: #1a0b2e; /* Moradito profundo */
+            --morado-claro: #9b51e0;
             --azul-neon: #00d4ff;
-            --fondo: #050505; 
-            --card-bg: #121212; 
+            --card-bg: #251442; 
             --texto: #ffffff; 
         }
         
@@ -20,134 +20,121 @@
         body { 
             font-family: 'Outfit', sans-serif; 
             margin: 0; 
-            background-color: var(--fondo); 
+            background-color: var(--morado-principal); 
             color: var(--texto); 
-            line-height: 1.8; 
+            line-height: 1.6; 
         }
 
         /* --- LAYOUT RESPONSIVO --- */
         .main-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
         .brand-side { 
-            background: linear-gradient(135deg, #2b002b, #000);
-            padding: 80px 30px; 
+            background: linear-gradient(135deg, #2e1052, #1a0b2e);
+            padding: 40px 20px; 
             text-align: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            border-bottom: 2px solid var(--morado-neon);
-            box-shadow: 0 0 20px var(--morado-neon);
+            border-bottom: 3px solid var(--morado-claro);
         }
 
         .menu-side { 
-            padding: 50px 25px; 
-            background: var(--fondo); 
+            padding: 30px 20px; 
         }
 
         @media (min-width: 900px) {
             .main-wrapper { flex-direction: row; }
             .brand-side { 
-                width: 45%; height: 100vh; position: fixed; 
-                left: 0; top: 0; padding: 80px; overflow-y: auto; 
-                border-bottom: none; border-right: 2px solid var(--morado-neon);
+                width: 40%; height: 100vh; position: fixed; 
+                left: 0; top: 0; padding: 50px; overflow-y: auto; 
+                border-bottom: none; border-right: 3px solid var(--morado-claro);
             }
-            .menu-side { width: 55%; margin-left: 45%; padding: 80px; }
-            .footer-bar { left: 45% !important; width: 55% !important; }
+            .menu-side { width: 60%; margin-left: 40%; padding: 60px; }
+            .footer-bar { left: 40% !important; width: 60% !important; }
         }
 
-        /* --- TEXTOS E IDENTIDAD --- */
+        /* --- TEXTOS AJUSTADOS (TAMAÑO MEDIANO) --- */
         header h1 { 
-            margin: 0; font-size: 4.5rem; font-weight: 800; letter-spacing: -2px; 
-            color: #fff; text-shadow: 0 0 10px var(--rosa-neon), 0 0 20px var(--rosa-neon);
+            margin: 0; font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; 
+            color: #fff; text-shadow: 0 0 10px var(--rosa-neon);
         }
         .eslogan { 
-            font-family: 'Caveat', cursive; font-size: 3rem; color: var(--azul-neon); 
-            margin: 25px 0; text-shadow: 0 0 10px var(--azul-neon);
+            font-family: 'Caveat', cursive; font-size: 2rem; color: var(--azul-neon); 
+            margin: 15px 0;
         }
         
         .poesia-box { 
-            margin: 35px 0; padding: 20px; 
-            border: 1px solid var(--morado-neon); border-radius: 20px;
-            box-shadow: inset 0 0 15px var(--morado-neon);
+            margin: 20px 0; padding: 15px; 
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 15px;
+            background: rgba(255,255,255,0.03);
         }
-        .poesia { font-family: 'Caveat', cursive; font-size: 1.8rem; line-height: 1.4; }
+        .poesia { font-family: 'Caveat', cursive; font-size: 1.4rem; line-height: 1.3; color: #ddd; }
         
         .bio-card { 
-            background: rgba(255, 255, 255, 0.03); 
-            padding: 40px; border-radius: 40px; border: 1px solid rgba(188, 19, 254, 0.3);
-            text-align: left; margin-top: 30px;
+            background: var(--card-bg); 
+            padding: 25px; border-radius: 25px; border: 1px solid rgba(155, 81, 224, 0.2);
+            text-align: left; margin-top: 20px;
         }
-        .bio-card h3 { color: var(--rosa-neon); font-size: 1.8rem; text-shadow: 0 0 5px var(--rosa-neon); }
+        .bio-card h3 { color: var(--rosa-neon); font-size: 1.4rem; margin-bottom: 8px; }
+        .bio-card p { font-size: 1rem; margin-bottom: 15px; color: #eee; }
 
-        /* --- PRODUCTOS Y NEONES --- */
+        /* --- PRODUCTOS --- */
         .intro-gourmet { 
-            background: var(--card-bg); padding: 40px; border-radius: 35px; 
-            margin-bottom: 50px; border: 1px solid var(--azul-neon);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+            background: var(--card-bg); padding: 25px; border-radius: 20px; 
+            margin-bottom: 30px; border-left: 4px solid var(--azul-neon);
         }
+        .intro-gourmet p { font-size: 1rem; margin: 0; opacity: 0.9; }
 
         .categoria-header { 
-            font-size: 1.8rem; font-weight: 800; margin: 60px 0 30px; 
-            color: var(--rosa-neon); text-transform: uppercase; letter-spacing: 4px;
-            text-shadow: 0 0 8px var(--rosa-neon);
+            font-size: 1.3rem; font-weight: 800; margin: 35px 0 20px; 
+            color: var(--rosa-neon); text-transform: uppercase; letter-spacing: 2px;
         }
         
         .producto { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 30px; background: var(--card-bg); border-radius: 30px; 
-            margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s;
-        }
-        .producto:hover { 
-            border-color: var(--azul-neon); 
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-            transform: translateY(-5px);
+            padding: 18px; background: var(--card-bg); border-radius: 20px; 
+            margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
         }
         
-        .info-p .nombre { font-size: 1.4rem; font-weight: 700; color: #fff; }
+        .info-p .nombre { font-size: 1.1rem; font-weight: 700; color: #fff; }
         .info-p .precio { 
-            font-size: 1.2rem; color: var(--azul-neon); font-weight: 800; 
-            display: block; margin-top: 8px; text-shadow: 0 0 5px var(--azul-neon);
+            font-size: 1rem; color: var(--azul-neon); font-weight: 700; 
+            display: block; margin-top: 2px;
         }
 
         .controles { 
-            display: flex; align-items: center; background: #000; 
-            border: 1px solid var(--morado-neon); border-radius: 20px; padding: 8px;
-            box-shadow: 0 0 10px var(--morado-neon);
+            display: flex; align-items: center; background: rgba(0,0,0,0.2); 
+            border-radius: 12px; padding: 4px;
         }
         .btn-qty { 
-            background: var(--morado-neon); border: none; color: white; 
-            width: 50px; height: 50px; border-radius: 15px; 
-            font-size: 2rem; font-weight: 800; cursor: pointer;
+            background: var(--morado-claro); border: none; color: white; 
+            width: 35px; height: 35px; border-radius: 8px; 
+            font-size: 1.4rem; font-weight: 800; cursor: pointer;
         }
         .cant { 
-            width: 50px; text-align: center; font-weight: 800; font-size: 1.6rem; 
-            color: #fff; text-shadow: 0 0 10px #fff;
+            width: 35px; text-align: center; font-weight: 800; font-size: 1.2rem; 
         }
 
         /* --- PRÓXIMAMENTE --- */
         .proximo-item { 
-            background: #0a0a0a; border: 1px dashed var(--morado-neon);
-            padding: 25px; border-radius: 25px; margin-bottom: 15px;
+            background: rgba(255,255,255,0.03); border: 1px dashed var(--morado-claro);
+            padding: 15px; border-radius: 15px; margin-bottom: 10px;
             display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.95rem;
         }
 
-        /* --- FOOTER NEÓN --- */
+        /* --- FOOTER --- */
         .footer-bar { 
             position: fixed; bottom: 0; left: 0; right: 0; 
-            background: rgba(5, 5, 5, 0.95); padding: 35px; 
+            background: var(--morado-principal); padding: 20px; 
             display: flex; justify-content: space-between; align-items: center; 
-            backdrop-filter: blur(20px); z-index: 1000; 
-            border-top: 2px solid var(--rosa-neon);
-            box-shadow: 0 -10px 20px rgba(255, 0, 127, 0.3);
+            backdrop-filter: blur(10px); z-index: 1000; 
+            border-top: 2px solid var(--morado-claro);
         }
-        .total-display { 
-            font-size: 2.5rem; font-weight: 900; 
-            color: #fff; text-shadow: 0 0 15px var(--azul-neon);
-        }
+        .total-display { font-size: 1.6rem; font-weight: 800; }
         .total-display span { color: var(--azul-neon); }
         .btn-ws { 
-            background: #25d366; color: white; border: none; padding: 20px 40px; 
-            border-radius: 25px; font-weight: 800; font-size: 1.3rem; 
-            cursor: pointer; box-shadow: 0 0 20px #25d366;
+            background: #25d366; color: white; border: none; padding: 12px 25px; 
+            border-radius: 15px; font-weight: 800; font-size: 1rem; cursor: pointer;
         }
     </style>
 </head>
@@ -156,7 +143,7 @@
 <div class="main-wrapper">
     <div class="brand-side">
         <header><h1>M&E Antojitos</h1></header>
-        <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
+        <p class="eslogan">"Amor en cada bocado."</p>
         
         <div class="poesia-box">
             <div class="poesia">
@@ -167,39 +154,38 @@
         </div>
         
         <div class="bio-card">
-            <h3>Nuestra Esencia 👫</h3>
-            <p>Somos <b>Iker y Michelle</b>. A nuestros 15 años, transformamos el postre clásico en una experiencia neón gourmet. No solo hacemos bolis, creamos momentos helados imposibles de olvidar.</p>
-            <h3>El Objetivo 🚀</h3>
-            <p>Dominar el sabor en <b>Coapa y Cuemanco</b> con calidad premium y un estilo que brilla por sí solo.</p>
-            <button onclick="window.open('https://instagram.com/antojitos_mi')" style="background:var(--rosa-neon); color:#fff; border:none; padding:15px 30px; border-radius:20px; cursor:pointer; font-weight:800; margin-top:10px; box-shadow: 0 0 15px var(--rosa-neon);">📸 SÍGUENOS</button>
+            <h3>Nuestra Historia 👫</h3>
+            <p>Somos <b>Iker y Michelle</b>. A nuestros 15 años, decidimos crear algo único: bolis gourmet con sabor real y artesanal.</p>
+            <h3>La Meta 🚀</h3>
+            <p>Endulzar cada rincón de <b>Coapa y Cuemanco</b> con la mejor calidad y dedicación.</p>
+            <button onclick="window.open('https://instagram.com/antojitos_mi')" style="background:var(--morado-claro); color:#fff; border:none; padding:10px 20px; border-radius:12px; cursor:pointer; font-weight:700; font-size: 0.9rem;">📸 @antojitos_mi</button>
         </div>
     </div>
 
     <div class="menu-side">
         <section class="intro-gourmet">
-            <h2>Artesanía Helada ✨</h2>
-            <p>Nuestra base secreta fusiona la cremosidad de la leche entera con ingredientes premium. Sin cristales de hielo, solo seda pura que se derrite en tu boca.</p>
+            <p>Base secreta de leche entera infusionada para lograr una cremosidad excepcional. Sin cristales de hielo, solo sabor puro.</p>
         </section>
 
-        <div class="categoria-header">🔥 Combos Locos</div>
+        <div class="categoria-header">🔥 Promociones</div>
         <div id="lista-promos"></div>
 
-        <div class="categoria-header">🥛 Cremosos Premium</div>
+        <div class="categoria-header">🥛 Cremosos de Leche</div>
         <div id="lista-leche"></div>
 
-        <div class="categoria-header">🧪 Frutales & Explosivos</div>
+        <div class="categoria-header">🧪 Frutales y Salados</div>
         <div id="lista-agua"></div>
 
-        <div class="categoria-header">🚀 Próximo Nivel</div>
+        <div class="categoria-header">✨ Próximamente</div>
         <div id="lista-proximos"></div>
         
-        <div style="height: 160px;"></div> 
+        <div style="height: 100px;"></div> 
     </div>
 </div>
 
 <div class="footer-bar">
     <div class="total-display">TOTAL: <span id="total-val">$0</span></div>
-    <button class="btn-ws" onclick="enviarPedido()">PEDIR AHORA ➔</button>
+    <button class="btn-ws" onclick="enviarPedido()">PEDIR POR WHATSAPP ➔</button>
 </div>
 
 <script>
@@ -236,7 +222,7 @@
         });
 
         proximos.forEach(p => { 
-            dS.innerHTML += `<div class="proximo-item"><b>${p.nombre}</b><span style="color:var(--morado-neon); font-weight:900;">PRÓXIMAMENTE</span></div>`; 
+            dS.innerHTML += `<div class="proximo-item"><b>${p.nombre}</b><span style="color:var(--morado-claro); font-weight:800; font-size:0.8rem;">MUY PRONTO</span></div>`; 
         });
         updateUI();
     }
@@ -252,10 +238,9 @@
     function enviarPedido() {
         let it = []; for (let n in carrito) { if (carrito[n] > 0) it.push(`${carrito[n]}x ${n}`); }
         if (it.length === 0) return alert("¡Tu carrito está vacío!");
-        window.open(`https://wa.me/5580830028?text=${encodeURIComponent("¡Hola M&E! 👋 Mi pedido neón:\n\n" + it.join("\n") + "\n\nTotal: " + document.getElementById('total-val').innerText)}`);
+        window.open(`https://wa.me/5580830028?text=${encodeURIComponent("¡Hola M&E! 👋 Mi pedido:\n\n" + it.join("\n") + "\n\nTotal: " + document.getElementById('total-val').innerText)}`);
     }
     render();
 </script>
 </body>
 </html>
- 

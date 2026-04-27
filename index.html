@@ -9,75 +9,91 @@
         :root { --rosa: #ff85c1; --morado: #9b51e0; --fondo: #0d1117; --card-bg: #161b22; --texto: #ffffff; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); overflow-x: hidden; }
+        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto); line-height: 1.6; }
 
-        /* --- DETECTOR DE DISPOSITIVO (RESPONSIVE) --- */
+        /* --- SISTEMA RESPONSIVO --- */
         .main-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
         .brand-side { 
             background: linear-gradient(135deg, #d6249f, var(--morado));
-            padding: 50px 20px; text-align: center;
+            padding: 50px 25px; text-align: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        .menu-side { padding: 30px 20px; background: var(--fondo); }
+        .menu-side { padding: 40px 20px; background: var(--fondo); }
 
-        @media (min-width: 850px) {
+        @media (min-width: 900px) {
             .main-wrapper { flex-direction: row; }
-            .brand-side { width: 50%; height: 100vh; position: fixed; left: 0; top: 0; padding: 60px; }
-            .menu-side { width: 50%; margin-left: 50%; padding: 60px 40px; }
+            .brand-side { 
+                width: 50%; height: 100vh; position: fixed; 
+                left: 0; top: 0; padding: 60px; overflow-y: auto; 
+            }
+            .menu-side { width: 50%; margin-left: 50%; padding: 80px 60px; }
             .footer-bar { left: 50% !important; width: 50% !important; }
         }
 
-        /* --- ESTILOS DE TEXTO --- */
-        header h1 { margin: 0; font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; }
-        .eslogan { font-family: 'Caveat', cursive; font-size: 2.5rem; color: #fff; margin: 15px 0; }
-        .poesia { font-family: 'Caveat', cursive; font-size: 1.6rem; color: rgba(255,255,255,0.9); line-height: 1.3; max-width: 450px; }
+        /* --- IDENTIDAD VISUAL --- */
+        header h1 { margin: 0; font-size: 4rem; font-weight: 800; letter-spacing: -2px; line-height: 1; }
+        .eslogan { font-family: 'Caveat', cursive; font-size: 2.8rem; color: #fff; margin: 20px 0; }
         
-        .bio-box { 
-            background: rgba(255, 255, 255, 0.12); padding: 25px; border-radius: 30px; 
-            margin-top: 30px; border: 1px solid rgba(255,255,255,0.2); max-width: 450px;
+        .poesia-box { margin: 25px 0; border-top: 1px solid rgba(255,255,255,0.2); border-bottom: 1px solid rgba(255,255,255,0.2); padding: 15px 0; }
+        .poesia { font-family: 'Caveat', cursive; font-size: 1.7rem; color: #fff; line-height: 1.3; }
+        
+        .bio-card { 
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            padding: 35px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.2);
+            text-align: left; max-width: 500px; margin-top: 20px;
         }
+        .bio-card h3 { margin-top: 0; color: var(--rosa); font-size: 1.6rem; margin-bottom: 10px; border-bottom: 1px solid rgba(255,133,193,0.3); display: inline-block; }
+        .bio-card p { font-size: 1.1rem; margin-bottom: 20px; color: #fff; }
 
-        .categoria-label { 
-            font-size: 1.5rem; font-weight: 800; margin: 45px 0 20px; 
-            color: var(--rosa); text-transform: uppercase; letter-spacing: 2px;
-            border-left: 5px solid var(--rosa); padding-left: 15px;
+        /* --- SECCIONES DERECHA --- */
+        .intro-gourmet { 
+            background: var(--card-bg); padding: 30px; border-radius: 30px; 
+            margin-bottom: 40px; border-left: 6px solid var(--rosa); 
         }
+        .intro-gourmet h2 { margin: 0 0 10px; color: var(--rosa); }
+
+        .categoria-header { 
+            font-size: 1.5rem; font-weight: 800; margin: 40px 0 20px; 
+            color: var(--rosa); text-transform: uppercase; letter-spacing: 2px;
+            display: flex; align-items: center;
+        }
+        .categoria-header::after { content: ''; flex: 1; height: 1px; background: rgba(255,133,193,0.3); margin-left: 15px; }
         
-        /* --- TARJETAS DE PRODUCTO --- */
         .producto { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 22px; background: var(--card-bg); border-radius: 25px; 
-            margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.03);
+            margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
         }
-
-        .producto.proximamente {
-            border: 1px dashed var(--morado);
-            background: rgba(155, 81, 224, 0.05);
-            opacity: 0.8;
-        }
-
-        .badge-proximo {
-            font-size: 0.7rem; font-weight: 800; background: var(--morado);
-            color: white; padding: 5px 10px; border-radius: 10px; text-transform: uppercase;
-        }
+        .producto:hover { border-color: var(--rosa); transform: scale(1.02); }
         
-        .info-p .nombre { font-size: 1.2rem; font-weight: 700; color: #fff; display: block; }
-        .info-p .precio { font-size: 1rem; color: var(--rosa); font-weight: 600; }
+        .info-p .nombre { font-size: 1.2rem; font-weight: 700; color: #fff; }
+        .info-p .precio { font-size: 1rem; color: var(--rosa); font-weight: 600; display: block; margin-top: 4px; }
 
-        .controles { display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 15px; padding: 5px; }
-        .btn-qty { background: var(--morado); border: none; color: white; width: 40px; height: 40px; border-radius: 12px; font-size: 1.5rem; font-weight: 800; cursor: pointer; }
-        .cant { width: 40px; text-align: center; font-weight: 800; font-size: 1.2rem; }
+        .controles { display: flex; align-items: center; background: rgba(0,0,0,0.2); border-radius: 15px; padding: 5px; }
+        .btn-qty { background: var(--morado); border: none; color: white; width: 42px; height: 42px; border-radius: 12px; font-size: 1.6rem; font-weight: 800; cursor: pointer; }
+        .cant { width: 40px; text-align: center; font-weight: 800; font-size: 1.3rem; }
 
+        /* --- PRÓXIMAMENTE --- */
+        .proximo-item { 
+            background: rgba(155, 81, 224, 0.05); border: 1px dashed var(--morado);
+            padding: 20px; border-radius: 20px; margin-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .tag-p { font-size: 0.7rem; background: var(--morado); padding: 3px 8px; border-radius: 8px; color: white; font-weight: 800; }
+
+        /* --- FOOTER --- */
         .footer-bar { 
             position: fixed; bottom: 0; left: 0; right: 0; 
             background: rgba(13, 17, 23, 0.98); padding: 25px; 
             display: flex; justify-content: space-between; align-items: center; 
-            border-top: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); z-index: 1000; 
+            backdrop-filter: blur(15px); z-index: 1000; border-top: 1px solid rgba(255,255,255,0.1);
         }
-        .total-display { font-size: 2rem; font-weight: 900; color: #fff; }
-        .btn-ws { background: #25d366; color: white; border: none; padding: 18px 30px; border-radius: 20px; font-weight: 800; cursor: pointer; font-size: 1.1rem; }
+        .total-display { font-size: 2rem; font-weight: 900; }
+        .total-display span { color: var(--rosa); }
+        .btn-ws { background: #25d366; color: white; border: none; padding: 16px 35px; border-radius: 20px; font-weight: 800; font-size: 1.1rem; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -86,28 +102,45 @@
     <div class="brand-side">
         <header><h1>M&E Antojitos</h1></header>
         <p class="eslogan">"Frío en las manos, amor en el paladar."</p>
-        <div class="poesia">
-            En cada bocado un dulce cantar,<br>
-            un frío que invita a soñar y amar,<br>
-            textura de seda que te ha de hechizar.
+        
+        <div class="poesia-box">
+            <div class="poesia">
+                En cada bocado un dulce cantar,<br>
+                un frío que invita a soñar y amar,<br>
+                textura de seda que te ha de hechizar,<br>
+                pues M&E vino a tu alma endulzar.
+            </div>
         </div>
-        <div class="bio-box">
-            <p>Somos <b>Iker y Michelle</b>. Emprendedores de 15 años creando los bolis más cremosos y gourmet para ti. ✨</p>
-            <button onclick="window.open('https://instagram.com/antojitos_mi')" style="background:#fff; color:var(--morado); border:none; padding:12px 20px; border-radius:15px; cursor:pointer; font-weight:800;">📸 @antojitos_mi</button>
+        
+        <div class="bio-card">
+            <h3>¿Quiénes somos? 👫</h3>
+            <p>Somos <b>Iker y Michelle</b>, emprendedores de 15 años dedicados a transformar el concepto del boli tradicional. Creemos que la calidad y el amor son los ingredientes principales de cada una de nuestras creaciones.</p>
+            
+            <h3>Nuestra Meta 🚀</h3>
+            <p>Queremos llevar el sabor gourmet a cada hogar en <b>Coapa y Cuemanco</b>. Nuestra meta es crecer como negocio manteniendo siempre el proceso artesanal que nos hace únicos y especiales.</p>
+            
+            <div style="text-align: center;">
+                <button onclick="window.open('https://instagram.com/antojitos_mi')" style="background:#fff; color:var(--morado); border:none; padding:12px 25px; border-radius:15px; cursor:pointer; font-weight:800; font-size: 1rem;">📸 Visita nuestro Instagram</button>
+            </div>
         </div>
     </div>
 
     <div class="menu-side">
-        <div class="categoria-label">🎉 Promociones</div>
+        <section class="intro-gourmet">
+            <h2>Receta Artesanal 🍧</h2>
+            <p>Nuestros bolis están elaborados con ingredientes seleccionados de la más alta calidad. Utilizamos leche entera, cremas premium y fruta fresca para garantizar una textura de seda y un sabor intenso en cada bocado.</p>
+        </section>
+
+        <div class="categoria-header">🎉 Combos y Promos</div>
         <div id="lista-promos"></div>
 
-        <div class="categoria-label">🥛 Cremosos de Leche</div>
+        <div class="categoria-header">🥛 Línea de Leche (Cremosos)</div>
         <div id="lista-leche"></div>
 
-        <div class="categoria-label">🥭 Salados y Frutales</div>
+        <div class="categoria-header">🥭 Línea de Agua (Frutales)</div>
         <div id="lista-agua"></div>
 
-        <div class="categoria-label">✨ Próximamente (Nuevos Sabores)</div>
+        <div class="categoria-header">✨ Próximos Lanzamientos</div>
         <div id="lista-proximos"></div>
         
         <div style="height: 120px;"></div> 
@@ -115,8 +148,8 @@
 </div>
 
 <div class="footer-bar">
-    <div class="total-display">Total: <span id="total-val" style="color:var(--rosa)">$0</span></div>
-    <button class="btn-ws" onclick="enviarPedido()">Confirmar Pedido ➔</button>
+    <div class="total-display">Total: <span id="total-val">$0</span></div>
+    <button class="btn-ws" onclick="enviarPedido()">Hacer Pedido ➔</button>
 </div>
 
 <script>
@@ -128,19 +161,20 @@
         {nombre: "Piña Colada 🥥🍍", tipo: "leche", precio: 25},
         {nombre: "Coco 🥥", tipo: "leche", precio: 25},
         {nombre: "Chocolate 🍫", tipo: "leche", precio: 25},
-        {nombre: "Mango (Leche) 🥭🥛", tipo: "leche", precio: 25},
+        {nombre: "Mango Leche 🥭🥛", tipo: "leche", precio: 25},
         {nombre: "Mango Chamoy 🥭", tipo: "agua", precio: 20},
         {nombre: "Skwinkles 🍭", tipo: "agua", precio: 20},
-        {nombre: "Jamaica con Chamoy 🌺", tipo: "agua", precio: 20},
+        {nombre: "Jamaica Chamoy 🌺", tipo: "agua", precio: 20},
         {nombre: "Jamaica Natural 🌸", tipo: "agua", precio: 20}
     ];
 
     const proximos = [
-        {nombre: "Queso con Zarzamora 🍰", tag: "Cremoso"},
+        {nombre: "Chocorrol 🌀", tag: "Premium"},
+        {nombre: "Pica fresa 🍓🔥", tag: "Especial"},
+        {nombre: "Queso con zarzamora 🍰", tag: "Gourmet"},
+        {nombre: "Guayaba 🍈", tag: "Frutal"},
         {nombre: "Carlota de Limón 🍋", tag: "Cremoso"},
-        {nombre: "Chocorrol 🌀", tag: "Especial"},
-        {nombre: "Fresas con Crema 🍓", tag: "Cremoso"},
-        {nombre: "Panditas 🧸", tag: "Frutal"}
+        {nombre: "Panditas 🧸", tag: "Divertido"}
     ];
 
     let carrito = {};
@@ -156,14 +190,7 @@
         });
 
         proximos.forEach(p => { 
-            dS.innerHTML += `
-                <div class="producto proximamente">
-                    <div>
-                        <span class="nombre">${p.nombre}</span>
-                        <span class="badge-proximo">${p.tag}</span>
-                    </div>
-                    <div style="font-size: 0.8rem; font-weight: 800; color: var(--morado);">MUY PRONTO</div>
-                </div>`; 
+            dS.innerHTML += `<div class="proximo-item"><div><b>${p.nombre}</b> <span class="tag-p">${p.tag}</span></div><span style="color:var(--morado); font-weight:800; font-size:0.8rem;">ESPERALO</span></div>`; 
         });
         updateUI();
     }
@@ -178,10 +205,12 @@
     }
     function enviarPedido() {
         let it = []; for (let n in carrito) { if (carrito[n] > 0) it.push(`• ${carrito[n]} x ${n}`); }
-        if (it.length === 0) return alert("¡Elige tus bolis!");
-        window.open(`https://wa.me/5580830028?text=${encodeURIComponent("¡Hola M&E! 👋 Mi pedido:\n\n" + it.join("\n") + "\n\nTotal: " + document.getElementById('total-val').innerText)}`);
+        if (it.length === 0) return alert("¡Elige tus sabores!");
+        const total = document.getElementById('total-val').innerText;
+        window.open(`https://wa.me/5580830028?text=${encodeURIComponent("¡Hola M&E! 👋 Quisiera este pedido:\n\n" + it.join("\n") + "\n\nTotal: " + total)}`);
     }
     render();
 </script>
 </body>
 </html>
+ 
